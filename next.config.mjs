@@ -1,4 +1,9 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {};
+// next.config.mjs
+import withTwin from "./withTwin.mjs";
 
-export default nextConfig;
+/**
+ * @type {import('next').NextConfig}
+ */
+export default withTwin({
+  reactStrictMode: true,
+});
