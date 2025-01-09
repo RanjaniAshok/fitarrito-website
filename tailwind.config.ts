@@ -9,6 +9,12 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        'xs': '360px',
+        // => @media (min-width: 640px) { ... }
+ 
+      },
+  
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
@@ -38,6 +44,8 @@ export default {
   
       },
         fontSize: {
+          xxs: "0.55rem",
+
           xs: "0.75rem",
           sm: "0.875rem",
           base: "1rem",
