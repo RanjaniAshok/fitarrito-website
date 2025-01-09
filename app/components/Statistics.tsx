@@ -14,16 +14,13 @@ interface TextColumnProps {
   textonleft: string; // Adjust the type as needed
 }
 const Container = tw.div`relative`;
-const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24`;
+const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto pb-20`;
 const Column = tw.div`w-full max-w-md mx-auto md:max-w-none md:mx-0`;
 const imageContainerCss = tw`p-2!`;
 
-const ImageColumn = tw(Column)`md:w-5/12 flex-shrink-0 h-80 md:h-auto relative`;
-const TextColumn = styled(Column)<TextColumnProps>((props) => [
+const ImageColumn = tw(Column)`md:w-5/12 h-80 md:h-auto relative`;
+const TextColumn = styled(Column)<TextColumnProps>(() => [
   tw`md:w-7/12 mt-16 md:mt-0`,
-  props.textonleft === "true"
-    ? tw`md:mr-12 lg:mr-16 md:order-first`
-    : tw`md:ml-12 lg:ml-16 md:order-last`,
 ]);
 
 const TextContent = tw.div`lg:py-8 text-center md:text-left`;
@@ -45,34 +42,23 @@ const PrimaryButton = tw(
   PrimaryButtonBase
 )`mt-8 md:mt-10 text-sm inline-block mx-auto md:mx-0`;
 
-const DotBlobContainer = tw.div`pointer-events-none rounded-md absolute w-32 h-32 right-1/2 bottom-0 transform translate-x-10 translate-y-10 -z-10`;
+const DotBlobContainer = tw.div`pointer-events-none rounded-md absolute w-32 h-32 right-1/2 sm:bottom-0  transform translate-x-10 sm:translate-y-10 xs:translate-y-0 xs:bottom-10 -z-10`;
 
 export default function Statistics() {
   const data = [
     {
       key: "Orders",
-      value: "2282+",
+      value: "300+",
     },
     {
       key: "Dishes",
-      value: "3891+",
+      value: "50+",
     },
   ];
 
   return (
     <Container>
       <TwoColumn css={tw`md:items-center`}>
-        <ImageColumn css={imageContainerCss}>
-          <Image
-            src={Stats}
-            alt="UTP-Logo"
-            width={1500}
-            style={{ borderRadius: "5%" }}
-          />
-          <DotBlobContainer>
-            <Image src={DotBlob} alt="Blob-Logo" />
-          </DotBlobContainer>
-        </ImageColumn>
         <TextColumn textonleft={true.toString()}>
           <TextContent>
             <Subheading>A Reputated Brand</Subheading>
@@ -98,6 +84,17 @@ export default function Statistics() {
             </PrimaryButton>
           </TextContent>
         </TextColumn>
+        <ImageColumn css={imageContainerCss}>
+          <Image
+            src={Stats}
+            alt="UTP-Logo"
+            width={1500}
+            style={{ borderRadius: "5%" }}
+          />
+          <DotBlobContainer>
+            <Image src={DotBlob} alt="Blob-Logo" />
+          </DotBlobContainer>
+        </ImageColumn>
       </TwoColumn>
     </Container>
   );

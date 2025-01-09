@@ -3,7 +3,6 @@ import React from "react";
 import cuisine from "@/images/cuisine.svg";
 import Link from "next/link";
 import DotBlob from "@/images/dot-pattern.svg";
-import DecoratorBlob from "@/images/svg-decorator-blob-1.svg";
 import Image from "next/image";
 import tw from "twin.macro";
 const Container = tw.div`relative`;
@@ -15,7 +14,6 @@ const DotBlobContainer = tw.div`pointer-events-none rounded-md absolute w-32 h-3
 const HighlightedText = tw.span`bg-customTheme text-gray-100 px-4 transform -skew-x-12 inline-block leading-snug text-3xl font-black`;
 const Heading = tw.h1`font-black text-3xl text-gray-600 md:text-5xl leading-snug max-w-3xl`;
 const Paragraph = tw.p`my-5 lg:my-8 text-sm lg:text-base font-bold text-gray-600 mx-auto max-w-lg lg:mx-0`;
-const DecoratorBlobContrainer = tw.div`pointer-events-none opacity-10 absolute left-0 bottom-0 h-64 w-64 transform -translate-x-2/3  -z-10`;
 export default function About() {
   return (
     <Container>
@@ -52,9 +50,9 @@ export default function About() {
           </DotBlobContainer>
         </RightColumn>
       </TwoColumn>
-      <DecoratorBlobContrainer>
+      {/* <DecoratorBlobContrainer>
         <Image src={DecoratorBlob} alt="Blob-Logo" />
-      </DecoratorBlobContrainer>
+      </DecoratorBlobContrainer> */}
     </Container>
   );
 }

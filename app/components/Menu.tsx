@@ -6,8 +6,6 @@ import { FaStar } from "react-icons/fa";
 import Link from "next/link";
 import { Container, ContentWithPaddingXl } from "@/components/misc/Layout";
 import { SectionHeading } from "@/components/misc/Heading";
-import { PrimaryButton as PrimaryButtonBase } from "./misc/Buttons";
-import SvgDecoratorBlob1 from "@/images/svg-decorator-blob-5.svg";
 import SvgDecoratorBlob2 from "@/images/svg-decorator-blob-7.svg";
 import Image from "next/image";
 import tw from "twin.macro";
@@ -53,9 +51,9 @@ const TabControl = styled.div<TabControlProps>`
 const TabContent = tw(
   motion.div
 )`mt-6 flex flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12`;
-const CardContainer = tw.div`mt-10 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 sm:pr-10 md:pr-6 lg:pr-12`;
+const CardContainer = tw.div`mt-10 w-full xs:w-full sm:w-1/2 md:w-1/3 lg:w-1/4 sm:pr-10 md:pr-6 lg:pr-12 xs:pr-10`;
 const Card = tw(
-  motion.a
+  motion.div
 )`bg-gray-200 rounded-b block max-w-xs mx-auto sm:max-w-none sm:mx-0`;
 
 const CardImageContainer = styled.div<CardImageContainerProps>`
@@ -64,7 +62,7 @@ const CardImageContainer = styled.div<CardImageContainerProps>`
 `;
 const CardRatingContainer = tw.div`leading-none absolute inline-flex bg-gray-100 bottom-0 left-0 ml-4 mb-4 rounded-full px-5 py-2 items-end`;
 const CardRating = styled.div`
-  ${tw`mr-1 text-sm font-bold flex items-end`}
+  ${tw`mr-1 text-sm xs:text-xs font-bold flex items-end`}
   svg {
     ${tw`w-4 h-4 fill-current text-orange-400 mr-1`}
   }
@@ -74,17 +72,15 @@ const CardHoverOverlay = styled(motion.div)`
   background-color: rgba(255, 255, 255, 0.5);
   ${tw`absolute inset-0 flex justify-center items-center`}
 `;
-const CardButton = tw(PrimaryButtonBase)`text-sm`;
+const CardButton = tw.div`text-sm px-8 py-3 font-bold rounded bg-primary-500 text-gray-100 hocus:bg-primary-700 hocus:text-gray-200 focus:shadow-sm focus:outline-none transition duration-300`;
 
 const CardReview = tw.div`font-medium text-xs text-gray-600`;
 
 const CardText = tw.div`p-4 text-gray-900`;
-const CardTitle = tw.h5`text-base font-semibold group-hover:text-primary-500`;
-const CardContent = tw.p`mt-1 text-sm font-medium text-gray-600`;
+const CardTitle = tw.h5`text-base font-semibold group-hover:text-primary-500 xs:text-xs`;
+const CardContent = tw.p`mt-1 text-sm xs:text-xxs font-medium text-gray-600`;
 const CardPrice = tw.p`mt-4 text-xl font-bold`;
-const DecoratorBlob1 = styled.div`
-  ${tw`pointer-events-none -z-20 absolute right-0 top-0 h-64 w-64 opacity-15 transform translate-x-60 -translate-y-12 text-pink-400`}
-`;
+
 const DecoratorBlob2 = styled.div`
   ${tw`pointer-events-none -z-20 absolute left-0 bottom-0 h-80 w-80 opacity-15 transform -translate-x-60 text-primary-500`}
 `;
@@ -133,7 +129,7 @@ export default function Menu({ heading, tabs }: MenuProps) {
               <CardContainer key={index}>
                 <Card
                   className="group"
-                  href={card.url}
+                  // href={card.url}
                   initial="rest"
                   whileHover="hover"
                   animate="rest"
@@ -153,6 +149,7 @@ export default function Menu({ heading, tabs }: MenuProps) {
                             opacity: 1,
                             height: "auto",
                           },
+
                           rest: {
                             opacity: 0,
                             height: 0,
@@ -185,9 +182,7 @@ export default function Menu({ heading, tabs }: MenuProps) {
           </TabContent>
         ))}
       </ContentWithPaddingXl>
-      <DecoratorBlob1>
-        <Image src={SvgDecoratorBlob1} alt="Blob-Logo" />
-      </DecoratorBlob1>
+
       <DecoratorBlob2>
         <Image src={SvgDecoratorBlob2} alt="Blob-Logo" />
       </DecoratorBlob2>
