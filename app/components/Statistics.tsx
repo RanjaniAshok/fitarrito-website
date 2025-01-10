@@ -18,7 +18,7 @@ const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-
 const Column = tw.div`w-full max-w-md mx-auto md:max-w-none md:mx-0`;
 const imageContainerCss = tw`p-2!`;
 
-const ImageColumn = tw(Column)`md:w-5/12 h-80 md:h-auto relative`;
+const ImageColumn = tw.div`relative mt-12 lg:mt-0 flex flex-col justify-center`;
 const TextColumn = styled(Column)<TextColumnProps>(() => [
   tw`md:w-7/12 mt-16 md:mt-0`,
 ]);
@@ -42,7 +42,7 @@ const PrimaryButton = tw(
   PrimaryButtonBase
 )`mt-8 md:mt-10 text-sm inline-block mx-auto md:mx-0`;
 
-const DotBlobContainer = tw.div`pointer-events-none rounded-md absolute w-32 h-32 right-1/2 sm:bottom-0  transform translate-x-10 sm:translate-y-10 xs:translate-y-0 xs:bottom-10 -z-10`;
+const DotBlobContainer = tw.div`pointer-events-none rounded-md absolute w-32 h-32 right-0 bottom-0 transform translate-x-10 translate-y-10 -z-10`;
 
 export default function Statistics() {
   const data = [
@@ -88,7 +88,7 @@ export default function Statistics() {
           <Image
             src={Stats}
             alt="UTP-Logo"
-            width={1500}
+            width={400}
             style={{ borderRadius: "5%" }}
           />
           <DotBlobContainer>
