@@ -1,9 +1,8 @@
 {
     "cleanUrls": true,
-
-    "git": {
-      "deploymentEnabled": {
-        "main": false
+    
+      "github": {
+        "autoJobCancelation": false
       }
-    }
+    
   }
