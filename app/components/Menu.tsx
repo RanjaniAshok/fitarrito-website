@@ -50,15 +50,15 @@ const TabControl = styled.div<TabControlProps>`
 `;
 const TabContent = tw(
   motion.div
-)`mt-6 flex flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12`;
-const CardContainer = tw.div`mt-10 w-full xs:w-full sm:w-1/2 md:w-1/3 lg:w-1/4 sm:pr-10 md:pr-6 lg:pr-12 xs:pr-10`;
+)`mt-6 flex sm:-mr-10 md:-mr-6 lg:-mr-12 overflow-x-auto`;
+const CardContainer = tw.div`mt-10 w-full xs:w-full sm:w-1/2 md:w-1/3 lg:w-1/4 sm:pr-10 md:pr-6 lg:pr-12 xs:pr-10 `;
 const Card = tw(
   motion.div
 )`bg-gray-200 rounded-b block max-w-xs mx-auto sm:max-w-none sm:mx-0`;
 
 const CardImageContainer = styled.div<CardImageContainerProps>`
   background: url(${(props) => props.imagesrc.src}) no-repeat top center;
-  ${tw`h-56 xl:h-64 bg-center bg-cover relative rounded-t`}
+  ${tw`h-56 xl:h-64 w-56 bg-center bg-cover relative rounded-t`}
 `;
 const CardRatingContainer = tw.div`leading-none absolute inline-flex bg-gray-100 bottom-0 left-0 ml-4 mb-4 rounded-full px-5 py-2 items-end`;
 const CardRating = styled.div`
