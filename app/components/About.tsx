@@ -10,10 +10,12 @@ const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col lg:flex-row md:items-center max-w-screen-xl mx-auto py-10 md:py-20`;
 const LeftColumn = tw.div`relative lg:w-6/12 lg:pr-12 shrink-0 text-center lg:text-left`;
 const RightColumn = tw.div`relative mt-12 lg:mt-0 flex flex-col justify-center`;
+const Description = tw.p`my-8 text-center md:text-left text-base md:text-base lg:text-lg font-semibold leading-relaxed text-secondary-200`;
+
 const DotBlobContainer = tw.div`pointer-events-none rounded-md absolute w-32 h-32 right-0 bottom-0 transform translate-x-10 translate-y-10 -z-10`;
 const HighlightedText = tw.span`bg-customTheme text-gray-100 px-4 transform -skew-x-12 inline-block leading-snug text-3xl font-black`;
 const Heading = tw.h1`font-black text-3xl text-gray-600 md:text-5xl leading-snug max-w-3xl`;
-const Paragraph = tw.p`my-5 lg:my-8 text-sm lg:text-base font-bold text-gray-600 mx-auto max-w-lg lg:mx-0`;
+
 export default function About() {
   return (
     <Container>
@@ -21,12 +23,10 @@ export default function About() {
         <LeftColumn>
           <Heading>Delicious & Healthy </Heading>
           <HighlightedText>Meals Near You.</HighlightedText>
-          <Paragraph>
+          <Description>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            <br />
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </Paragraph>
-          {/* <PrimaryButton> */}
+          </Description>
           <Link
             target="_blank"
             href={
@@ -36,7 +36,6 @@ export default function About() {
           >
             Order Now
           </Link>
-          {/* </PrimaryButton> */}
         </LeftColumn>
         <RightColumn>
           <Image

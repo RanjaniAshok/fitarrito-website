@@ -36,6 +36,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </head>
       <body className={`${roboto.className} ${inter.className}`}>
         <StyledComponentsRegistry>

@@ -87,7 +87,7 @@ const Header: React.FC = () => {
         {/* Hintergrund für das aufklappbare Menü */}
 
         <div className="flex justify-center">
-          <div className=" bg-nav-color-dark w-screen shadow-customShadow-md laptop:w-[80vw] text-white inline-flex justify-between py-1 mobile:py-3 px-5 laptop:rounded-full laptop:my-4  laptop:inline-flex">
+          <div className=" bg-nav-color-dark w-screen sm:justify-between md:justify-between lg:justify-between xs:justify-center shadow-customShadow-md laptop:w-[80vw] text-white inline-flex items-center py-1 mobile:py-3 px-5 laptop:rounded-full laptop:my-4  laptop:inline-flex">
             <div className="flex items-center">
               <div>
                 <Link
