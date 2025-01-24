@@ -70,7 +70,7 @@ const CardRating = styled.div`
 
 const CardHoverOverlay = styled(motion.div)`
   background-color: rgba(255, 255, 255, 0.5);
-  ${tw`absolute inset-0 flex justify-center items-center`}
+  ${tw`absolute inset-0 justify-center items-center xs:hidden sm:flex`}
 `;
 const CardButton = tw.div`text-sm px-8 py-3 font-bold rounded bg-primary-500 text-gray-100 hocus:bg-primary-700 hocus:text-gray-200 focus:shadow-sm focus:outline-none transition duration-300`;
 
@@ -79,7 +79,8 @@ const CardReview = tw.div`font-medium text-xs text-gray-600`;
 const CardText = tw.div`p-4 text-gray-900`;
 const CardTitle = tw.h5`text-base font-semibold group-hover:text-primary-500 xs:text-xs`;
 const CardContent = tw.p`mt-1 text-sm xs:text-xxs font-medium text-gray-600`;
-const CardPrice = tw.p`mt-4 text-xl font-bold`;
+const CardPrice = tw.p`text-xl font-bold`;
+const CardBuyButton = tw.div`flex flex-row items-center justify-between mt-4 sm:hidden`;
 
 const DecoratorBlob2 = styled.div`
   ${tw`pointer-events-none -z-20 absolute left-0 bottom-0 h-80 w-80 opacity-15 transform -translate-x-60 text-primary-500`}
@@ -129,10 +130,9 @@ export default function Menu({ heading, tabs }: MenuProps) {
               <CardContainer key={index}>
                 <Card
                   className="group"
-                  // href={card.url}
+                  animate={"rest"}
                   initial="rest"
                   whileHover="hover"
-                  animate="rest"
                 >
                   <Container>
                     <CardImageContainer imagesrc={card.imagesrc}>
@@ -174,7 +174,19 @@ export default function Menu({ heading, tabs }: MenuProps) {
                   <CardText>
                     <CardTitle>{card.title}</CardTitle>
                     <CardContent>{card.content}</CardContent>
-                    <CardPrice>{card.price}</CardPrice>
+                    <CardBuyButton>
+                      <CardPrice>{card.price}</CardPrice>
+                      <CardButton>
+                        <Link
+                          target="_blank"
+                          href={`https://wa.me/7373824646?text=${encodeURI(
+                            `Hi I would like to place order for this item from your shop. \n ${card.title}.`
+                          )}`}
+                        >
+                          Buy Now
+                        </Link>
+                      </CardButton>
+                    </CardBuyButton>
                   </CardText>
                 </Card>
               </CardContainer>
