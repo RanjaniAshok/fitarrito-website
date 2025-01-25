@@ -20,7 +20,7 @@ const imageContainerCss = tw`p-2!`;
 
 const ImageColumn = tw.div`relative mt-12 lg:mt-0 flex flex-col justify-center`;
 const TextColumn = styled(Column)<TextColumnProps>(() => [
-  tw`md:w-7/12 mt-16 md:mt-0`,
+  tw`md:w-7/12 mt-8 md:mt-0`,
 ]);
 
 const TextContent = tw.div`lg:py-8 text-center md:text-left`;

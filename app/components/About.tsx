@@ -7,8 +7,8 @@ import Image from "next/image";
 import tw from "twin.macro";
 const Container = tw.div`relative`;
 
-const TwoColumn = tw.div`flex flex-col lg:flex-row md:items-center max-w-screen-xl mx-auto py-10 md:py-20`;
-const LeftColumn = tw.div`relative lg:w-6/12 lg:pr-12 shrink-0 text-center lg:text-left`;
+const TwoColumn = tw.div`flex flex-col sm:flex-row md:items-center max-w-screen-xl mx-auto py-10 md:py-20`;
+const LeftColumn = tw.div`relative sm:w-6/12 sm:pr-12 shrink-0 text-center lg:text-left`;
 const RightColumn = tw.div`relative mt-12 lg:mt-0 flex flex-col justify-center`;
 const Description = tw.p`my-8 text-center md:text-left text-base md:text-base lg:text-lg font-semibold leading-relaxed text-secondary-200`;
 
@@ -41,7 +41,7 @@ export default function About() {
           <Image
             src={cuisine}
             alt="UTP-Logo"
-            width={1200}
+            width={600}
             style={{ borderRadius: "5%" }}
           />
           <DotBlobContainer>

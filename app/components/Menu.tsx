@@ -1,10 +1,12 @@
 "use client";
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useState, useRef } from "react";
 import styled from "styled-components";
 import { motion } from "motion/react";
 import { FaStar } from "react-icons/fa";
 import Link from "next/link";
 import { Container, ContentWithPaddingXl } from "@/components/misc/Layout";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi"; // Import icons
+
 import { SectionHeading } from "@/components/misc/Heading";
 import SvgDecoratorBlob2 from "@/images/svg-decorator-blob-7.svg";
 import Image from "next/image";
@@ -50,15 +52,15 @@ const TabControl = styled.div<TabControlProps>`
 `;
 const TabContent = tw(
   motion.div
-)`mt-6 flex sm:-mr-10 md:-mr-6 lg:-mr-12 overflow-x-auto`;
-const CardContainer = tw.div`mt-10 w-full xs:w-full sm:w-1/2 md:w-1/3 lg:w-1/4 sm:pr-10 md:pr-6 lg:pr-12 xs:pr-10 `;
+)`flex overflow-x-auto scroll-mr-0 scroll-smooth snap-x snap-mandatory max-w-full relative`;
+const CardContainer = tw.div`mt-10 w-[90%] xs:w-auto sm:pr-10 md:pr-6 lg:pr-8 xs:pr-10 snap-start`;
 const Card = tw(
   motion.div
-)`bg-gray-200 rounded-b block max-w-xs mx-auto sm:max-w-none sm:mx-0`;
+)`bg-gray-200 rounded-b  mx-auto sm:max-w-none sm:mx-0`;
 
 const CardImageContainer = styled.div<CardImageContainerProps>`
   background: url(${(props) => props.imagesrc.src}) no-repeat top center;
-  ${tw`h-56 xl:h-64 w-56 bg-center bg-cover relative rounded-t`}
+  ${tw`h-64 xl:h-64 w-64 bg-center bg-cover relative rounded-t`}
 `;
 const CardRatingContainer = tw.div`leading-none absolute inline-flex bg-gray-100 bottom-0 left-0 ml-4 mb-4 rounded-full px-5 py-2 items-end`;
 const CardRating = styled.div`
@@ -78,7 +80,7 @@ const CardReview = tw.div`font-medium text-xs text-gray-600`;
 
 const CardText = tw.div`p-4 text-gray-900`;
 const CardTitle = tw.h5`text-base font-semibold group-hover:text-primary-500 xs:text-xs`;
-const CardContent = tw.p`mt-1 text-sm xs:text-xxs font-medium text-gray-600`;
+const CardContent = tw.p`mt-1 text-base xs:text-xxs font-medium text-gray-600`;
 const CardPrice = tw.p`text-xl font-bold`;
 const CardBuyButton = tw.div`flex flex-row items-center justify-between mt-4 sm:hidden`;
 
@@ -89,7 +91,18 @@ export default function Menu({ heading, tabs }: MenuProps) {
   const tabsKeys = Object.keys(tabs);
 
   const [activeTab, setActiveTab] = useState(tabsKeys[0]);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
 
+  const scroll = (direction: string) => {
+    console.log(scrollRef.current);
+    if (!scrollRef.current) return; // Prevent accessing null
+
+    if (direction === "left") {
+      scrollRef.current.scrollBy({ left: -300, behavior: "smooth" }); // Scroll left
+    } else {
+      scrollRef.current.scrollBy({ left: 300, behavior: "smooth" }); // Scroll right
+    }
+  };
   return (
     <Container>
       <ContentWithPaddingXl>
@@ -107,26 +120,15 @@ export default function Menu({ heading, tabs }: MenuProps) {
             ))}
           </TabsControl>
         </HeaderRow>
-        {tabsKeys.map((tabKey: string | number, index) => (
-          <TabContent
-            key={index}
-            variants={{
-              current: {
-                opacity: 1,
-                scale: 1,
-                display: "flex",
-              },
-              hidden: {
-                opacity: 0,
-                scale: 0.8,
-                display: "none",
-              },
-            }}
-            transition={{ duration: 0.4 }}
-            initial={activeTab === tabKey ? "current" : "hidden"}
-            animate={activeTab === tabKey ? "current" : "hidden"}
+        <div className="relative flex items-center">
+          <button
+            onClick={() => scroll("left")}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-customTheme text-white p-2 rounded-full shadow-lg hover:bg-gray-700"
           >
-            {tabs[tabKey].map((card, index) => (
+            <FiChevronLeft size={24} />
+          </button>
+          <TabContent ref={scrollRef} className="w-[85%] mx-auto">
+            {tabs[activeTab].map((card, index) => (
               <CardContainer key={index}>
                 <Card
                   className="group"
@@ -192,7 +194,13 @@ export default function Menu({ heading, tabs }: MenuProps) {
               </CardContainer>
             ))}
           </TabContent>
-        ))}
+          <button
+            onClick={() => scroll("right")}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-customTheme text-white p-2 rounded-full shadow-lg hover:bg-gray-700"
+          >
+            <FiChevronRight size={24} />
+          </button>
+        </div>
       </ContentWithPaddingXl>
 
       <DecoratorBlob2>
