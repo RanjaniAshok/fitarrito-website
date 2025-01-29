@@ -52,15 +52,15 @@ const TabControl = styled.div<TabControlProps>`
 `;
 const TabContent = tw(
   motion.div
-)`flex overflow-x-auto scroll-mr-0 scroll-smooth snap-x snap-mandatory max-w-full relative`;
-const CardContainer = tw.div`mt-10 w-[90%] xs:w-auto sm:pr-10 md:pr-6 lg:pr-8 xs:pr-10 snap-start`;
+)`flex overflow-x-auto scroll-mr-0 scroll-smooth snap-x snap-mandatory max-w-full relative px-2 sm:px-8`;
+const CardContainer = tw.div`flex-shrink-0 mt-10 sm:pr-10 md:pr-6 lg:pr-8 xs:pr-10 snap-start`;
 const Card = tw(
   motion.div
-)`bg-gray-200 rounded-b  mx-auto sm:max-w-none sm:mx-0`;
+)`bg-gray-200 rounded-b mx-auto sm:max-w-none sm:mx-0`;
 
 const CardImageContainer = styled.div<CardImageContainerProps>`
   background: url(${(props) => props.imagesrc.src}) no-repeat top center;
-  ${tw`h-64 xl:h-64 w-64 bg-center bg-cover relative rounded-t`}
+  ${tw`h-56 xl:h-64 w-64 bg-center bg-cover relative rounded-t`}
 `;
 const CardRatingContainer = tw.div`leading-none absolute inline-flex bg-gray-100 bottom-0 left-0 ml-4 mb-4 rounded-full px-5 py-2 items-end`;
 const CardRating = styled.div`
@@ -121,13 +121,13 @@ export default function Menu({ heading, tabs }: MenuProps) {
           </TabsControl>
         </HeaderRow>
         <div className="relative flex items-center">
-          <button
+          <FiChevronLeft
+            size={32}
             onClick={() => scroll("left")}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-customTheme text-white p-2 rounded-full shadow-lg hover:bg-gray-700"
-          >
-            <FiChevronLeft size={24} />
-          </button>
-          <TabContent ref={scrollRef} className="w-[85%] mx-auto">
+            className="absolute -left-10 sm:left-0 top-1/2 transform -translate-y-1/2 z-10 
+            bg-customTheme text-white p-2 rounded-full shadow-lg hover:bg-red-500"
+          />
+          <TabContent ref={scrollRef} className="sm:w-[85%] mx-auto">
             {tabs[activeTab].map((card, index) => (
               <CardContainer key={index}>
                 <Card
@@ -194,12 +194,13 @@ export default function Menu({ heading, tabs }: MenuProps) {
               </CardContainer>
             ))}
           </TabContent>
-          <button
+
+          <FiChevronRight
+            size={32}
             onClick={() => scroll("right")}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-customTheme text-white p-2 rounded-full shadow-lg hover:bg-gray-700"
-          >
-            <FiChevronRight size={24} />
-          </button>
+            className="absolute -right-10 sm:right-0 top-1/2 transform -translate-y-1/2 z-10 
+            bg-customTheme text-white p-2 rounded-full shadow-lg hover:bg-red-500"
+          />
         </div>
       </ContentWithPaddingXl>
 

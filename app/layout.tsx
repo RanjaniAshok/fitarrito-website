@@ -5,6 +5,7 @@ import Favicon from "../public/favicon.ico";
 
 import { ThemeProvider } from "./components/ThemeProvider";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import GlobalStyles from "src/styles/GlobalStyles";
 import StyledComponentsRegistry from "lib/registry";
 import { Inter } from "next/font/google";
@@ -36,19 +37,23 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body className={`${roboto.className} ${inter.className}`}>
         <StyledComponentsRegistry>
           <GlobalStyles />
 
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="p-12">
+            {/* Make this a flex container */}
+            <div className="flex flex-col min-h-screen">
               <Header />
-              <div className="absolute top-24">{children}</div>
-            </div>
 
-            {/* <Footer /> */}
+              {/* Make content grow to push footer down */}
+              <main className="flex-1 p-12">{children}</main>
+
+              {/* Footer stays at the bottom */}
+              <Footer />
+            </div>
           </ThemeProvider>
         </StyledComponentsRegistry>
       </body>
