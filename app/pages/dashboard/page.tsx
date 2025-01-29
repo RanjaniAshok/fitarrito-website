@@ -6,7 +6,6 @@ import About from "@/components/About";
 import Menu from "@/components/Menu";
 import tw from "twin.macro";
 import Statistics from "@/components/Statistics";
-import Footer from "@/components/Footer";
 const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`;
 const tabs = {
   Main: Main,

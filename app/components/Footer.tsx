@@ -2,16 +2,11 @@
 import React from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
-import { Container as ContainerBase } from "@/components/misc/Layout";
 import logo from "../images/logo.svg";
 import Image from "next/image";
 import { FaSquareInstagram } from "react-icons/fa6";
 import { FaWhatsappSquare } from "react-icons/fa";
 import { IoCall } from "react-icons/io5";
-
-import { ReactComponent as FacebookIcon } from "../../images/facebook-icon.svg";
-import { ReactComponent as TwitterIcon } from "../../images/twitter-icon.svg";
-import { ReactComponent as YoutubeIcon } from "../../images/youtube-icon.svg";
 
 const Container = tw.div`bg-gray-500 text-gray-100 w-screen`;
 const Content = tw.div`mx-auto py-10 lg:py-16 `;
@@ -19,7 +14,6 @@ const Content = tw.div`mx-auto py-10 lg:py-16 `;
 const Row = tw.div`flex items-center justify-center flex-col`;
 
 const LogoContainer = tw.div`flex items-center justify-center md:justify-start`;
-const LogoImg = tw.img`w-8`;
 const LogoText = tw.h5`ml-2 text-2xl font-black tracking-wider`;
 
 const LinksContainer = tw.div`mt-8 font-medium flex flex-wrap justify-center items-center flex-col sm:flex-row`;
@@ -33,7 +27,6 @@ const SocialLink = styled.a`
   }
 `;
 
-const CopyrightText = tw.p`text-center mt-10 font-medium tracking-wide text-sm text-gray-600`;
 const Footer: React.FC = () => {
   return (
     <Container>
