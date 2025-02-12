@@ -115,7 +115,7 @@ const CartModal: React.FC<CartModalProps> = ({
           </QuantityWrapper>
           <ActionButton
             onClick={async () => {
-              let { meta } = await dispatch(
+              const { meta } = await dispatch(
                 addItemsToCart({ ...selectedCard, quantity: quantity })
               );
               if (meta.requestStatus === "fulfilled") {

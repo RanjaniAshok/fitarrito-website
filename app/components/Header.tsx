@@ -9,7 +9,7 @@ import textImage from "../images/fitarrito.svg";
 import CartDrawer from "@/components/CartDrawer";
 import logo from "../images/logo.svg";
 import { FaShoppingCart } from "react-icons/fa";
-import { useAppSelector, useAppDispatch } from "app/lib/hooks";
+import { useAppSelector } from "app/lib/hooks";
 import { selectTotalQuantity } from "app/lib/features/cartSlice";
 
 // Typ für einen einzelnen Menüpunkt
@@ -119,11 +119,6 @@ const Header: React.FC = () => {
             </div>
 
             <div className="z-40 flex flex-row gap-3">
-              {/* <li className="py-2 list-none">
-                <button className="bg-customTheme transition ease-in-out duration-150  px-5 py-2  mobile:px-3 mobile:py-2 rounded-lg text-xs mobile:text-base">
-                  <Link href="/">Login</Link>
-                </button>
-              </li> */}
               <button
                 onClick={() => setIsOpen(true)}
                 className="px-3 py-2 bg-customTheme rounded-3xl flex flex-row items-center justify-between w-16"

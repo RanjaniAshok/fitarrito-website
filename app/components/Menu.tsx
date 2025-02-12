@@ -3,7 +3,6 @@ import React, { ReactNode, useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { motion } from "motion/react";
 import { FaStar } from "react-icons/fa";
-import Link from "next/link";
 import { Container, ContentWithPaddingXl } from "@/components/misc/Layout";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi"; // Import icons
 import LoaderText from "@/components/ImageSkeleton";

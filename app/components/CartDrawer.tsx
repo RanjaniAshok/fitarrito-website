@@ -9,7 +9,6 @@ import { useAppSelector, useAppDispatch } from "app/lib/hooks";
 import {
   incrementQuantity,
   decrementQuantity,
-  selectTotalQuantity,
   removeItem,
 } from "app/lib/features/cartSlice";
 import Image from "next/image";
@@ -59,7 +58,6 @@ const ContinueButton = tw.button`w-[45%] md:w-[40%] bg-customTheme text-white ro
 const DrawerComponent = ({ setIsOpen }: DrawerProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const totalQuantity = useAppSelector(selectTotalQuantity);
   const cartItems = useAppSelector((state) => state.cart.cartItems);
   const totalAmt = useAppSelector((state) => state.cart.totalAmt);
 

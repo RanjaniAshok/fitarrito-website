@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Modal from "react-modal";
 import tw from "twin.macro";
-import { useAppSelector, useAppDispatch } from "app/lib/hooks";
+import { useAppSelector } from "app/lib/hooks";
 
 // Tailwind Styled Components
 const Card = tw.div`bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto`;

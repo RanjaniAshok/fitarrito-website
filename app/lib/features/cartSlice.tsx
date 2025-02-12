@@ -9,10 +9,6 @@ interface Item {
   rating: number | string;
   reviews: string;
 }
-interface CartState {
-  cartItems: Item[];
-  loading: "idle" | "pending" | "succeeded" | "failed";
-}
 
 export const addItemsToCart = createAsyncThunk(
   "cart/addItemsToCart",

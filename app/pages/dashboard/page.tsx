@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect } from "react";
-import { Main, Nachos, Taco, Smoothie, Salad } from "@/helpers/menu";
 import { getMenu } from "app/lib/features/menuSlice";
 import { useAppDispatch, useAppSelector } from "app/lib/hooks";
 import About from "@/components/About";
@@ -21,7 +20,7 @@ export default function Dashboard() {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getMenu());
-  }, []);
+  }, [dispatch]);
   useEffect(() => {
     console.log(menu, "menu in useEffect");
   }, [menu]);
