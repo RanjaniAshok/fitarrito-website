@@ -9,6 +9,12 @@ interface Item {
   rating: number | string;
   reviews: string;
   url: string;
+  nutrients: {
+    cals: string;
+    protein: string;
+    fat: string;
+    carbs: string;
+  };
 }
 
 type Tabs = {

@@ -2,8 +2,7 @@ import ChickenBurrito from "@/images/menuimages/ChickenBurrito.svg";
 import MuttonBurrito from "@/images/menuimages/MuttonBurrito.svg";
 import PannerBurrito from "@/images/menuimages/PannerBurrito.svg";
 import MushroomBurrito from "@/images/menuimages/MushroomBurrito.svg";
-import BrocolliBurrito from "@/images/menuimages/BrocolliBurrito.svg";
-import MalaxiangGuo from "@/images/menuimages/MalaxiangGuo.svg";
+
 import VegHummusBuddhaBowl from "@/images/menuimages/VegHummusBowl.svg";
 import ChickenHummusBuddhaBowl from "@/images/menuimages/ChickenHummusBowl.svg";
 import SingaporeLaksa from "@/images/menuimages/SingaporeLaksa.svg";
@@ -13,13 +12,11 @@ import PannerNachos from "@/images/menuimages/PannerNachos.svg";
 import ButterChickenNachos from "@/images/menuimages/ButterChickenNachos.svg";
 import BBQCHickenNachos from "@/images/menuimages/BBQChickenNachos.svg";
 import MushroomNachos from "@/images/menuimages/MushroomNachos.svg";
-import BroccoliNachos from "@/images/menuimages/BroccolliNachos.svg";
 import Chickentaco from "@/images/menuimages/ChickenTaco.svg";
 import Muttontaco from "@/images/menuimages/MuttonTaco.svg";
 import EggTaco from "@/images/menuimages/EggTaco.svg";
 import Paneertaco from "@/images/menuimages/PaneerTaco.svg";
 import MushroomTaco from "@/images/menuimages/MushroomTaco.svg";
-import BroccoliTaco from "@/images/menuimages/BroccoliTaco.svg";
 import VegOuesadilla from "@/images/menuimages/VegQuesadilla.svg";
 import ChickenQuesadilla from "@/images/menuimages/ChickenQuesadilla.svg";
 import AppleSmoothie from "@/images/menuimages/AppleSmoothie.svg";
@@ -41,6 +38,16 @@ interface tabItem {
   rating: number | string;
   reviews: string;
   url: string;
+  nutrient?: {
+    mini: { cals: string; protein: string; fat: string; carbs: string };
+    regular: { cals: string; protein: string; fat: string; carbs: string };
+  };
+  nutrients: {
+    cals: string;
+    protein: string;
+    fat: string;
+    carbs: string;
+  };
 }
 
 export const Main: Array<tabItem> = [
@@ -52,88 +59,110 @@ export const Main: Array<tabItem> = [
     rating: "5.0",
     reviews: "87",
     url: "#",
+    nutrients: {
+      cals: "750 kcal",
+      protein: "45g",
+      fat: "35g",
+      carbs: "60g",
+    },
   },
+
   {
     imagesrc: MuttonBurrito,
     title: "Mutton Burrito/Bowl",
-    content: "Tortilla roll infused with chicken and veggies",
+    content:
+      "A hearty tortilla roll filled with slow-cooked spiced mutton, fresh veggies, beans, and flavorful sauces.",
     price: "330",
     rating: "4.8",
     reviews: "32",
     url: "#",
+    nutrients: {
+      cals: "750 kcal",
+      protein: "45g",
+      fat: "35g",
+      carbs: "60g",
+    },
   },
+
   {
     imagesrc: PannerBurrito,
-    title: "Panner Burrito/Bowl",
-    content: "Hamburger & Fries",
+    title: "Paneer Burrito/Bowl",
+    content:
+      "A soft tortilla filled with spiced paneer, sautéed bell peppers, onions, beans, and a tangy yogurt sauce.",
     price: "179",
     rating: "4.9",
     reviews: "89",
     url: "#",
+    nutrients: {
+      cals: "620 kcal",
+      protein: "30g",
+      fat: "28g",
+      carbs: "65g",
+    },
   },
   {
     imagesrc: MushroomBurrito,
     title: "Mushroom Burrito/Bowl",
-    content: "Crispy Soyabeans",
+    content:
+      "A delicious mix of sautéed mushrooms, beans, rice, fresh veggies, and creamy avocado wrapped in a tortilla.",
     price: "179",
     rating: "4.6",
     reviews: "12",
     url: "#",
-  },
-  {
-    imagesrc: BrocolliBurrito,
-    title: "Brocolli Burrito/Bowl",
-    content: "Roasted Chicken & Egg",
-    price: "179",
-    rating: "4.2",
-    reviews: "19",
-    url: "#",
+    nutrients: {
+      cals: "500 kcal",
+      protein: "20g",
+      fat: "15g",
+      carbs: "70g",
+    },
   },
   {
     imagesrc: ChickenBurrito,
     title: "Egg Burrito/Bowl",
-    content: "Deepfried Chicken",
+    content:
+      "A protein-rich burrito stuffed with scrambled eggs, beans, cheese, and fresh vegetables.",
     price: "159",
     rating: "5.0",
     reviews: "61",
     url: "#",
+    nutrients: {
+      cals: "520 kcal",
+      protein: "35g",
+      fat: "22g",
+      carbs: "50g",
+    },
   },
-  {
-    imagesrc: MalaxiangGuo,
-    title: "Mala Xiong Guo (Veg)",
-    content: "Mexican Chilli",
-    price: "150",
-    rating: "4.2",
-    reviews: "95",
-    url: "#",
-  },
-  {
-    imagesrc: MalaxiangGuo,
-    title: "Mala Xiong Guo (Chicken)",
-    content: "Mexican Chilli",
-    price: "190",
-    rating: "4.2",
-    reviews: "95",
-    url: "#",
-  },
-
   {
     imagesrc: VegHummusBuddhaBowl,
-    title: "Hummus Buddha bowl (veg)",
-    content: "Mexican Chilli",
+    title: "Hummus Buddha Bowl (Veg)",
+    content:
+      "A nutritious bowl with hummus, quinoa, fresh greens, roasted chickpeas, and tahini dressing.",
     price: "190",
     rating: "4.2",
     reviews: "95",
     url: "#",
+    nutrients: {
+      cals: "480 kcal",
+      protein: "22g",
+      fat: "18g",
+      carbs: "55g",
+    },
   },
   {
     imagesrc: ChickenHummusBuddhaBowl,
-    title: "Chicken Hummus Buddha bowl",
-    content: "Mexican Chilli",
+    title: "Chicken Hummus Buddha Bowl",
+    content:
+      "A high-protein bowl with grilled chicken, hummus, quinoa, roasted veggies, and garlic tahini dressing.",
     price: "240",
     rating: "4.2",
     reviews: "95",
     url: "#",
+    nutrients: {
+      cals: "600 kcal",
+      protein: "50g",
+      fat: "20g",
+      carbs: "60g",
+    },
   },
   {
     imagesrc: VegLaksa,
@@ -143,6 +172,12 @@ export const Main: Array<tabItem> = [
     rating: "4.2",
     reviews: "95",
     url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
   {
     imagesrc: PaneerLaksa,
@@ -152,6 +187,12 @@ export const Main: Array<tabItem> = [
     rating: "4.2",
     reviews: "95",
     url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
   {
     imagesrc: SingaporeLaksa,
@@ -161,16 +202,14 @@ export const Main: Array<tabItem> = [
     rating: "4.2",
     reviews: "95",
     url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
-  {
-    imagesrc: SingaporeLaksa,
-    title: "Laksa maggi",
-    content: "Mexican Chilli",
-    price: "180",
-    rating: "4.2",
-    reviews: "95",
-    url: "#",
-  },
+
   {
     imagesrc: VegOuesadilla,
     title: "Veg Quesadillas",
@@ -179,6 +218,12 @@ export const Main: Array<tabItem> = [
     rating: "4.2",
     reviews: "95",
     url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
   {
     imagesrc: ChickenQuesadilla,
@@ -188,6 +233,12 @@ export const Main: Array<tabItem> = [
     rating: "4.2",
     reviews: "95",
     url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
 ];
 export const Salad: Array<tabItem> = [
@@ -199,6 +250,12 @@ export const Salad: Array<tabItem> = [
     rating: "5.0",
     reviews: "87",
     url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
   {
     imagesrc: MushroomSalad,
@@ -208,6 +265,12 @@ export const Salad: Array<tabItem> = [
     rating: "4.9",
     reviews: "89",
     url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
   {
     imagesrc: BBQChickenSalad,
@@ -217,6 +280,12 @@ export const Salad: Array<tabItem> = [
     rating: "4.6",
     reviews: "12",
     url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
   {
     imagesrc: TeriyakiChickenSalad,
@@ -226,6 +295,12 @@ export const Salad: Array<tabItem> = [
     rating: "4.6",
     reviews: "12",
     url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
 ];
 export const Nachos: Array<tabItem> = [
@@ -237,6 +312,12 @@ export const Nachos: Array<tabItem> = [
     rating: "5.0",
     reviews: "87",
     url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
   {
     imagesrc: ChickenNachos,
@@ -246,6 +327,12 @@ export const Nachos: Array<tabItem> = [
     rating: "4.8",
     reviews: "32",
     url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
   {
     imagesrc: PannerNachos,
@@ -255,6 +342,12 @@ export const Nachos: Array<tabItem> = [
     rating: "4.9",
     reviews: "89",
     url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
   {
     imagesrc: ButterChickenNachos,
@@ -264,6 +357,12 @@ export const Nachos: Array<tabItem> = [
     rating: "4.6",
     reviews: "12",
     url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
   {
     imagesrc: BBQCHickenNachos,
@@ -273,6 +372,12 @@ export const Nachos: Array<tabItem> = [
     rating: "4.2",
     reviews: "19",
     url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
   {
     imagesrc: MushroomNachos,
@@ -282,15 +387,12 @@ export const Nachos: Array<tabItem> = [
     rating: "5.0",
     reviews: "61",
     url: "#",
-  },
-  {
-    imagesrc: BroccoliNachos,
-    title: "Broccoli Nachos Bowll",
-    content: "Mexican Chilli",
-    price: "239",
-    rating: "4.2",
-    reviews: "95",
-    url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
 ];
 export const Taco: Array<tabItem> = [
@@ -302,6 +404,12 @@ export const Taco: Array<tabItem> = [
     rating: "5.0",
     reviews: "87",
     url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
   {
     imagesrc: Muttontaco,
@@ -311,6 +419,12 @@ export const Taco: Array<tabItem> = [
     rating: "4.8",
     reviews: "32",
     url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
   {
     imagesrc: EggTaco,
@@ -320,6 +434,12 @@ export const Taco: Array<tabItem> = [
     rating: "4.9",
     reviews: "89",
     url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
   {
     imagesrc: Paneertaco,
@@ -329,6 +449,12 @@ export const Taco: Array<tabItem> = [
     rating: "4.6",
     reviews: "12",
     url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
   {
     imagesrc: MushroomTaco,
@@ -338,15 +464,12 @@ export const Taco: Array<tabItem> = [
     rating: "4.2",
     reviews: "19",
     url: "#",
-  },
-  {
-    imagesrc: BroccoliTaco,
-    title: "Roasted Broccoli Taco",
-    content: "Deepfried Chicken",
-    price: "99",
-    rating: "5.0",
-    reviews: "61",
-    url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
 ];
 export const Smoothie: Array<tabItem> = [
@@ -358,6 +481,12 @@ export const Smoothie: Array<tabItem> = [
     rating: "5.0",
     reviews: "87",
     url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
   {
     imagesrc: BananaSmoothie,
@@ -367,6 +496,12 @@ export const Smoothie: Array<tabItem> = [
     rating: "4.8",
     reviews: "32",
     url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
   {
     imagesrc: MangoSmoothie,
@@ -376,6 +511,12 @@ export const Smoothie: Array<tabItem> = [
     rating: "4.9",
     reviews: "89",
     url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
   {
     imagesrc: ChocolateSmoothie,
@@ -385,5 +526,11 @@ export const Smoothie: Array<tabItem> = [
     rating: "4.6",
     reviews: "12",
     url: "#",
+    nutrients: {
+      cals: "0g",
+      protein: "0g",
+      fat: "0g",
+      carbs: "0g",
+    },
   },
 ];

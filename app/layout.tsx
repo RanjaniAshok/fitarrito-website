@@ -53,7 +53,7 @@ export default function RootLayout({
                 <Header />
 
                 {/* Make content grow to push footer down */}
-                <main className="flex-1 p-12">{children}</main>
+                <main className="flex-1 p-5">{children}</main>
 
                 {/* Footer stays at the bottom */}
                 <Footer />

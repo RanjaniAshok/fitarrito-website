@@ -2,7 +2,6 @@
 import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import ThemeToggler from "./ThemeToggler";
 import { useTheme } from "next-themes";
 import gsap from "gsap";
 import textImage from "../images/fitarrito.svg";
@@ -130,7 +129,7 @@ const Header: React.FC = () => {
               </button>
 
               {isOpen ? <CartDrawer setIsOpen={setIsOpen} /> : null}
-              <ThemeToggler />
+              {/* <ThemeToggler /> */}
             </div>
           </div>
         </div>

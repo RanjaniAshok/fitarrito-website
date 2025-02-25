@@ -2,9 +2,7 @@
 import React, { ReactNode, useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { motion } from "motion/react";
-import { FaStar } from "react-icons/fa";
 import { Container, ContentWithPaddingXl } from "@/components/misc/Layout";
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi"; // Import icons
 import LoaderText from "@/components/ImageSkeleton";
 import { SectionHeading } from "@/components/misc/Heading";
 import SvgDecoratorBlob2 from "@/images/svg-decorator-blob-7.svg";
@@ -12,7 +10,7 @@ import Image from "next/image";
 import CartModal from "./CartModal"; // Import modal
 import tw from "twin.macro";
 import Modal from "react-modal";
-
+import CaloriesModal from "./CaloriesModal";
 // Set the Next.js root element
 
 interface Card {
@@ -24,6 +22,16 @@ interface Card {
   rating: number | string;
   reviews: string;
   url: string;
+  nutrient?: {
+    mini: { cals: string; protein: string; fat: string; carbs: string };
+    regular: { cals: string; protein: string; fat: string; carbs: string };
+  };
+  nutrients: {
+    cals: string;
+    protein: string;
+    fat: string;
+    carbs: string;
+  };
   // Add other card properties here
 }
 
@@ -55,63 +63,69 @@ const TabControl = styled.div<TabControlProps>`
 `;
 const TabContent = tw(
   motion.div
-)`flex overflow-x-auto scroll-mr-0 scroll-smooth snap-x snap-mandatory max-w-full relative px-2 sm:px-8`;
-const CardContainer = tw.div`flex-shrink-0 mt-10 sm:pr-10 md:pr-6 lg:pr-8 xs:pr-10 snap-start`;
+)`grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-full px-2`;
+
+const CardContainer = tw.div`w-full sm:w-auto flex-shrink-0 mt-10`;
 const Card = tw(
   motion.div
 )`bg-gray-200 rounded-b mx-auto sm:max-w-none sm:mx-0`;
 
 const CardImageContainer = styled.div<CardImageContainerProps>`
   background: url(${(props) => props.imagesrc.src}) no-repeat top center;
-  ${tw`h-56 xl:h-64 w-64 bg-center bg-cover relative rounded-t`}
-`;
-const CardRatingContainer = tw.div`leading-none absolute inline-flex bg-gray-100 bottom-0 left-0 ml-4 mb-4 rounded-full px-5 py-2 items-end`;
-const CardRating = styled.div`
-  ${tw`mr-1 text-sm xs:text-xs font-bold flex items-end`}
-  svg {
-    ${tw`w-4 h-4 fill-current text-orange-400 mr-1`}
-  }
+  ${tw`h-32 sm:h-56 xl:h-64 w-full bg-center bg-cover relative rounded-t`}
 `;
 
 const CardHoverOverlay = styled(motion.div)`
   background-color: rgba(255, 255, 255, 0.5);
   ${tw`absolute inset-0 justify-center items-center xs:hidden sm:flex`}
 `;
-const CardButton = tw.div`text-sm px-8 py-3 font-bold rounded bg-customTheme text-gray-100 hocus:bg-primary-700 hocus:text-gray-200 focus:shadow-sm focus:outline-none transition duration-300`;
+const CardButton = tw.div`text-sm m-1 xs:text-xs xs:px-8 px-2
+ py-3 font-bold rounded bg-customTheme text-gray-100 hocus:bg-primary-700 hocus:text-gray-200 focus:shadow-sm focus:outline-none transition duration-300`;
 
-const CardReview = tw.div`font-medium text-xs text-gray-600`;
+const CardText = tw.div`w-full p-4 text-gray-900 flex flex-col justify-between bg-gray-100`;
+const CardTitle = tw.h5`text-sm sm:text-base font-semibold group-hover:text-primary-500 mb-2`;
+const CardPrice = tw.p`text-sm sm:text-sm`;
 
-const CardText = tw.div`p-4 text-gray-900`;
-const CardTitle = tw.h5`text-base font-semibold group-hover:text-primary-500 xs:text-xs`;
-const CardContent = tw.p`mt-1 text-base xs:text-xxs font-medium text-gray-600`;
-const CardPrice = tw.p`text-xl font-bold`;
-const CardBuyButton = tw.div`flex flex-row items-center justify-between mt-4 sm:hidden`;
-
+const CardBuyButton = tw.div`flex items-center mt-4 sm:hidden`;
+const CardInfo = tw.p`grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 p-2 bg-gray-300 rounded-lg`;
 const DecoratorBlob2 = styled.div`
   ${tw`pointer-events-none -z-20 absolute left-0 bottom-0 h-80 w-80 opacity-15 transform -translate-x-60 text-primary-500`}
 `;
-
+function NutrientBadge({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="text-center">
+      <p className="text-gray-500 text-sm font-bold">{label}</p>
+      <p className="text-green-700 font-bold text-xs">{value}</p>
+    </div>
+  );
+}
 export default function Menu({ heading, tabs }: MenuProps) {
   const tabsKeys = Object.keys(tabs);
   const [activeTab, setActiveTab] = useState(tabsKeys[0]);
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
-  const scroll = (direction: string) => {
-    if (!scrollRef.current) return; // Prevent accessing null
+  // const scroll = (direction: string) => {
+  //   if (!scrollRef.current) return; // Prevent accessing null
 
-    if (direction === "left") {
-      scrollRef.current.scrollBy({ left: -300, behavior: "smooth" }); // Scroll left
-    } else {
-      scrollRef.current.scrollBy({ left: 300, behavior: "smooth" }); // Scroll right
-    }
-  };
+  //   if (direction === "left") {
+  //     scrollRef.current.scrollBy({ left: -300, behavior: "smooth" }); // Scroll left
+  //   } else {
+  //     scrollRef.current.scrollBy({ left: 300, behavior: "smooth" }); // Scroll right
+  //   }
+  // };
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
+  const [isCalorieModalOpen, setCalorieModalOpen] = useState<boolean>(false);
+
   const [quantity, setQuantity] = useState<number>(1);
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
   const openModal = (card: Card) => {
     setSelectedCard(card);
     setQuantity(1); // ✅ Reset quantity to 1 when opening for a new card
     setModalOpen(true);
+  };
+  const openCalorieModal = (card: Card) => {
+    setSelectedCard(card);
+    setCalorieModalOpen(true);
   };
   const incrementQuantity = () => setQuantity((prev) => prev + 1);
   const decrementQuantity = () =>
@@ -146,13 +160,13 @@ export default function Menu({ heading, tabs }: MenuProps) {
           </TabsControl>
         </HeaderRow>
         <div className="relative flex items-center">
-          <FiChevronLeft
+          {/* <FiChevronLeft
             size={32}
             onClick={() => scroll("left")}
             className="absolute -left-10 sm:left-0 top-1/2 transform -translate-y-1/2 z-5 
             bg-customTheme text-white p-2 rounded-full shadow-lg hover:bg-red-500"
-          />
-          <TabContent ref={scrollRef} className="sm:w-[85%] mx-auto">
+          /> */}
+          <TabContent ref={scrollRef} className="mx-auto">
             {tabs[activeTab]?.length > 0 ? (
               tabs[activeTab].map((card, index) => (
                 <CardContainer key={index}>
@@ -164,13 +178,13 @@ export default function Menu({ heading, tabs }: MenuProps) {
                   >
                     <Container>
                       <CardImageContainer imagesrc={card.imagesrc}>
-                        <CardRatingContainer>
+                        {/* <CardRatingContainer>
                           <CardRating>
                             <FaStar />
                             {card.rating}
                           </CardRating>
                           <CardReview>({card.reviews})</CardReview>
-                        </CardRatingContainer>
+                        </CardRatingContainer> */}
                         <CardHoverOverlay
                           variants={{
                             hover: {
@@ -194,11 +208,31 @@ export default function Menu({ heading, tabs }: MenuProps) {
 
                     <CardText>
                       <CardTitle>{card.title}</CardTitle>
-                      <CardContent>{card.content}</CardContent>
+                      <CardPrice>Rs.{card.price}</CardPrice>
+                      <CardInfo>
+                        <NutrientBadge
+                          label="Cals"
+                          value={`${card.nutrients.cals}`}
+                        />
+                        <NutrientBadge
+                          label="Carbs"
+                          value={card.nutrients.carbs}
+                        />
+                        <NutrientBadge label="Fat" value={card.nutrients.fat} />
+                        <NutrientBadge
+                          label="Protein"
+                          value={card.nutrients.protein}
+                        />
+                      </CardInfo>
+                      <button
+                        className="bg-green-700 text-white py-2 px-4 rounded mt-2"
+                        onClick={() => openCalorieModal(card)}
+                      >
+                        View Calories
+                      </button>
                       <CardBuyButton>
-                        <CardPrice>{card.price}</CardPrice>
                         <CardButton onClick={() => openModal(card)}>
-                          Buy Now
+                          Add to cart
                         </CardButton>
                       </CardBuyButton>
                     </CardText>
@@ -210,12 +244,12 @@ export default function Menu({ heading, tabs }: MenuProps) {
             )}
           </TabContent>
 
-          <FiChevronRight
+          {/* <FiChevronRight
             size={32}
             onClick={() => scroll("right")}
             className="absolute -right-10 sm:right-0 top-1/2 transform -translate-y-1/2 z-5 
             bg-customTheme text-white p-2 rounded-full shadow-lg hover:bg-red-500"
-          />
+          /> */}
         </div>
       </ContentWithPaddingXl>
 
@@ -229,6 +263,11 @@ export default function Menu({ heading, tabs }: MenuProps) {
         quantity={quantity}
         incrementQuantity={incrementQuantity}
         decrementQuantity={decrementQuantity}
+      />
+      <CaloriesModal
+        isOpen={isCalorieModalOpen}
+        closeModal={() => setCalorieModalOpen(false)}
+        selectedCard={selectedCard}
       />
     </Container>
   );
