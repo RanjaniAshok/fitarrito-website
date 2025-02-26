@@ -5,12 +5,12 @@ import { motion } from "motion/react";
 import { Container, ContentWithPaddingXl } from "@/components/misc/Layout";
 import LoaderText from "@/components/ImageSkeleton";
 import { SectionHeading } from "@/components/misc/Heading";
+import ChooseVariantCard from "./ChooseVariantCard";
 import SvgDecoratorBlob2 from "@/images/svg-decorator-blob-7.svg";
 import Image from "next/image";
 import CartModal from "./CartModal"; // Import modal
 import tw from "twin.macro";
 import Modal from "react-modal";
-import CaloriesModal from "./CaloriesModal";
 // Set the Next.js root element
 
 interface Card {
@@ -87,18 +87,10 @@ const CardTitle = tw.h5`text-sm sm:text-base font-semibold group-hover:text-prim
 const CardPrice = tw.p`text-sm sm:text-sm`;
 
 const CardBuyButton = tw.div`flex items-center mt-4 sm:hidden`;
-const CardInfo = tw.p`grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 p-2 bg-gray-300 rounded-lg`;
 const DecoratorBlob2 = styled.div`
   ${tw`pointer-events-none -z-20 absolute left-0 bottom-0 h-80 w-80 opacity-15 transform -translate-x-60 text-primary-500`}
 `;
-function NutrientBadge({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="text-center">
-      <p className="text-gray-500 text-sm font-bold">{label}</p>
-      <p className="text-green-700 font-bold text-xs">{value}</p>
-    </div>
-  );
-}
+
 export default function Menu({ heading, tabs }: MenuProps) {
   const tabsKeys = Object.keys(tabs);
   const [activeTab, setActiveTab] = useState(tabsKeys[0]);
@@ -114,8 +106,6 @@ export default function Menu({ heading, tabs }: MenuProps) {
   //   }
   // };
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
-  const [isCalorieModalOpen, setCalorieModalOpen] = useState<boolean>(false);
-
   const [quantity, setQuantity] = useState<number>(1);
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
   const openModal = (card: Card) => {
@@ -123,10 +113,7 @@ export default function Menu({ heading, tabs }: MenuProps) {
     setQuantity(1); // ✅ Reset quantity to 1 when opening for a new card
     setModalOpen(true);
   };
-  const openCalorieModal = (card: Card) => {
-    setSelectedCard(card);
-    setCalorieModalOpen(true);
-  };
+
   const incrementQuantity = () => setQuantity((prev) => prev + 1);
   const decrementQuantity = () =>
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
@@ -200,7 +187,7 @@ export default function Menu({ heading, tabs }: MenuProps) {
                           transition={{ duration: 0.3 }}
                         >
                           <CardButton onClick={() => openModal(card)}>
-                            Buy Now
+                            Add to cart
                           </CardButton>
                         </CardHoverOverlay>
                       </CardImageContainer>
@@ -209,27 +196,8 @@ export default function Menu({ heading, tabs }: MenuProps) {
                     <CardText>
                       <CardTitle>{card.title}</CardTitle>
                       <CardPrice>Rs.{card.price}</CardPrice>
-                      <CardInfo>
-                        <NutrientBadge
-                          label="Cals"
-                          value={`${card.nutrients.cals}`}
-                        />
-                        <NutrientBadge
-                          label="Carbs"
-                          value={card.nutrients.carbs}
-                        />
-                        <NutrientBadge label="Fat" value={card.nutrients.fat} />
-                        <NutrientBadge
-                          label="Protein"
-                          value={card.nutrients.protein}
-                        />
-                      </CardInfo>
-                      <button
-                        className="bg-green-700 text-white py-2 px-4 rounded mt-2"
-                        onClick={() => openCalorieModal(card)}
-                      >
-                        View Calories
-                      </button>
+                      <ChooseVariantCard item={card} />
+
                       <CardBuyButton>
                         <CardButton onClick={() => openModal(card)}>
                           Add to cart
@@ -263,11 +231,6 @@ export default function Menu({ heading, tabs }: MenuProps) {
         quantity={quantity}
         incrementQuantity={incrementQuantity}
         decrementQuantity={decrementQuantity}
-      />
-      <CaloriesModal
-        isOpen={isCalorieModalOpen}
-        closeModal={() => setCalorieModalOpen(false)}
-        selectedCard={selectedCard}
       />
     </Container>
   );

@@ -48,7 +48,7 @@ const QuantityWrapper = tw.div`flex items-center`;
 
 const QuantityButton = tw.button`px-3 py-1 md:px-4 md:py-2 bg-gray-300 text-gray-700 rounded-full focus:outline-none hover:bg-gray-400`;
 
-const QuantityText = tw.span`px-4 py-2 bg-gray-100 text-gray-900 font-semibold`;
+const QuantityText = tw.span`px-4 py-2 bg-gray-100 text-gray-900 font-semibold mx-2`;
 
 const ActionButton = tw.button`md:px-8 xs:px-4 md:px-10 py-2 md:py-3 bg-customTheme md:text-sm xs:text-xs text-white rounded-full mx-2`;
 
@@ -86,10 +86,6 @@ const CartModal: React.FC<CartModalProps> = ({
 
         <div tw="mb-2">
           <Title>{selectedCard.title}</Title>
-          <Rating>
-            ⭐ {selectedCard.rating} ({selectedCard.reviews} reviews)
-          </Rating>
-          <Description>{selectedCard.content}</Description>
         </div>
 
         <ProductImage

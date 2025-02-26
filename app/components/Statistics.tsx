@@ -67,8 +67,7 @@ export default function Statistics() {
             <Description>
               <SubHeading>Fitarrito: Where Health Meets Taste</SubHeading>
               <p className="text-lg text-gray-700 mb-4">
-                In India,{" "}
-                <strong>healthy food is rarely an easy, go-to option</strong>.
+                <strong>Healthy food is rarely an easy, go-to option</strong>.
                 Finding a place that serves nutritious yet delicious meals often
                 feels like a compromise. At <strong>Fitarrito</strong>, we’re
                 here to change that.
