@@ -24,10 +24,10 @@ export default function About() {
           <Heading>Delicious & Healthy </Heading>
           <HighlightedText>Meals Near You.</HighlightedText>
           <Description>
-            "Enjoy fresh, flavorful, and nutritious meals delivered straight to
-            your door! Crafted with quality ingredients to keep you energized
-            and satisfied. Order now and experience the perfect balance of taste
-            and health!"
+            &quot;Enjoy fresh, flavorful, and nutritious meals delivered
+            straight to your door! Crafted with quality ingredients to keep you
+            energized and satisfied. Order now and experience the perfect
+            balance of taste and health!&quot;
           </Description>
           <Link
             target="_blank"

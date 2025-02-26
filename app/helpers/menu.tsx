@@ -19,10 +19,10 @@ import Paneertaco from "@/images/menuimages/PaneerTaco.svg";
 import MushroomTaco from "@/images/menuimages/MushroomTaco.svg";
 import VegOuesadilla from "@/images/menuimages/VegQuesadilla.svg";
 import ChickenQuesadilla from "@/images/menuimages/ChickenQuesadilla.svg";
-import AppleSmoothie from "@/images/menuimages/AppleSmoothie.svg";
-import BananaSmoothie from "@/images/menuimages/BananaSmoothie.svg";
-import MangoSmoothie from "@/images/menuimages/MangoSmoothie.svg";
-import ChocolateSmoothie from "@/images/menuimages/ChocolateSmoothie.svg";
+// import AppleSmoothie from "@/images/menuimages/AppleSmoothie.svg";
+// import BananaSmoothie from "@/images/menuimages/BananaSmoothie.svg";
+// import MangoSmoothie from "@/images/menuimages/MangoSmoothie.svg";
+// import ChocolateSmoothie from "@/images/menuimages/ChocolateSmoothie.svg";
 import PaneerLaksa from "@/images/menuimages/PaneerLaksa.svg";
 import VegLaksa from "@/images/menuimages/VegLaksa.svg";
 import MushroomSalad from "@/images/menuimages/MushroomSalad.svg";
@@ -49,7 +49,7 @@ export const Main: Array<tabItem> = [
     imagesrc: ChickenBurrito,
     title: "Chicken Burrito/Bowl",
     content: "Tortilla roll infused with chicken and veggies",
-    price: "239",
+    price: "150",
     rating: "5.0",
     reviews: "87",
     url: "#",
@@ -353,41 +353,41 @@ export const Taco: Array<tabItem> = [
     url: "#",
   },
 ];
-export const Smoothie: Array<tabItem> = [
-  {
-    imagesrc: AppleSmoothie,
-    title: "Apple Smoothie",
-    content: "Tomato Salad & Carrot",
-    price: "99",
-    rating: "5.0",
-    reviews: "87",
-    url: "#",
-  },
-  {
-    imagesrc: BananaSmoothie,
-    title: "Banana Smoothie",
-    content: "Cheese Pizza",
-    price: "99",
-    rating: "4.8",
-    reviews: "32",
-    url: "#",
-  },
-  {
-    imagesrc: MangoSmoothie,
-    title: "Mango Smoothie",
-    content: "Hamburger & Fries",
-    price: "99",
-    rating: "4.9",
-    reviews: "89",
-    url: "#",
-  },
-  {
-    imagesrc: ChocolateSmoothie,
-    title: "Chocolate smoothie",
-    content: "Crispy Soyabeans",
-    price: "99",
-    rating: "4.6",
-    reviews: "12",
-    url: "#",
-  },
-];
+// export const Smoothie: Array<tabItem> = [
+//   {
+//     imagesrc: AppleSmoothie,
+//     title: "Apple Smoothie",
+//     content: "Tomato Salad & Carrot",
+//     price: "99",
+//     rating: "5.0",
+//     reviews: "87",
+//     url: "#",
+//   },
+//   {
+//     imagesrc: BananaSmoothie,
+//     title: "Banana Smoothie",
+//     content: "Cheese Pizza",
+//     price: "99",
+//     rating: "4.8",
+//     reviews: "32",
+//     url: "#",
+//   },
+//   {
+//     imagesrc: MangoSmoothie,
+//     title: "Mango Smoothie",
+//     content: "Hamburger & Fries",
+//     price: "99",
+//     rating: "4.9",
+//     reviews: "89",
+//     url: "#",
+//   },
+//   {
+//     imagesrc: ChocolateSmoothie,
+//     title: "Chocolate smoothie",
+//     content: "Crispy Soyabeans",
+//     price: "99",
+//     rating: "4.6",
+//     reviews: "12",
+//     url: "#",
+//   },
+// ];

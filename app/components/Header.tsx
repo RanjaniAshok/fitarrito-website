@@ -128,7 +128,9 @@ const Header: React.FC = () => {
                 </p>
               </button>
 
-              {isOpen ? <CartDrawer setIsOpen={setIsOpen} /> : null}
+              {isOpen ? (
+                <CartDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
+              ) : null}
               {/* <ThemeToggler /> */}
             </div>
           </div>

@@ -14,14 +14,11 @@ import {
 import Image from "next/image";
 
 interface DrawerProps {
+  isOpen: boolean;
   setIsOpen: (val: boolean) => void;
 }
 
 // Styled Components
-const DrawerContainer = styled.div`
-  ${tw`fixed z-30 top-0 right-0 h-screen bg-white shadow-2xl p-4 transform transition-transform duration-300`}
-  ${tw`w-[85%] md:w-[60%] lg:w-[30%]`}
-`;
 
 const CloseIcon = tw(
   IoCloseSharp
@@ -55,70 +52,84 @@ const Footer = tw.div`absolute bottom-0 left-0 w-full p-4 bg-white border-t shad
 
 const ContinueButton = tw.button`w-[45%] md:w-[40%] bg-customTheme text-white rounded-lg py-2 text-sm font-semibold`;
 
-const DrawerComponent = ({ setIsOpen }: DrawerProps) => {
+const DrawerComponent = ({ isOpen, setIsOpen }: DrawerProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const cartItems = useAppSelector((state) => state.cart.cartItems);
   const totalAmt = useAppSelector((state) => state.cart.totalAmt);
 
   const dispatch = useAppDispatch();
-
+  const DrawerContainer = styled.div`
+    ${tw`fixed z-50 top-0 right-0 h-screen bg-white shadow-2xl p-4 transform transition-transform duration-300`}
+    ${isOpen ? "translate-x-0" : "translate-x-full"}
+  ${tw`w-[85%] md:w-[60%] lg:w-[30%]`}
+  `;
   return (
-    <DrawerContainer>
-      <CloseIcon onClick={() => setIsOpen(false)} />
-
-      {cartItems.length === 0 ? (
-        <EmptyCartContainer>
-          <Image src={cartEmpty} alt="Empty cart" width={180} height={180} />
-          <p tw="text-black text-lg font-bold">Your cart is empty</p>
-        </EmptyCartContainer>
-      ) : (
-        <CartItemList>
-          {cartItems.map((item) => (
-            <CartItem key={item.title}>
-              <ItemWrapper>
-                <ItemImage src={item.imagesrc.src} alt={item.title} />
-                <ItemInfo>
-                  <ItemTitle>{item.title}</ItemTitle>
-                  <ItemPrice>₹{item.price}</ItemPrice>
-                </ItemInfo>
-                <QuantityWrapper>
-                  <QuantityButton
-                    onClick={() => dispatch(decrementQuantity(item.title))}
-                  >
-                    -
-                  </QuantityButton>
-                  <QuantityText>{item.quantity}</QuantityText>
-                  <QuantityButton
-                    onClick={() => dispatch(incrementQuantity(item.title))}
-                  >
-                    +
-                  </QuantityButton>
-                </QuantityWrapper>
-                <DeleteButton onClick={() => dispatch(removeItem(item.title))}>
-                  <IoTrash />
-                </DeleteButton>
-              </ItemWrapper>
-            </CartItem>
-          ))}
-        </CartItemList>
+    <>
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-xs z-40"
+          onClick={() => setIsOpen(false)} // Close drawer on click outside
+        ></div>
       )}
+      <DrawerContainer>
+        <CloseIcon onClick={() => setIsOpen(false)} />
 
-      {cartItems.length > 0 && (
-        <Footer>
-          <p tw="text-black text-sm font-bold">Total : ₹{totalAmt}</p>
-          <ContinueButton
-            onClick={() => {
-              setIsModalOpen(true);
-              //   setIsOpen(false);
-            }}
-          >
-            Continue
-          </ContinueButton>
-        </Footer>
-      )}
-      <PlaceOrderForm isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
-    </DrawerContainer>
+        {cartItems.length === 0 ? (
+          <EmptyCartContainer>
+            <Image src={cartEmpty} alt="Empty cart" width={180} height={180} />
+            <p tw="text-black text-lg font-bold">Your cart is empty</p>
+          </EmptyCartContainer>
+        ) : (
+          <CartItemList>
+            {cartItems.map((item) => (
+              <CartItem key={item.title}>
+                <ItemWrapper>
+                  <ItemImage src={item.imagesrc.src} alt={item.title} />
+                  <ItemInfo>
+                    <ItemTitle>{item.title}</ItemTitle>
+                    <ItemPrice>₹{item.price}</ItemPrice>
+                  </ItemInfo>
+                  <QuantityWrapper>
+                    <QuantityButton
+                      onClick={() => dispatch(decrementQuantity(item.title))}
+                    >
+                      -
+                    </QuantityButton>
+                    <QuantityText>{item.quantity}</QuantityText>
+                    <QuantityButton
+                      onClick={() => dispatch(incrementQuantity(item.title))}
+                    >
+                      +
+                    </QuantityButton>
+                  </QuantityWrapper>
+                  <DeleteButton
+                    onClick={() => dispatch(removeItem(item.title))}
+                  >
+                    <IoTrash />
+                  </DeleteButton>
+                </ItemWrapper>
+              </CartItem>
+            ))}
+          </CartItemList>
+        )}
+
+        {cartItems.length > 0 && (
+          <Footer>
+            <p tw="text-black text-sm font-bold">Total : ₹{totalAmt}</p>
+            <ContinueButton
+              onClick={() => {
+                setIsModalOpen(true);
+                //   setIsOpen(false);
+              }}
+            >
+              Continue
+            </ContinueButton>
+          </Footer>
+        )}
+        <PlaceOrderForm isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      </DrawerContainer>
+    </>
   );
 };
 

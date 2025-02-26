@@ -11,6 +11,9 @@ import Image from "next/image";
 import CartModal from "./CartModal"; // Import modal
 import tw from "twin.macro";
 import Modal from "react-modal";
+import { useAppDispatch } from "app/lib/hooks";
+import { addItemsToCart } from "app/lib/features/cartSlice";
+import CartDrawer from "@/components/CartDrawer";
 // Set the Next.js root element
 
 interface Card {
@@ -26,12 +29,7 @@ interface Card {
     mini: { cals: string; protein: string; fat: string; carbs: string };
     regular: { cals: string; protein: string; fat: string; carbs: string };
   };
-  nutrients: {
-    cals: string;
-    protein: string;
-    fat: string;
-    carbs: string;
-  };
+
   // Add other card properties here
 }
 
@@ -95,6 +93,7 @@ export default function Menu({ heading, tabs }: MenuProps) {
   const tabsKeys = Object.keys(tabs);
   const [activeTab, setActiveTab] = useState(tabsKeys[0]);
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   // const scroll = (direction: string) => {
   //   if (!scrollRef.current) return; // Prevent accessing null
@@ -113,6 +112,7 @@ export default function Menu({ heading, tabs }: MenuProps) {
     setQuantity(1); // ✅ Reset quantity to 1 when opening for a new card
     setModalOpen(true);
   };
+  const dispatch = useAppDispatch();
 
   const incrementQuantity = () => setQuantity((prev) => prev + 1);
   const decrementQuantity = () =>
@@ -186,7 +186,16 @@ export default function Menu({ heading, tabs }: MenuProps) {
                           }}
                           transition={{ duration: 0.3 }}
                         >
-                          <CardButton onClick={() => openModal(card)}>
+                          <CardButton
+                            onClick={async () => {
+                              const { meta } = await dispatch(
+                                addItemsToCart({ ...card, quantity: quantity })
+                              );
+                              if (meta.requestStatus === "fulfilled") {
+                                setIsDrawerOpen(true);
+                              }
+                            }}
+                          >
                             Add to cart
                           </CardButton>
                         </CardHoverOverlay>
@@ -232,6 +241,10 @@ export default function Menu({ heading, tabs }: MenuProps) {
         incrementQuantity={incrementQuantity}
         decrementQuantity={decrementQuantity}
       />
+
+      {isDrawerOpen ? (
+        <CartDrawer isOpen={isDrawerOpen} setIsOpen={setIsDrawerOpen} />
+      ) : null}
     </Container>
   );
 }

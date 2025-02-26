@@ -34,15 +34,11 @@ const CloseButton = tw.button`absolute top-4 right-6 text-gray-500 hover:text-gr
 
 const Title = tw.h2`text-lg md:text-xl font-semibold`;
 
-const Rating = tw.p`text-xs md:text-sm text-gray-500`;
-
-const Description = tw.p`mt-2 text-gray-600 text-sm md:text-base`;
-
 const ProductImage = tw.img`w-full h-52 md:h-64 object-cover rounded`;
 
-const ModifiersContainer = tw.div`mt-4`;
+// const ModifiersContainer = tw.div`mt-4`;
 
-const CheckboxLabel = tw.label`flex items-center mt-2 text-sm md:text-base`;
+// const CheckboxLabel = tw.label`flex items-center mt-2 text-sm md:text-base`;
 
 const QuantityWrapper = tw.div`flex items-center`;
 
@@ -92,7 +88,7 @@ const CartModal: React.FC<CartModalProps> = ({
           src={selectedCard.imagesrc.src}
           alt={selectedCard.title}
         />
-
+        {/* 
         <ModifiersContainer>
           <p tw="font-semibold text-gray-700">Packing Modifiers (Optional)</p>
           <CheckboxLabel>
@@ -101,7 +97,7 @@ const CartModal: React.FC<CartModalProps> = ({
           <CheckboxLabel>
             <input type="checkbox" className="mr-2" /> NO! Utensils
           </CheckboxLabel>
-        </ModifiersContainer>
+        </ModifiersContainer> */}
 
         <ButtonGroup>
           <QuantityWrapper>

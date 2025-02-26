@@ -16,24 +16,15 @@ interface CardItem {
     mini: { cals: string; protein: string; fat: string; carbs: string };
     regular: { cals: string; protein: string; fat: string; carbs: string };
   };
-  nutrients: {
-    cals: string;
-    protein: string;
-    fat: string;
-    carbs: string;
-  };
+
   // Add other card properties here
 }
 
 const ChooseVariantCard: React.FC<{ item: CardItem | null }> = ({ item }) => {
   // State for the selected variant of this specific item
-  const CardInfo = tw.p`grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 p-2 bg-gray-300 rounded-lg`;
+  const CardInfo = tw.div`grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 p-2 bg-gray-300 rounded-lg`;
 
   const [variant, setVariant] = useState<"mini" | "regular">("mini");
-  console.log(item, "item");
-
-  console.log(variant, "variant");
-  console.log(item?.nutrient?.[variant].protein);
 
   function NutrientBadge({ label, value }: { label: string; value: string }) {
     return (

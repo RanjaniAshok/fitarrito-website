@@ -1,5 +1,5 @@
 import { createAsyncThunk, PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Main, Nachos, Taco, Smoothie, Salad } from "@/helpers/menu";
+import { Main, Nachos, Taco, Salad } from "@/helpers/menu";
 
 interface Item {
   title: string;
@@ -9,11 +9,9 @@ interface Item {
   rating: number | string;
   reviews: string;
   url: string;
-  nutrients: {
-    cals: string;
-    protein: string;
-    fat: string;
-    carbs: string;
+  nutrient?: {
+    mini: { cals: string; protein: string; fat: string; carbs: string };
+    regular: { cals: string; protein: string; fat: string; carbs: string };
   };
 }
 
@@ -27,7 +25,6 @@ export const getMenu = createAsyncThunk("menu/getMenu", async () => {
     Salad,
     Nachos,
     Taco,
-    Smoothie,
   };
   return Tabs;
   // const { data } = await getMenu();
