@@ -1,5 +1,12 @@
 import { createAsyncThunk, PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Main, Nachos, Taco, Salad } from "@/helpers/menu";
+import {
+  Burrito,
+  Bowl,
+  Nachos,
+  Taco,
+  Salad,
+  Quesadillas,
+} from "@/helpers/menu";
 
 interface Item {
   title: string;
@@ -21,10 +28,12 @@ type Tabs = {
 
 export const getMenu = createAsyncThunk("menu/getMenu", async () => {
   const Tabs = {
-    Main,
+    Burrito,
+    Bowl,
     Salad,
     Nachos,
     Taco,
+    Quesadillas,
   };
   return Tabs;
   // const { data } = await getMenu();
@@ -35,9 +44,14 @@ const cartSlice = createSlice({
   name: "menu",
   initialState: {
     menu: {} as Tabs,
+    menuType: "restaurant",
     loading: "idle",
   },
-  reducers: {},
+  reducers: {
+    setMenuType: (state, action) => {
+      state.menuType = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getMenu.pending, (state) => {
@@ -53,5 +67,5 @@ const cartSlice = createSlice({
       });
   },
 });
-
+export const { setMenuType } = cartSlice.actions;
 export default cartSlice.reducer;

@@ -1,7 +1,7 @@
 "use client";
 
 import tw, { styled } from "twin.macro";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IoCloseSharp, IoTrash } from "react-icons/io5";
 import PlaceOrderForm from "@/components/PlaceOrderForm";
 import cartEmpty from "@/images/CartEmpty.svg";
@@ -53,6 +53,16 @@ const Footer = tw.div`absolute bottom-0 left-0 w-full p-4 bg-white border-t shad
 const ContinueButton = tw.button`w-[45%] md:w-[40%] bg-customTheme text-white rounded-lg py-2 text-sm font-semibold`;
 
 const DrawerComponent = ({ isOpen, setIsOpen }: DrawerProps) => {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("overflow-hidden"); // Prevent background scrolling
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isOpen]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const cartItems = useAppSelector((state) => state.cart.cartItems);
@@ -60,15 +70,15 @@ const DrawerComponent = ({ isOpen, setIsOpen }: DrawerProps) => {
 
   const dispatch = useAppDispatch();
   const DrawerContainer = styled.div`
-    ${tw`fixed z-50 top-0 right-0 h-screen bg-white shadow-2xl p-4 transform transition-transform duration-300`}
-    ${isOpen ? "translate-x-0" : "translate-x-full"}
-  ${tw`w-[85%] md:w-[60%] lg:w-[30%]`}
+    ${tw`fixed z-50 top-0 right-0 h-full bg-white shadow-2xl p-4 transition-all duration-300 ease-in-out overflow-y-auto`}
+    right: ${isOpen ? "0" : "-100%"};
+    ${tw`w-[80%] md:w-[60%] lg:w-[30%]`}
   `;
   return (
     <>
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-xs z-40"
+          className="fixed inset-0 bg-black bg-opacity-30 z-40"
           onClick={() => setIsOpen(false)} // Close drawer on click outside
         ></div>
       )}

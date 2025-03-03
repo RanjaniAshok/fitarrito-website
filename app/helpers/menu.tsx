@@ -44,10 +44,10 @@ interface tabItem {
   };
 }
 
-export const Main: Array<tabItem> = [
+export const Burrito: Array<tabItem> = [
   {
     imagesrc: ChickenBurrito,
-    title: "Chicken Burrito/Bowl",
+    title: "Chicken Burrito",
     content: "Tortilla roll infused with chicken and veggies",
     price: "150",
     rating: "5.0",
@@ -60,7 +60,7 @@ export const Main: Array<tabItem> = [
   },
   {
     imagesrc: MuttonBurrito,
-    title: "Mutton Burrito/Bowl",
+    title: "Mutton Burrito",
     content:
       "A hearty tortilla roll filled with slow-cooked spiced mutton, fresh veggies, beans, and flavorful sauces.",
     price: "330",
@@ -74,7 +74,7 @@ export const Main: Array<tabItem> = [
   },
   {
     imagesrc: PannerBurrito,
-    title: "Paneer Burrito/Bowl",
+    title: "Paneer Burrito",
     content:
       "A soft tortilla filled with spiced paneer, sautéed bell peppers, onions, beans, and a tangy yogurt sauce.",
     price: "179",
@@ -88,7 +88,7 @@ export const Main: Array<tabItem> = [
   },
   {
     imagesrc: MushroomBurrito,
-    title: "Mushroom Burrito/Bowl",
+    title: "Mushroom Burrito",
     content:
       "A delicious mix of sautéed mushrooms, beans, rice, fresh veggies, and creamy avocado wrapped in a tortilla.",
     price: "179",
@@ -102,7 +102,78 @@ export const Main: Array<tabItem> = [
   },
   {
     imagesrc: ChickenBurrito,
-    title: "Egg Burrito/Bowl",
+    title: "Egg Burrito",
+    content:
+      "A protein-rich burrito stuffed with scrambled eggs, beans, cheese, and fresh vegetables.",
+    price: "159",
+    rating: "5.0",
+    reviews: "61",
+    url: "#",
+    nutrient: {
+      mini: { cals: "260", protein: "17g", fat: "11g", carbs: "25g" },
+      regular: { cals: "520 ", protein: "35g", fat: "22g", carbs: "50g" },
+    },
+  },
+];
+export const Bowl: Array<tabItem> = [
+  {
+    imagesrc: ChickenBurrito,
+    title: "Chicken Burrito Bowl",
+    content: "Tortilla roll infused with chicken and veggies",
+    price: "150",
+    rating: "5.0",
+    reviews: "87",
+    url: "#",
+    nutrient: {
+      mini: { cals: "375", protein: "25g", fat: "15g", carbs: "30g" },
+      regular: { cals: "750 ", protein: "50g", fat: "30g", carbs: "60g" },
+    },
+  },
+  {
+    imagesrc: MuttonBurrito,
+    title: "Mutton Burrito Bowl",
+    content:
+      "A hearty tortilla roll filled with slow-cooked spiced mutton, fresh veggies, beans, and flavorful sauces.",
+    price: "330",
+    rating: "4.8",
+    reviews: "32",
+    url: "#",
+    nutrient: {
+      mini: { cals: "375", protein: "22g", fat: "17g", carbs: "30g" },
+      regular: { cals: "750 ", protein: "45g", fat: "35g", carbs: "60g" },
+    },
+  },
+  {
+    imagesrc: PannerBurrito,
+    title: "Paneer Burrito Bowl",
+    content:
+      "A soft tortilla filled with spiced paneer, sautéed bell peppers, onions, beans, and a tangy yogurt sauce.",
+    price: "179",
+    rating: "4.9",
+    reviews: "89",
+    url: "#",
+    nutrient: {
+      mini: { cals: "310", protein: "15g", fat: "14g", carbs: "32g" },
+      regular: { cals: "620 ", protein: "30g", fat: "28g", carbs: "65g" },
+    },
+  },
+  {
+    imagesrc: MushroomBurrito,
+    title: "Mushroom Burrito Bowl",
+    content:
+      "A delicious mix of sautéed mushrooms, beans, rice, fresh veggies, and creamy avocado wrapped in a tortilla.",
+    price: "179",
+    rating: "4.6",
+    reviews: "12",
+    url: "#",
+    nutrient: {
+      mini: { cals: "250", protein: "10g", fat: "7g", carbs: "35g" },
+      regular: { cals: "500 ", protein: "20g", fat: "15g", carbs: "70g" },
+    },
+  },
+  {
+    imagesrc: ChickenBurrito,
+    title: "Egg Burrito Bowl",
     content:
       "A protein-rich burrito stuffed with scrambled eggs, beans, cheese, and fresh vegetables.",
     price: "159",
@@ -170,7 +241,7 @@ export const Main: Array<tabItem> = [
   },
   {
     imagesrc: SingaporeLaksa,
-    title: "Singapore Chicken Laksa",
+    title: "Chicken Laksa",
     content: "A fragrant laksa with tender chicken and rice noodles.",
     price: "235",
     rating: "4.2",
@@ -179,32 +250,6 @@ export const Main: Array<tabItem> = [
     nutrient: {
       mini: { cals: "300", protein: "18g", fat: "10g", carbs: "40g" },
       regular: { cals: "600 ", protein: "36g", fat: "20g", carbs: "80g" },
-    },
-  },
-  {
-    imagesrc: VegOuesadilla,
-    title: "Veg Quesadillas",
-    content: "A crispy tortilla filled with cheese, beans, and vegetables.",
-    price: "199",
-    rating: "4.2",
-    reviews: "95",
-    url: "#",
-    nutrient: {
-      mini: { cals: "320", protein: "10g", fat: "12g", carbs: "45g" },
-      regular: { cals: "640 ", protein: "20g", fat: "24g", carbs: "90g" },
-    },
-  },
-  {
-    imagesrc: ChickenQuesadilla,
-    title: "Chicken Quesadillas",
-    content: "A cheesy tortilla filled with grilled chicken and peppers.",
-    price: "249",
-    rating: "4.2",
-    reviews: "95",
-    url: "#",
-    nutrient: {
-      mini: { cals: "350", protein: "22g", fat: "14g", carbs: "38g" },
-      regular: { cals: "700 ", protein: "44g", fat: "28g", carbs: "76g" },
     },
   },
 ];
@@ -351,6 +396,34 @@ export const Taco: Array<tabItem> = [
     rating: "4.2",
     reviews: "19",
     url: "#",
+  },
+];
+export const Quesadillas: Array<tabItem> = [
+  {
+    imagesrc: VegOuesadilla,
+    title: "Veg Quesadillas",
+    content: "A crispy tortilla filled with cheese, beans, and vegetables.",
+    price: "199",
+    rating: "4.2",
+    reviews: "95",
+    url: "#",
+    nutrient: {
+      mini: { cals: "320", protein: "10g", fat: "12g", carbs: "45g" },
+      regular: { cals: "640 ", protein: "20g", fat: "24g", carbs: "90g" },
+    },
+  },
+  {
+    imagesrc: ChickenQuesadilla,
+    title: "Chicken Quesadillas",
+    content: "A cheesy tortilla filled with grilled chicken and peppers.",
+    price: "249",
+    rating: "4.2",
+    reviews: "95",
+    url: "#",
+    nutrient: {
+      mini: { cals: "350", protein: "22g", fat: "14g", carbs: "38g" },
+      regular: { cals: "700 ", protein: "44g", fat: "28g", carbs: "76g" },
+    },
   },
 ];
 // export const Smoothie: Array<tabItem> = [

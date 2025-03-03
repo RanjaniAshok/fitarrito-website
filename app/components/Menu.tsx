@@ -107,6 +107,17 @@ export default function Menu({ heading, tabs }: MenuProps) {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleTabChange = (tabName: string) => {
+    setLoading(true); // Start loading
+    setActiveTab(tabName);
+
+    // Simulate loading delay or wait for the data update
+    setTimeout(() => {
+      setLoading(false); // Stop loading after content update
+    }, 1000); // Adjust delay as needed
+  };
   const openModal = (card: Card) => {
     setSelectedCard(card);
     setQuantity(1); // ✅ Reset quantity to 1 when opening for a new card
@@ -139,7 +150,7 @@ export default function Menu({ heading, tabs }: MenuProps) {
               <TabControl
                 key={index}
                 active={activeTab === tabName ? "true" : "false"}
-                onClick={() => setActiveTab(tabName)}
+                onClick={() => handleTabChange(tabName)}
               >
                 {tabName}
               </TabControl>
@@ -154,7 +165,9 @@ export default function Menu({ heading, tabs }: MenuProps) {
             bg-customTheme text-white p-2 rounded-full shadow-lg hover:bg-red-500"
           /> */}
           <TabContent ref={scrollRef} className="mx-auto">
-            {tabs[activeTab]?.length > 0 ? (
+            {loading ? (
+              <LoaderText /> // Show loader while loading is true
+            ) : tabs[activeTab]?.length > 0 ? (
               tabs[activeTab].map((card, index) => (
                 <CardContainer key={index}>
                   <Card

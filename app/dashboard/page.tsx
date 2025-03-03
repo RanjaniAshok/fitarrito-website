@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { getMenu } from "app/lib/features/menuSlice";
 import { useAppDispatch, useAppSelector } from "app/lib/hooks";
 import About from "@/components/About";
+import MenuCategories from "@/components/ChooseMenuType";
 import Menu from "@/components/Menu";
 import tw from "twin.macro";
 import Statistics from "@/components/Statistics";
@@ -27,6 +28,7 @@ export default function Dashboard() {
   return (
     <>
       <About />
+      <MenuCategories />
       <Menu
         tabs={menu && menu}
         heading={

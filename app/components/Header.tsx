@@ -87,17 +87,17 @@ const Header: React.FC = () => {
     <header className="sticky top-0 z-50">
       <div
         ref={navRef}
-        className={`fixed top-0 left-0 z-50 w-full md:flex justify-between items-center bg-white`}
+        className={`fixed top-0 left-0 z-50 w-full items-center bg-white`}
       >
         {/* Hintergrund für das aufklappbare Menü */}
 
         <div className="flex justify-center">
-          <div className=" bg-nav-color-dark w-screen sm:justify-between xs:justify-center shadow-customShadow-md laptop:w-[80vw] text-white inline-flex items-center py-1 mobile:py-3 px-5 laptop:rounded-full laptop:my-4  laptop:inline-flex">
+          <div className=" bg-nav-color-dark w-screen justify-between  shadow-customShadow-md laptop:w-[80vw] text-white inline-flex items-center py-1 mobile:py-3 px-1 md:px-4 lg laptop:rounded-full laptop:my-4  laptop:inline-flex">
             <div className="flex items-center">
               <div>
                 <Link
                   href="/"
-                  className=" transition ease-in-out duration-150  px-3 py-1 justify-center mobile:px-3 mobile:py-2 rounded-xl text-xs mobile:text-base min-w-[50px] mobile:w-[100px]  flex"
+                  className=" transition ease-in-out duration-150  px-3 py-1 justify-center mobile:px-3 mobile:py-2 rounded-xl text-xs mobile:text-base min-w-[50px] mobile:w-[50px]  flex"
                 >
                   <Image src={logo} alt="UTP-Logo" width={55} height={55} />
                 </Link>
@@ -110,8 +110,8 @@ const Header: React.FC = () => {
                   <Image
                     src={textImage}
                     alt="UTP-Logo"
-                    width={150}
-                    height={100}
+                    width={130}
+                    height={90}
                   />
                 </Link>
               </div>
@@ -128,9 +128,6 @@ const Header: React.FC = () => {
                 </p>
               </button>
 
-              {isOpen ? (
-                <CartDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
-              ) : null}
               {/* <ThemeToggler /> */}
             </div>
           </div>
@@ -138,6 +135,7 @@ const Header: React.FC = () => {
 
         {/* Aufklappbares Menü */}
       </div>
+      {isOpen ? <CartDrawer isOpen={isOpen} setIsOpen={setIsOpen} /> : null}
     </header>
   );
 };
