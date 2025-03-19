@@ -29,14 +29,28 @@ import MushroomSalad from "@/images/menuimages/MushroomSalad.svg";
 import BBQChickenSalad from "@/images/menuimages/BBQChickenSalad.svg";
 import TeriyakiChickenSalad from "@/images/menuimages/TeriyakiChickenSalad.svg";
 import TeriyakiPaneerSalad from "@/images/menuimages/PaneerTeriyakiSalad.svg";
-
-interface tabItem {
-  imagesrc: { src: string };
+// interface items {
+//   imagesrc: { src: string };
+//   title: string;
+//   content: string;
+//   price: number | string;
+//   rating: number | string;
+//   reviews: string;
+//   url: string;
+//   nutrient?: {
+//     mini: { cals: string; protein: string; fat: string; carbs: string };
+//     regular: { cals: string; protein: string; fat: string; carbs: string };
+//   };
+// }
+interface Item {
   title: string;
+  imagesrc: { src: string };
   content: string;
   price: number | string;
   rating: number | string;
   reviews: string;
+  category?: string;
+
   url: string;
   nutrient?: {
     mini: { cals: string; protein: string; fat: string; carbs: string };
@@ -44,17 +58,18 @@ interface tabItem {
   };
 }
 
-export const Burrito: Array<tabItem> = [
+export const Burrito: Array<Item> = [
   {
     imagesrc: ChickenBurrito,
     title: "Chicken Burrito",
     content: "Tortilla roll infused with chicken and veggies",
-    price: "150",
+    price: "120",
     rating: "5.0",
     reviews: "87",
     url: "#",
+
     nutrient: {
-      mini: { cals: "375", protein: "25g", fat: "15g", carbs: "30g" },
+      mini: { cals: "562.5", protein: "37.5g", fat: "22.5g", carbs: "45.0g" },
       regular: { cals: "750 ", protein: "50g", fat: "30g", carbs: "60g" },
     },
   },
@@ -63,12 +78,12 @@ export const Burrito: Array<tabItem> = [
     title: "Mutton Burrito",
     content:
       "A hearty tortilla roll filled with slow-cooked spiced mutton, fresh veggies, beans, and flavorful sauces.",
-    price: "330",
+    price: "200",
     rating: "4.8",
     reviews: "32",
     url: "#",
     nutrient: {
-      mini: { cals: "375", protein: "22g", fat: "17g", carbs: "30g" },
+      mini: { cals: "562.5", protein: "33.0g", fat: "25.5g", carbs: "45.0g" },
       regular: { cals: "750 ", protein: "45g", fat: "35g", carbs: "60g" },
     },
   },
@@ -77,12 +92,12 @@ export const Burrito: Array<tabItem> = [
     title: "Paneer Burrito",
     content:
       "A soft tortilla filled with spiced paneer, sautéed bell peppers, onions, beans, and a tangy yogurt sauce.",
-    price: "179",
+    price: "120",
     rating: "4.9",
     reviews: "89",
     url: "#",
     nutrient: {
-      mini: { cals: "310", protein: "15g", fat: "14g", carbs: "32g" },
+      mini: { cals: "465.0", protein: "22.5g", fat: "21.0g", carbs: "48.0g" },
       regular: { cals: "620 ", protein: "30g", fat: "28g", carbs: "65g" },
     },
   },
@@ -91,12 +106,12 @@ export const Burrito: Array<tabItem> = [
     title: "Mushroom Burrito",
     content:
       "A delicious mix of sautéed mushrooms, beans, rice, fresh veggies, and creamy avocado wrapped in a tortilla.",
-    price: "179",
+    price: "120",
     rating: "4.6",
     reviews: "12",
     url: "#",
     nutrient: {
-      mini: { cals: "250", protein: "10g", fat: "7g", carbs: "35g" },
+      mini: { cals: "375.0", protein: "15.0g", fat: "10.5g", carbs: "52.5g" },
       regular: { cals: "500 ", protein: "20g", fat: "15g", carbs: "70g" },
     },
   },
@@ -105,17 +120,17 @@ export const Burrito: Array<tabItem> = [
     title: "Egg Burrito",
     content:
       "A protein-rich burrito stuffed with scrambled eggs, beans, cheese, and fresh vegetables.",
-    price: "159",
+    price: "120",
     rating: "5.0",
     reviews: "61",
     url: "#",
     nutrient: {
-      mini: { cals: "260", protein: "17g", fat: "11g", carbs: "25g" },
+      mini: { cals: "390.0", protein: "25.5g", fat: "16.5g", carbs: "37.5g" },
       regular: { cals: "520 ", protein: "35g", fat: "22g", carbs: "50g" },
     },
   },
 ];
-export const Bowl: Array<tabItem> = [
+export const Bowl: Array<Item> = [
   {
     imagesrc: ChickenBurrito,
     title: "Chicken Burrito Bowl",
@@ -125,7 +140,7 @@ export const Bowl: Array<tabItem> = [
     reviews: "87",
     url: "#",
     nutrient: {
-      mini: { cals: "375", protein: "25g", fat: "15g", carbs: "30g" },
+      mini: { cals: "562.5", protein: "37.5g", fat: "22.5g", carbs: "45.0g" },
       regular: { cals: "750 ", protein: "50g", fat: "30g", carbs: "60g" },
     },
   },
@@ -139,7 +154,7 @@ export const Bowl: Array<tabItem> = [
     reviews: "32",
     url: "#",
     nutrient: {
-      mini: { cals: "375", protein: "22g", fat: "17g", carbs: "30g" },
+      mini: { cals: "562.5", protein: "33.0g", fat: "25.5g", carbs: "45.0g" },
       regular: { cals: "750 ", protein: "45g", fat: "35g", carbs: "60g" },
     },
   },
@@ -153,7 +168,7 @@ export const Bowl: Array<tabItem> = [
     reviews: "89",
     url: "#",
     nutrient: {
-      mini: { cals: "310", protein: "15g", fat: "14g", carbs: "32g" },
+      mini: { cals: "465.0", protein: "22.5g", fat: "21.0g", carbs: "48.0g" },
       regular: { cals: "620 ", protein: "30g", fat: "28g", carbs: "65g" },
     },
   },
@@ -167,7 +182,7 @@ export const Bowl: Array<tabItem> = [
     reviews: "12",
     url: "#",
     nutrient: {
-      mini: { cals: "250", protein: "10g", fat: "7g", carbs: "35g" },
+      mini: { cals: "375.0", protein: "15.0g", fat: "10.5g", carbs: "52.5g" },
       regular: { cals: "500 ", protein: "20g", fat: "15g", carbs: "70g" },
     },
   },
@@ -181,7 +196,7 @@ export const Bowl: Array<tabItem> = [
     reviews: "61",
     url: "#",
     nutrient: {
-      mini: { cals: "260", protein: "17g", fat: "11g", carbs: "25g" },
+      mini: { cals: "390.0", protein: "25.5g", fat: "16.5g", carbs: "37.5g" },
       regular: { cals: "520 ", protein: "35g", fat: "22g", carbs: "50g" },
     },
   },
@@ -195,8 +210,13 @@ export const Bowl: Array<tabItem> = [
     reviews: "95",
     url: "#",
     nutrient: {
-      mini: { cals: "240", protein: "11g", fat: "9g", carbs: "27g" },
-      regular: { cals: "480 ", protein: "22g", fat: "18g", carbs: "55g" },
+      mini: {
+        cals: "360.0",
+        protein: "16.5g",
+        fat: "13.5g",
+        carbs: "40.5g",
+      },
+      regular: { cals: "480", protein: "22g", fat: "18g", carbs: "55g" },
     },
   },
   {
@@ -209,33 +229,39 @@ export const Bowl: Array<tabItem> = [
     reviews: "95",
     url: "#",
     nutrient: {
-      mini: { cals: "300", protein: "25g", fat: "10g", carbs: "30g" },
-      regular: { cals: "600 ", protein: "50g", fat: "20g", carbs: "60g" },
+      mini: {
+        cals: "450.0",
+        protein: "37.5g",
+        fat: "15.0g",
+        carbs: "45.0g",
+      },
+      regular: { cals: "600", protein: "50g", fat: "20g", carbs: "60g" },
     },
   },
+
   {
     imagesrc: VegLaksa,
-    title: "Singapore Veg Laksa",
+    title: "Veg Laksa",
     content: "A spicy coconut-based noodle soup with tofu and vegetables.",
     price: "180",
     rating: "4.2",
     reviews: "95",
     url: "#",
     nutrient: {
-      mini: { cals: "250", protein: "8g", fat: "12g", carbs: "40g" },
+      mini: { cals: "375.0", protein: "12.0g", fat: "18.0g", carbs: "60.0g" },
       regular: { cals: "500 ", protein: "16g", fat: "24g", carbs: "80g" },
     },
   },
   {
     imagesrc: PaneerLaksa,
-    title: "Singapore Paneer Laksa",
+    title: "Paneer Laksa",
     content: "A rich and creamy laksa with paneer and coconut milk.",
     price: "200",
     rating: "4.2",
     reviews: "95",
     url: "#",
     nutrient: {
-      mini: { cals: "280", protein: "12g", fat: "15g", carbs: "35g" },
+      mini: { cals: "420.0", protein: "18.0g", fat: "22.5g", carbs: "52.5g" },
       regular: { cals: "560 ", protein: "24g", fat: "30g", carbs: "70g" },
     },
   },
@@ -248,22 +274,22 @@ export const Bowl: Array<tabItem> = [
     reviews: "95",
     url: "#",
     nutrient: {
-      mini: { cals: "300", protein: "18g", fat: "10g", carbs: "40g" },
+      mini: { cals: "450.0", protein: "27.0g", fat: "15.0g", carbs: "60.0g" },
       regular: { cals: "600 ", protein: "36g", fat: "20g", carbs: "80g" },
     },
   },
 ];
-export const Salad: Array<tabItem> = [
+export const Salad: Array<Item> = [
   {
     imagesrc: TeriyakiPaneerSalad,
     title: "Teriyaki Paneer Salad",
     content: "Tomato Salad & Carrot",
-    price: "179",
+    price: "180",
     rating: "5.0",
     reviews: "87",
     url: "#",
     nutrient: {
-      mini: { cals: "200", protein: "10g", fat: "5g", carbs: "20g" },
+      mini: { cals: "300.0", protein: "15.0g", fat: "7.5g", carbs: "30.0g" },
       regular: { cals: "400", protein: "20g", fat: "10g", carbs: "40g" },
     },
   },
@@ -271,7 +297,7 @@ export const Salad: Array<tabItem> = [
     imagesrc: MushroomSalad,
     title: "Mushroom Salad",
     content: "Hamburger & Fries",
-    price: "179",
+    price: "180",
     rating: "4.9",
     reviews: "89",
     url: "#",
@@ -280,7 +306,7 @@ export const Salad: Array<tabItem> = [
     imagesrc: BBQChickenSalad,
     title: "Barbeque chicken Salad",
     content: "Crispy Soyabeans",
-    price: "229",
+    price: "180",
     rating: "4.6",
     reviews: "12",
     url: "#",
@@ -289,18 +315,18 @@ export const Salad: Array<tabItem> = [
     imagesrc: TeriyakiChickenSalad,
     title: "Chicken Teriyaki Salad",
     content: "Crispy Soyabeans",
-    price: "229",
+    price: "180",
     rating: "4.6",
     reviews: "12",
     url: "#",
   },
 ];
-export const Nachos: Array<tabItem> = [
+export const Nachos: Array<Item> = [
   {
     imagesrc: Fiesta,
     title: "Nachos Fiesta",
     content: "Tomato Salad & Carrot",
-    price: "219",
+    price: "180",
     rating: "5.0",
     reviews: "87",
     url: "#",
@@ -309,7 +335,7 @@ export const Nachos: Array<tabItem> = [
     imagesrc: ChickenNachos,
     title: "Spicy Chicken Nachos Bowl",
     content: "Cheese Pizza",
-    price: "259",
+    price: "190",
     rating: "4.8",
     reviews: "32",
     url: "#",
@@ -318,7 +344,7 @@ export const Nachos: Array<tabItem> = [
     imagesrc: PannerNachos,
     title: "Spicy Panner Nachos Bowl",
     content: "Hamburger & Fries",
-    price: "229",
+    price: "190",
     rating: "4.9",
     reviews: "89",
     url: "#",
@@ -327,7 +353,7 @@ export const Nachos: Array<tabItem> = [
     imagesrc: ButterChickenNachos,
     title: "Butter Chicken Nachos Bowl",
     content: "Crispy Soyabeans",
-    price: "249",
+    price: "190",
     rating: "4.6",
     reviews: "12",
     url: "#",
@@ -336,7 +362,7 @@ export const Nachos: Array<tabItem> = [
     imagesrc: BBQCHickenNachos,
     title: "Barbeque Chicken Nachos Bowl",
     content: "Roasted Chicken & Egg",
-    price: "249",
+    price: "190",
     rating: "4.2",
     reviews: "19",
     url: "#",
@@ -345,18 +371,18 @@ export const Nachos: Array<tabItem> = [
     imagesrc: MushroomNachos,
     title: "Mushroom Nachos Bowl",
     content: "Deepfried Chicken",
-    price: "229",
+    price: "190",
     rating: "5.0",
     reviews: "61",
     url: "#",
   },
 ];
-export const Taco: Array<tabItem> = [
+export const Taco: Array<Item> = [
   {
     imagesrc: Chickentaco,
     title: "Chicken Taco",
     content: "Tomato Salad & Carrot",
-    price: "129",
+    price: "80",
     rating: "5.0",
     reviews: "87",
     url: "#",
@@ -365,7 +391,7 @@ export const Taco: Array<tabItem> = [
     imagesrc: Muttontaco,
     title: "Mutton Taco",
     content: "Cheese Pizza",
-    price: "189",
+    price: "120",
     rating: "4.8",
     reviews: "32",
     url: "#",
@@ -374,7 +400,7 @@ export const Taco: Array<tabItem> = [
     imagesrc: EggTaco,
     title: "Egg Taco",
     content: "Hamburger & Fries",
-    price: "109",
+    price: "70",
     rating: "4.9",
     reviews: "89",
     url: "#",
@@ -383,7 +409,7 @@ export const Taco: Array<tabItem> = [
     imagesrc: Paneertaco,
     title: "Paneer Taco",
     content: "Crispy Soyabeans",
-    price: "99",
+    price: "70",
     rating: "4.6",
     reviews: "12",
     url: "#",
@@ -392,23 +418,23 @@ export const Taco: Array<tabItem> = [
     imagesrc: MushroomTaco,
     title: "Mushroom Taco",
     content: "Roasted Chicken & Egg",
-    price: "99",
+    price: "70",
     rating: "4.2",
     reviews: "19",
     url: "#",
   },
 ];
-export const Quesadillas: Array<tabItem> = [
+export const Quesadillas: Array<Item> = [
   {
     imagesrc: VegOuesadilla,
     title: "Veg Quesadillas",
     content: "A crispy tortilla filled with cheese, beans, and vegetables.",
-    price: "199",
+    price: "160",
     rating: "4.2",
     reviews: "95",
     url: "#",
     nutrient: {
-      mini: { cals: "320", protein: "10g", fat: "12g", carbs: "45g" },
+      mini: { cals: "480.0", protein: "15.0g", fat: "18.0g", carbs: "67.5g" },
       regular: { cals: "640 ", protein: "20g", fat: "24g", carbs: "90g" },
     },
   },
@@ -418,15 +444,15 @@ export const Quesadillas: Array<tabItem> = [
     content: "A cheesy tortilla filled with grilled chicken and peppers.",
     price: "249",
     rating: "4.2",
-    reviews: "95",
+    reviews: "160",
     url: "#",
     nutrient: {
-      mini: { cals: "350", protein: "22g", fat: "14g", carbs: "38g" },
+      mini: { cals: "525.0", protein: "33.0g", fat: "21.0g", carbs: "57.0g" },
       regular: { cals: "700 ", protein: "44g", fat: "28g", carbs: "76g" },
     },
   },
 ];
-// export const Smoothie: Array<tabItem> = [
+// export const Smoothie: Array<Item> = [
 //   {
 //     imagesrc: AppleSmoothie,
 //     title: "Apple Smoothie",

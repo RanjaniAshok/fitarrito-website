@@ -1,6 +1,8 @@
+"use client";
 import tw from "twin.macro";
-import React, { useState } from "react";
-import { useAppDispatch } from "app/lib/hooks";
+import React from "react";
+import { useAppDispatch, useAppSelector } from "app/lib/hooks";
+import Link from "next/link";
 
 import { FaUtensils } from "react-icons/fa";
 import { MdOutlineMoreTime } from "react-icons/md";
@@ -24,53 +26,51 @@ const Label = tw.p`
 `;
 
 const Categories = () => {
-  const [selectedMenu, setSelectedMenu] = useState("restaurant");
-  const dispatch = useAppDispatch();
+  // const [selectedMenu, setSelectedMenu] = useState("restaurant");
+  const selectedMenu = useAppSelector((state) => state.menu.menuType); // Get from Redux
 
+  const dispatch = useAppDispatch();
+  const handleMenuSelection = (menu: string) => {
+    dispatch(setMenuType(menu));
+  };
   return (
     <TabContent>
-      <TabItem
-        onClick={() => {
-          setSelectedMenu("restaurant");
-          dispatch(setMenuType("restaurant"));
-        }}
-      >
-        <IconWrapper
-          className={
-            selectedMenu === "restaurant" ? "text-red-600" : "text-gray-600"
-          }
-        >
-          <FaUtensils />
-        </IconWrapper>
-        <Label
-          className={
-            selectedMenu === "restaurant" ? "text-red-600" : "text-gray-600"
-          }
-        >
-          Restaurant Menu
-        </Label>
-      </TabItem>
-      <TabItem
-        onClick={() => {
-          dispatch(setMenuType("preOrder"));
-          setSelectedMenu("preOrder");
-        }}
-      >
-        <IconWrapper
-          className={
-            selectedMenu === "preOrder" ? "text-red-600" : "text-gray-600"
-          }
-        >
-          <MdOutlineMoreTime />
-        </IconWrapper>
-        <Label
-          className={
-            selectedMenu === "preOrder" ? "text-red-600" : "text-gray-600"
-          }
-        >
-          Pre-order Menu
-        </Label>
-      </TabItem>
+      <Link href="/dashboard">
+        <TabItem onClick={() => handleMenuSelection("restaurant")}>
+          <IconWrapper
+            className={
+              selectedMenu === "restaurant" ? "text-red-600" : "text-gray-600"
+            }
+          >
+            <FaUtensils />
+          </IconWrapper>
+          <Label
+            className={
+              selectedMenu === "restaurant" ? "text-red-600" : "text-gray-600"
+            }
+          >
+            Restaurant Menu
+          </Label>
+        </TabItem>
+      </Link>
+      <Link href="/preOrderMenu">
+        <TabItem onClick={() => handleMenuSelection("preOrder")}>
+          <IconWrapper
+            className={
+              selectedMenu === "preOrder" ? "text-red-600" : "text-gray-600"
+            }
+          >
+            <MdOutlineMoreTime />
+          </IconWrapper>
+          <Label
+            className={
+              selectedMenu === "preOrder" ? "text-red-600" : "text-gray-600"
+            }
+          >
+            Pre-order Menu
+          </Label>
+        </TabItem>
+      </Link>
     </TabContent>
   );
 };

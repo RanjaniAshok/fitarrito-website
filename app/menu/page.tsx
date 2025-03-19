@@ -1,6 +1,7 @@
 "use client";
+
 import React, { useEffect } from "react";
-import { getMenu } from "app/lib/features/menuSlice";
+import { getMenu, getPreOrderMenu } from "app/lib/features/menuSlice";
 import { useAppDispatch, useAppSelector } from "app/lib/hooks";
 import Menu from "@/components/Menu";
 import tw from "twin.macro";
@@ -18,6 +19,7 @@ export default function Dashboard() {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getMenu());
+    dispatch(getPreOrderMenu());
   }, [dispatch]);
   useEffect(() => {
     console.log(menu, "menu in useEffect");
