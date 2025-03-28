@@ -2,6 +2,8 @@
 import React, { ReactNode, useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { motion } from "motion/react";
+import { useAppDispatch, useAppSelector } from "app/lib/hooks";
+
 import { Container, ContentWithPaddingXl } from "@/components/misc/Layout";
 import LoaderText from "@/components/ImageSkeleton";
 import { SectionHeading } from "@/components/misc/Heading";
@@ -12,10 +14,9 @@ import tw from "twin.macro";
 import Modal from "react-modal";
 import CartDrawer from "@/components/CartDrawer";
 import DisplayTabContent from "@/components/DisplayTabContent";
-// Set the Next.js root element
+import { getMenu } from "app/lib/features/menuSlice";
 
 interface Card {
-  // Define the structure of a card
   imagesrc: { src: string };
   title: string;
   content: string;
@@ -28,8 +29,6 @@ interface Card {
     mini: { cals: string; protein: string; fat: string; carbs: string };
     regular: { cals: string; protein: string; fat: string; carbs: string };
   };
-
-  // Add other card properties here
 }
 
 type Tabs = {
@@ -64,34 +63,32 @@ const TabContent = tw(
 
 export default function Menu({ heading, tabs }: MenuProps) {
   const tabsKeys = Object.keys(tabs);
-  const [activeTab, setActiveTab] = useState(tabsKeys[0]);
+  const menuType = useAppSelector((state) => state.menu.menuType);
+  const [activeTab, setActiveTab] = useState(tabsKeys[0] || "");
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
   const [loading, setLoading] = useState(false);
+  const dispatch = useAppDispatch();
 
   const handleTabChange = (tabName: string) => {
-    setLoading(true); // Start loading
+    setLoading(true);
     setActiveTab(tabName);
     setTimeout(() => {
-      setLoading(false); // Stop loading after content update
-    }, 1000); // Adjust delay as needed
+      setLoading(false);
+    }, 1000);
   };
   const openModal = (card: Card) => {
     setSelectedCard(card);
-    setQuantity(1); // ✅ Reset quantity to 1 when opening for a new card
+    setQuantity(1);
     setModalOpen(true);
   };
 
   const incrementQuantity = () => setQuantity((prev) => prev + 1);
   const decrementQuantity = () =>
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
-
-  useEffect(() => {
-    setActiveTab(tabsKeys[0]);
-  }, [tabsKeys]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -101,6 +98,16 @@ export default function Menu({ heading, tabs }: MenuProps) {
       }
     }
   }, []);
+  useEffect(() => {
+    if (tabsKeys.length > 0) {
+      setActiveTab(tabsKeys[0]); // Set the first tab as active
+    }
+  }, [menuType]);
+  useEffect(() => {
+    if (tabsKeys.length > 0 && !activeTab) {
+      setActiveTab(tabsKeys[0]); // Set the first tab as active
+    }
+  }, [tabsKeys, activeTab]);
 
   return (
     <Container>
@@ -125,7 +132,6 @@ export default function Menu({ heading, tabs }: MenuProps) {
               <LoaderText />
             ) : (
               <>
-                {/* Render individual tab items */}
                 {tabs[activeTab]?.length > 0 ? (
                   Object.entries(tabs[activeTab]).map(([index, card]) => (
                     <DisplayTabContent
@@ -157,7 +163,6 @@ export default function Menu({ heading, tabs }: MenuProps) {
         incrementQuantity={incrementQuantity}
         decrementQuantity={decrementQuantity}
       />
-
       {isDrawerOpen ? (
         <CartDrawer isOpen={isDrawerOpen} setIsOpen={setIsDrawerOpen} />
       ) : null}

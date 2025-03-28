@@ -1,12 +1,18 @@
 "use client";
 import React, { useEffect } from "react";
-import { getMenu, getPreOrderMenu } from "app/lib/features/menuSlice";
+import {
+  getMenu,
+  getPreOrderMenu,
+  setMenuType,
+} from "app/lib/features/menuSlice";
 import { useAppDispatch, useAppSelector } from "app/lib/hooks";
 import About from "@/components/About";
-// import MenuCategories from "@/components/ChooseMenuType";
+import MenuCategories from "@/components/ChooseMenuType";
 import Menu from "@/components/Menu";
 import tw from "twin.macro";
 import Statistics from "@/components/Statistics";
+import { useRouter, usePathname } from "next/navigation"; // ✅ Import Next.js router
+
 const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`;
 // const tabs = {
 //   Main: Main,
@@ -18,19 +24,24 @@ const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -ske
 export default function Dashboard() {
   const menu = useAppSelector((state) => state.menu.menu);
 
+  const menuType = useAppSelector((state) => state.menu.menuType);
+  const pathname = usePathname(); // ✅ Get current route
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getMenu());
     dispatch(getPreOrderMenu());
-  }, [dispatch]);
-
-  useEffect(() => {}, [menu]);
+  }, [dispatch, menuType]);
+  useEffect(() => {
+    if (pathname === "/") {
+      dispatch(setMenuType("restaurant"));
+    }
+  }, [pathname, dispatch]);
   return (
     <>
       <About />
-      {/* <MenuCategories /> */}
+      <MenuCategories />
       <Menu
-        tabs={menu && menu}
+        tabs={menu}
         heading={
           <>
             Checkout our <HighlightedText>menu.</HighlightedText>

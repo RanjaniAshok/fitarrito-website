@@ -59,6 +59,7 @@ const cartSlice = createSlice({
     menu: {} as Tabs,
     restaurantMenu: {} as Tabs, // Store restaurant menu
     preOrderMenu: {} as Tabs,
+    selectedMenu: {} as Tabs | null,
     menuType: "restaurant",
     loading: "idle",
   },
@@ -69,6 +70,12 @@ const cartSlice = createSlice({
         action.payload === "restaurant"
           ? state.restaurantMenu
           : state.preOrderMenu;
+    },
+    setSelectedMenu: (state, action: PayloadAction<any>) => {
+      state.selectedMenu = action.payload;
+    },
+    clearSelectedMenu: (state) => {
+      state.selectedMenu = null;
     },
   },
   extraReducers: (builder) => {
@@ -97,5 +104,6 @@ const cartSlice = createSlice({
       });
   },
 });
-export const { setMenuType } = cartSlice.actions;
+export const { setMenuType, setSelectedMenu, clearSelectedMenu } =
+  cartSlice.actions;
 export default cartSlice.reducer;

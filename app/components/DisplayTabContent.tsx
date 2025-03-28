@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation"; // ✅ Import useRouter for navigat
 
 import { Container } from "@/components/misc/Layout";
 import { addItemsToCart } from "app/lib/features/cartSlice";
+import { setSelectedMenu } from "app/lib/features/menuSlice";
 import ChooseVariantCard from "./ChooseVariantCard";
 import { useAppSelector, useAppDispatch } from "app/lib/hooks";
 interface CardImageContainerProps {
@@ -79,7 +80,6 @@ const DisplayTabContent: React.FC<{
   const dispatch = useAppDispatch();
   const menuType = useAppSelector((state) => state.menu.menuType);
   const router = useRouter();
-  console.log(menuType, "menuType");
   return (
     <CardContainer
       key={`${card.title}-${index}`}
@@ -132,8 +132,8 @@ const DisplayTabContent: React.FC<{
               ) : (
                 <CardButton
                   onClick={async () => {
+                    dispatch(setSelectedMenu(card));
                     const encodedName = encodeURIComponent(card.title);
-
                     router.push(`/preOrderMenu/${encodedName}`); // ✅ Navigate to the specific item page
                   }}
                 >

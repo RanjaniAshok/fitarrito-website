@@ -21,6 +21,7 @@ export default function Dashboard() {
     dispatch(getMenu());
     dispatch(getPreOrderMenu());
   }, [dispatch]);
+
   useEffect(() => {
     console.log(menu, "menu in useEffect");
   }, [menu]);
@@ -28,7 +29,7 @@ export default function Dashboard() {
     <>
       {/* <About /> */}
       <Menu
-        tabs={menu && menu}
+        tabs={menu}
         heading={
           <>
             Checkout our <HighlightedText>menu.</HighlightedText>

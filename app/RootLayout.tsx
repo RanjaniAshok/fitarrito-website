@@ -1,4 +1,3 @@
-// 📂 app/RootLayout.tsx
 "use client";
 
 import React from "react";
@@ -8,6 +7,8 @@ import Footer from "./components/Footer";
 import GlobalStyles from "src/styles/GlobalStyles";
 import StyledComponentsRegistry from "lib/registry";
 import Provider from "./StoreProvider";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./lib/store";
 
 export default function RootLayout({
   children,
@@ -22,17 +23,23 @@ export default function RootLayout({
       </head>
       <body>
         <Provider>
-          <StyledComponentsRegistry>
-            <GlobalStyles />
+          <PersistGate persistor={persistor} loading={null}>
+            <StyledComponentsRegistry>
+              <GlobalStyles />
 
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <div className="flex flex-col min-h-screen">
-                <Header />
-                <main className="flex-1 p-5">{children}</main>
-                <Footer />
-              </div>
-            </ThemeProvider>
-          </StyledComponentsRegistry>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+              >
+                <div className="flex flex-col min-h-screen">
+                  <Header />
+                  <main className="flex-1 p-5">{children}</main>
+                  <Footer />
+                </div>
+              </ThemeProvider>
+            </StyledComponentsRegistry>
+          </PersistGate>
         </Provider>
       </body>
     </html>

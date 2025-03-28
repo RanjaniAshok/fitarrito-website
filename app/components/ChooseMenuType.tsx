@@ -35,7 +35,7 @@ const Categories = () => {
   };
   return (
     <TabContent>
-      <Link href="/dashboard">
+      <Link href="/">
         <TabItem onClick={() => handleMenuSelection("restaurant")}>
           <IconWrapper
             className={
