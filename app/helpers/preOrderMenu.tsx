@@ -1,5 +1,11 @@
 import ChickenBurrito from "@/images/menuimages/ChickenBurrito.svg";
 import MuttonBurrito from "@/images/menuimages/MuttonBurrito.svg";
+import Chicken from "@/images/menuimages/Chicken.svg";
+import Mutton from "@/images/menuimages/Mutton.svg";
+import WhiteRice from "@/images/menuimages/WhiteRice.svg";
+import BrownRice from "@/images/menuimages/BrownRice.svg";
+import BlackBeans from "@/images/menuimages/BlackBeans.svg";
+import PintoBeans from "@/images/menuimages/PintoBeans.svg";
 // import PannerBurrito from "@/images/menuimages/PannerBurrito.svg";
 // import MushroomBurrito from "@/images/menuimages/MushroomBurrito.svg";
 import SpudBowl from "@/images/menuimages/SpudBowl.svg";
@@ -27,9 +33,10 @@ import StirFryVeggiesBowl from "@/images/menuimages/StirFryVeggiesBowl.svg";
 // import ChocolateSmoothie from "@/images/menuimages/ChocolateSmoothie.svg";
 // import PaneerLaksa from "@/images/menuimages/PaneerLaksa.svg";
 import VegLaksa from "@/images/menuimages/VegLaksa.svg";
-import MushroomSalad from "@/images/menuimages/MushroomSalad.svg";
-import BBQChickenSalad from "@/images/menuimages/BBQChickenSalad.svg";
-import TeriyakiChickenSalad from "@/images/menuimages/TeriyakiChickenSalad.svg";
+import { PreOrderMenuItem } from "app/types/types";
+// import MushroomSalad from "@/images/menuimages/MushroomSalad.svg";
+// import BBQChickenSalad from "@/images/menuimages/BBQChickenSalad.svg";
+// import TeriyakiChickenSalad from "@/images/menuimages/TeriyakiChickenSalad.svg";
 import TeriyakiPaneerSalad from "@/images/menuimages/PaneerTeriyakiSalad.svg";
 // interface items {
 //   imagesrc: { src: string };
@@ -55,26 +62,14 @@ interface addOnsItem {
     };
   }>;
 }
-interface Item {
-  title: string;
-  imagesrc: { src: string };
-  content: string;
-  category?: string;
-  nutrient?: {
-    cals: string;
-    protein: string;
-    fat: string;
-    carbs: string;
-  };
-  addOns: Array<addOnsItem>;
-}
-const addOns: Array<addOnsItem> = [
+
+const commonAddOns: Array<addOnsItem> = [
   {
     type: "Protein",
     value: [
       {
         item: "Chicken",
-        imagesrc: ChickenBurrito,
+        imagesrc: Chicken,
 
         nutrient: {
           mini: {
@@ -93,7 +88,7 @@ const addOns: Array<addOnsItem> = [
       },
       {
         item: "Mutton",
-        imagesrc: MuttonBurrito,
+        imagesrc: Mutton,
 
         nutrient: {
           mini: {
@@ -131,55 +126,13 @@ const addOns: Array<addOnsItem> = [
       },
     ],
   },
-  {
-    type: "Rice",
-    value: [
-      {
-        item: "White Rice",
-        imagesrc: ChickenBurrito,
 
-        nutrient: {
-          mini: {
-            cals: "562.5",
-            protein: "37.5",
-            fat: "22.5",
-            carbs: "45.0",
-          },
-          regular: {
-            cals: "750 ",
-            protein: "50",
-            fat: "30",
-            carbs: "60",
-          },
-        },
-      },
-      {
-        item: "Brown Rice",
-        imagesrc: MuttonBurrito,
-
-        nutrient: {
-          mini: {
-            cals: "562.5",
-            protein: "37.5",
-            fat: "22.5",
-            carbs: "45.0",
-          },
-          regular: {
-            cals: "750 ",
-            protein: "50",
-            fat: "30",
-            carbs: "60",
-          },
-        },
-      },
-    ],
-  },
   {
     type: "Beans",
     value: [
       {
         item: "Black Beans",
-        imagesrc: ChickenBurrito,
+        imagesrc: BlackBeans,
 
         nutrient: {
           mini: {
@@ -198,7 +151,7 @@ const addOns: Array<addOnsItem> = [
       },
       {
         item: "Pinto Beans",
-        imagesrc: MuttonBurrito,
+        imagesrc: PintoBeans,
 
         nutrient: {
           mini: {
@@ -218,19 +171,65 @@ const addOns: Array<addOnsItem> = [
     ],
   },
 ];
-export const Bowl: Array<Item> = [
+const bowlAddOns: Array<addOnsItem> = [
+  {
+    type: "Rice",
+    value: [
+      {
+        item: "White Rice",
+        imagesrc: WhiteRice,
+
+        nutrient: {
+          mini: {
+            cals: "562.5",
+            protein: "37.5",
+            fat: "22.5",
+            carbs: "45.0",
+          },
+          regular: {
+            cals: "750 ",
+            protein: "50",
+            fat: "30",
+            carbs: "60",
+          },
+        },
+      },
+      {
+        item: "Brown Rice",
+        imagesrc: BrownRice,
+
+        nutrient: {
+          mini: {
+            cals: "562.5",
+            protein: "37.5",
+            fat: "22.5",
+            carbs: "45.0",
+          },
+          regular: {
+            cals: "750 ",
+            protein: "50",
+            fat: "30",
+            carbs: "60",
+          },
+        },
+      },
+    ],
+  },
+];
+export const Bowl: Array<PreOrderMenuItem> = [
   {
     imagesrc: ChickenBurrito,
     title: "Burrito Bowl",
-    content: "Tortilla roll infused with chicken and veggies",
+    content: "infused with chicken and veggies",
     category: "Burrito Bowl",
     nutrient: {
-      cals: "00",
-      protein: "37.5",
-      fat: "22.5",
-      carbs: "45.0",
+      cals: 0,
+      protein: 0,
+      fat: 0,
+      carbs: 0,
     },
-    addOns: addOns,
+    addOns: commonAddOns,
+    specificAddons: bowlAddOns,
   },
   {
     imagesrc: VegHummusBuddhaBowl,
@@ -239,14 +238,13 @@ export const Bowl: Array<Item> = [
     content:
       "A nutritious bowl with hummus, quinoa, fresh greens, roasted chickpeas, and tahini dressing.",
     nutrient: {
-      cals: "00",
-      protein: "00",
-      fat: "00",
-      carbs: "00",
+      cals: 0,
+      protein: 0,
+      fat: 0,
+      carbs: 0,
     },
-    addOns: addOns,
+    addOns: commonAddOns,
   },
-
   {
     imagesrc: QuinoaBowl,
     title: "Quinoa Bowl",
@@ -254,12 +252,13 @@ export const Bowl: Array<Item> = [
     content:
       "A nutritious bowl with hummus, quinoa, fresh greens, roasted chickpeas, and tahini dressing.",
     nutrient: {
-      cals: "00",
-      protein: "00",
-      fat: "00",
-      carbs: "00",
+      cals: 0,
+      protein: 0,
+      fat: 0,
+      carbs: 0,
     },
-    addOns: addOns,
+    addOns: commonAddOns,
+    specificAddons: bowlAddOns,
   },
   {
     imagesrc: StirFryVeggiesBowl,
@@ -268,12 +267,13 @@ export const Bowl: Array<Item> = [
     content:
       "A protein-rich burrito stuffed with scrambled eggs, beans, cheese, and fresh vegetables.",
     nutrient: {
-      cals: "00",
-      protein: "00",
-      fat: "00",
-      carbs: "00",
+      cals: 0,
+      protein: 0,
+      fat: 0,
+      carbs: 0,
     },
-    addOns: addOns,
+    addOns: commonAddOns,
+    specificAddons: bowlAddOns,
   },
   {
     imagesrc: SpudBowl,
@@ -282,41 +282,41 @@ export const Bowl: Array<Item> = [
     content:
       "A protein-rich burrito stuffed with scrambled eggs, beans, cheese, and fresh vegetables.",
     nutrient: {
-      cals: "00",
-      protein: "00",
-      fat: "00",
-      carbs: "00",
+      cals: 0,
+      protein: 0,
+      fat: 0,
+      carbs: 0,
     },
-    addOns: addOns,
+    addOns: commonAddOns,
+    specificAddons: bowlAddOns,
   },
 
   {
     imagesrc: VegLaksa,
     title: "Laksa Noodles",
     category: "Soup Noodles",
-
     content: "A spicy coconut-based noodle soup with tofu and vegetables.",
     nutrient: {
-      cals: "00",
-      protein: "00",
-      fat: "00",
-      carbs: "00",
+      cals: 0,
+      protein: 0,
+      fat: 0,
+      carbs: 0,
     },
-    addOns: addOns,
+    addOns: commonAddOns,
   },
 ];
-export const Salad: Array<Item> = [
+export const Salad: Array<PreOrderMenuItem> = [
   {
     imagesrc: TeriyakiPaneerSalad,
     title: "Teriyaki Paneer Salad",
     content: "Tomato Salad & Carrot",
     category: "Salad",
     nutrient: {
-      cals: "00",
-      protein: "00",
-      fat: "00",
-      carbs: "00",
+      cals: 0,
+      protein: 0,
+      fat: 0,
+      carbs: 0,
     },
-    addOns: addOns,
+    addOns: commonAddOns,
   },
 ];

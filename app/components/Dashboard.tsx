@@ -11,7 +11,7 @@ import MenuCategories from "@/components/ChooseMenuType";
 import Menu from "@/components/Menu";
 import tw from "twin.macro";
 import Statistics from "@/components/Statistics";
-import { useRouter, usePathname } from "next/navigation"; // ✅ Import Next.js router
+import { usePathname } from "next/navigation"; // ✅ Import Next.js router
 
 const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block`;
 // const tabs = {
@@ -22,7 +22,7 @@ const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -ske
 //   Smoothie: Smoothie,
 // };
 export default function Dashboard() {
-  const menu = useAppSelector((state) => state.menu.menu);
+  const menu = useAppSelector((state) => state.menu.restaurantMenu);
 
   const menuType = useAppSelector((state) => state.menu.menuType);
   const pathname = usePathname(); // ✅ Get current route

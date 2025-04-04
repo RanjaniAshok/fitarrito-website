@@ -2,7 +2,8 @@
 import { useState } from "react";
 import Modal from "react-modal";
 import tw from "twin.macro";
-import { useAppSelector } from "app/lib/hooks";
+import { useAppSelector, useAppDispatch } from "app/lib/hooks";
+import { clearCart } from "app/lib/features/cartSlice"; // Update path as needed
 
 // Tailwind Styled Components
 const Card = tw.div`bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto`;
@@ -27,9 +28,10 @@ export default function OrderModal({
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const cartItems = useAppSelector((state) => state.cart.cartItems);
+  const dispatch = useAppDispatch();
 
   const sendOrderToWhatsApp = () => {
-    const phoneNumber = "918508936456"; // Replace with your WhatsApp number
+    const phoneNumber = "917373824646"; // Replace with your WhatsApp number
     let orderMessage = `🛒 *New Order*\n\n`;
 
     cartItems.forEach((item, index) => {
@@ -50,6 +52,7 @@ export default function OrderModal({
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
     window.open(whatsappUrl, "_blank");
+    dispatch(clearCart()); // 🧹 clear the cart
     setIsModalOpen(false); // Close modal
   };
 

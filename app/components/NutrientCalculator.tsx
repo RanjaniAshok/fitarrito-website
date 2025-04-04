@@ -4,13 +4,14 @@ import tw from "twin.macro";
 
 interface DataProps {
   data: {
-    cals: string;
-    protein: string;
-    fat: string;
-    carbs: string;
+    cals: number;
+    protein: number;
+    fat: number;
+    carbs: number;
   };
-  title: string;
-  content: string;
+  title?: string | undefined;
+  content?: string | undefined;
+  showAddToBag?: boolean;
 }
 const Button = tw.button`bg-red-500 text-white px-8 py-3 rounded-lg font-bold text-lg shadow-lg`;
 
@@ -21,7 +22,7 @@ const NutrientCalculator = (props: DataProps) => {
     { label: "Carbs", key: "carbs" },
   ];
   const data = props?.data;
-  const [selectedProtein, setSelectedProtein] = useState<string | null>(null);
+  const [selectedProtein] = useState<string | null>(null);
 
   return (
     <>
@@ -65,14 +66,16 @@ const NutrientCalculator = (props: DataProps) => {
               </div>
             ))}
           </div>
-          <div className="p-6 sm:p-8 ">
-            <Button
-              disabled={!selectedProtein}
-              onClick={() => console.log("Adding:", selectedProtein)}
-            >
-              Add to Bag
-            </Button>
-          </div>
+          {props?.showAddToBag ? (
+            <div className="p-6 sm:p-8 ">
+              <Button
+                disabled={!selectedProtein}
+                onClick={() => console.log("Adding:", selectedProtein)}
+              >
+                Add to Bag
+              </Button>
+            </div>
+          ) : null}
         </div>
       </div>
     </>

@@ -1,26 +1,23 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
-
-import { getPreOrderMenu, setMenuType } from "app/lib/features/menuSlice";
 import NutrientCalculator from "@/components/NutrientCalculator";
 // import MenuCategories from "@/components/ChooseMenuType";
 import tw from "twin.macro";
 import styled from "styled-components";
-import { useAppDispatch, useAppSelector } from "app/lib/hooks";
+import { useAppSelector } from "app/lib/hooks";
 import DisplayTabContent from "@/components/DisplayTabContent";
 import { Header, HeaderRow } from "@/components/misc/Header";
 import LoaderText from "@/components/ImageSkeleton";
-import { usePathname } from "next/navigation"; // ✅ Import Next.js router
 
 interface TabControlProps {
   active: string; // Adjust the type as needed
 }
 interface dataProps {
-  cals: string;
-  protein: string;
-  fat: string;
-  carbs: string;
+  cals: number;
+  protein: number;
+  fat: number;
+  carbs: number;
 }
 const TabControl = styled.div<TabControlProps>`
   ${tw`cursor-pointer px-6 py-3 mt-2 sm:mt-0 sm:mr-2 last:mr-0 text-gray-600 font-medium rounded-sm transition duration-300 text-sm sm:text-base w-1/2 sm:w-auto text-center`}
@@ -40,26 +37,16 @@ const SubHeading = tw.h1`font-black text-lg text-gray-600 md:text-2xl mx-auto le
 const TabsControl = tw.div`flex flex-wrap bg-gray-200 px-2 py-2 rounded leading-none mt-12 xl:mt-0`;
 export default function PreOrdermenu() {
   const menu = useAppSelector((state) => state.menu.preOrderMenu);
-  const menuType = useAppSelector((state) => state.menu.menuType);
 
   const tabsKeys = menu ? Object.keys(menu) : [];
   const [activeTab, setActiveTab] = useState(tabsKeys[0] || "");
   const [loading, setLoading] = useState(false);
   const [nutrientData, setNutrientData] = useState<dataProps>({
-    cals: "00",
-    protein: "00",
-    fat: "00",
-    carbs: "00",
+    cals: 0,
+    protein: 0,
+    fat: 0,
+    carbs: 0,
   });
-  const pathname = usePathname(); // ✅ Get current route
-
-  const dispatch = useAppDispatch();
-  // useEffect(() => {
-  //   dispatch(getPreOrderMenu());
-  //   if (pathname === "/preOrderMenu") {
-  //     dispatch(setMenuType("preOrder"));
-  //   }
-  // }, [pathname, dispatch]);
 
   useEffect(() => {
     if (tabsKeys.length > 0 && !activeTab) {
@@ -76,16 +63,11 @@ export default function PreOrdermenu() {
       setLoading(false); // Stop loading after content update
     }, 1000); // Adjust delay as needed
   };
-  console.log(menu, "menu");
-  console.log(activeTab, "activeTab");
-  console.log(tabsKeys, "tabsKeys");
-
-  console.log(menu[activeTab], "menu");
-
+  console.log(menu, "card");
   return (
     <Container>
       {/* <MenuCategories /> */}
-      <NutrientCalculator data={nutrientData} />
+      <NutrientCalculator data={nutrientData} showAddToBag={false} />
       <div className="container mx-auto p-6">
         <HeaderRow>
           <Header>
@@ -114,16 +96,17 @@ export default function PreOrdermenu() {
               {menu[activeTab]?.length > 0 ? (
                 Object.entries(menu[activeTab]).map(([index, card]) => (
                   <DisplayTabContent
-                    card={card}
+                    // card={card}
+                    selectedPreOrderMenu={card}
                     index={parseInt(index)}
                     key={card.title}
                     setNutrientData={setNutrientData}
                     onHover={() =>
                       setNutrientData({
-                        cals: card.nutrient?.cals || "00",
-                        protein: card.nutrient?.protein || "00",
-                        fat: card.nutrient?.fat || "00",
-                        carbs: card.nutrient?.carbs || "00",
+                        cals: card.nutrient?.cals || 0,
+                        protein: card.nutrient?.protein || 0,
+                        fat: card.nutrient?.fat || 0,
+                        carbs: card.nutrient?.carbs || 0,
                       })
                     }
                   />

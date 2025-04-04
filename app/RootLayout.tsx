@@ -8,7 +8,7 @@ import GlobalStyles from "src/styles/GlobalStyles";
 import StyledComponentsRegistry from "lib/registry";
 import Provider from "./StoreProvider";
 import { PersistGate } from "redux-persist/integration/react";
-import { store, persistor } from "./lib/store";
+import { persistor } from "./lib/store";
 
 export default function RootLayout({
   children,

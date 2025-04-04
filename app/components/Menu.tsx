@@ -2,7 +2,7 @@
 import React, { ReactNode, useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { motion } from "motion/react";
-import { useAppDispatch, useAppSelector } from "app/lib/hooks";
+import { useAppSelector } from "app/lib/hooks";
 
 import { Container, ContentWithPaddingXl } from "@/components/misc/Layout";
 import LoaderText from "@/components/ImageSkeleton";
@@ -14,7 +14,6 @@ import tw from "twin.macro";
 import Modal from "react-modal";
 import CartDrawer from "@/components/CartDrawer";
 import DisplayTabContent from "@/components/DisplayTabContent";
-import { getMenu } from "app/lib/features/menuSlice";
 
 interface Card {
   imagesrc: { src: string };
@@ -71,7 +70,6 @@ export default function Menu({ heading, tabs }: MenuProps) {
   const [quantity, setQuantity] = useState<number>(1);
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
   const [loading, setLoading] = useState(false);
-  const dispatch = useAppDispatch();
 
   const handleTabChange = (tabName: string) => {
     setLoading(true);

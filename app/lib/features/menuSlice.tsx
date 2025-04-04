@@ -8,10 +8,11 @@ import {
   Quesadillas,
 } from "@/helpers/menu";
 import { Bowl as Bowls, Salad as Salads } from "@/helpers/preOrderMenu";
+import { PreOrderMenuItem } from "app/types/types";
 interface Item {
   title: string;
   imagesrc: { src: string };
-  content: string;
+  content: string | "";
   price: number | string;
   rating: number | string;
   reviews: string;
@@ -25,6 +26,9 @@ interface Item {
 
 type Tabs = {
   [key: string]: Item[];
+};
+type PreOrderMenu = {
+  [key: string]: PreOrderMenuItem[];
 };
 
 export const getMenu = createAsyncThunk("menu/getMenu", async () => {
@@ -49,29 +53,27 @@ export const getPreOrderMenu = createAsyncThunk(
     };
 
     return Tabs;
-    // const { data } = await getMenu();
-    // return data;
   }
 );
+
 const cartSlice = createSlice({
   name: "menu",
   initialState: {
     menu: {} as Tabs,
     restaurantMenu: {} as Tabs, // Store restaurant menu
-    preOrderMenu: {} as Tabs,
-    selectedMenu: {} as Tabs | null,
+    preOrderMenu: {} as PreOrderMenu,
+    selectedMenu: {} as PreOrderMenuItem | null | undefined,
     menuType: "restaurant",
     loading: "idle",
   },
   reducers: {
     setMenuType: (state, action) => {
       state.menuType = action.payload;
-      state.menu =
-        action.payload === "restaurant"
-          ? state.restaurantMenu
-          : state.preOrderMenu;
     },
-    setSelectedMenu: (state, action: PayloadAction<any>) => {
+    setSelectedMenu: (
+      state,
+      action: PayloadAction<PreOrderMenuItem | null | undefined>
+    ) => {
       state.selectedMenu = action.payload;
     },
     clearSelectedMenu: (state) => {
@@ -85,18 +87,11 @@ const cartSlice = createSlice({
       })
       .addCase(getMenu.fulfilled, (state, action: PayloadAction<Tabs>) => {
         state.restaurantMenu = action.payload;
-        if (state.menuType === "restaurant") {
-          state.menu = action.payload;
-        }
       })
-
       .addCase(
         getPreOrderMenu.fulfilled,
-        (state, action: PayloadAction<Tabs>) => {
+        (state, action: PayloadAction<PreOrderMenu>) => {
           state.preOrderMenu = action.payload;
-          if (state.menuType === "preOrder") {
-            state.menu = action.payload;
-          }
         }
       )
       .addCase(getMenu.rejected, (state) => {

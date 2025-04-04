@@ -25,6 +25,10 @@ const cartSlice = createSlice({
     loading: "idle",
   },
   reducers: {
+    clearCart: (state) => {
+      state.cartItems = [];
+      state.totalAmt = 0;
+    },
     incrementQuantity: (state, action: PayloadAction<string>) => {
       const item = state.cartItems.find(
         (item) => item.title === action.payload
@@ -94,6 +98,6 @@ export const selectTotalQuantity = (state: RootState) =>
     (total: number, item: Item) => total + (item.quantity ?? 0),
     0
   ) || 0;
-export const { incrementQuantity, decrementQuantity, removeItem } =
+export const { incrementQuantity, decrementQuantity, removeItem, clearCart } =
   cartSlice.actions;
 export default cartSlice.reducer;

@@ -10,9 +10,11 @@ import { addItemsToCart } from "app/lib/features/cartSlice";
 import { setSelectedMenu } from "app/lib/features/menuSlice";
 import ChooseVariantCard from "./ChooseVariantCard";
 import { useAppSelector, useAppDispatch } from "app/lib/hooks";
+import { PreOrderMenuItem } from "app/types/types";
 interface CardImageContainerProps {
   imagesrc: { src: string }; // Adjust the type as needed
 }
+
 interface Card {
   // Define the structure of a card
   imagesrc: { src: string };
@@ -56,13 +58,14 @@ const CardBuyButton = tw.div`flex items-center mt-4 sm:hidden`;
 //   ${tw`pointer-events-none -z-20 absolute left-0 bottom-0 h-80 w-80 opacity-15 transform -translate-x-60 text-primary-500`}
 // `;
 const DisplayTabContent: React.FC<{
-  card: Card;
+  card?: Card;
+  selectedPreOrderMenu?: PreOrderMenuItem | null | undefined;
   index: number;
   setNutrientData?: (data: {
-    cals: string;
-    protein: string;
-    fat: string;
-    carbs: string;
+    cals: number;
+    protein: number;
+    fat: number;
+    carbs: number;
   }) => void; // ✅ Correct type
   onHover?: () => void;
   quantity?: number | undefined;
@@ -70,6 +73,7 @@ const DisplayTabContent: React.FC<{
   openModal?: (card: Card) => void | undefined;
 }> = ({
   card,
+  selectedPreOrderMenu,
   index,
   openModal,
   quantity,
@@ -82,15 +86,15 @@ const DisplayTabContent: React.FC<{
   const router = useRouter();
   return (
     <CardContainer
-      key={`${card.title}-${index}`}
+      key={`${card?.title}-${index}`}
       onMouseEnter={onHover}
       onMouseLeave={
         () =>
           setNutrientData?.({
-            cals: "00",
-            protein: "00",
-            fat: "00",
-            carbs: "00",
+            cals: 0,
+            protein: 0,
+            fat: 0,
+            carbs: 0,
           }) // Reset when unhovered
       }
     >
@@ -101,7 +105,12 @@ const DisplayTabContent: React.FC<{
         whileHover="hover"
       >
         <Container>
-          <CardImageContainer imagesrc={card.imagesrc}>
+          <CardImageContainer
+            imagesrc={
+              card?.imagesrc ??
+              selectedPreOrderMenu?.imagesrc ?? { src: "/fallback-image.jpg" }
+            }
+          >
             <CardHoverOverlay
               variants={{
                 hover: {
@@ -119,11 +128,16 @@ const DisplayTabContent: React.FC<{
               {menuType === "restaurant" ? (
                 <CardButton
                   onClick={async () => {
+                    if (!card) return;
+
                     const { meta } = await dispatch(
-                      addItemsToCart({ ...card, quantity: quantity ?? 0 })
+                      addItemsToCart({
+                        ...card, // Spread the card object to match Item's structure
+                        quantity: quantity ?? 0,
+                      })
                     );
                     if (meta.requestStatus === "fulfilled") {
-                      isDrawerOpen?.(); // ✅ Safe function call
+                      isDrawerOpen?.();
                     }
                   }}
                 >
@@ -132,12 +146,15 @@ const DisplayTabContent: React.FC<{
               ) : (
                 <CardButton
                   onClick={async () => {
-                    dispatch(setSelectedMenu(card));
-                    const encodedName = encodeURIComponent(card.title);
+                    console.log(card, "card");
+                    dispatch(setSelectedMenu(selectedPreOrderMenu));
+                    const encodedName = encodeURIComponent(
+                      selectedPreOrderMenu?.title ?? ""
+                    );
                     router.push(`/preOrderMenu/${encodedName}`); // ✅ Navigate to the specific item page
                   }}
                 >
-                  {card.title}
+                  {selectedPreOrderMenu?.title}
                 </CardButton>
               )}
             </CardHoverOverlay>
@@ -146,13 +163,18 @@ const DisplayTabContent: React.FC<{
 
         {menuType === "restaurant" ? (
           <CardText>
-            <CardTitle>{card.title}</CardTitle>
-            <CardPrice>Rs.{card.price}</CardPrice>
-            <ChooseVariantCard item={card} />
+            <CardTitle>{card?.title}</CardTitle>
+            <CardPrice>Rs.{card?.price ?? ""}</CardPrice>
+            <ChooseVariantCard item={card || null} />
 
             <CardBuyButton>
               {menuType === "restaurant" ? (
-                <CardButton onClick={() => openModal?.(card)}>
+                <CardButton
+                  onClick={() => {
+                    if (!card) return;
+                    else openModal?.(card);
+                  }}
+                >
                   Add to cart
                 </CardButton>
               ) : null}
