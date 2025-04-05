@@ -371,7 +371,7 @@ export const Nachos: Array<Item> = [
     imagesrc: MushroomNachos,
     title: "Mushroom Nachos Bowl",
     content: "Deepfried Chicken",
-    price: "190",
+    price: "180",
     rating: "5.0",
     reviews: "61",
     url: "#",

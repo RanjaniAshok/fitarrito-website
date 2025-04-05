@@ -6,6 +6,7 @@ import WhiteRice from "@/images/menuimages/WhiteRice.svg";
 import BrownRice from "@/images/menuimages/BrownRice.svg";
 import BlackBeans from "@/images/menuimages/BlackBeans.svg";
 import PintoBeans from "@/images/menuimages/PintoBeans.svg";
+import circle from "@/images/menuimages/white-circle.svg";
 // import PannerBurrito from "@/images/menuimages/PannerBurrito.svg";
 // import MushroomBurrito from "@/images/menuimages/MushroomBurrito.svg";
 import SpudBowl from "@/images/menuimages/SpudBowl.svg";
@@ -79,10 +80,10 @@ const commonAddOns: Array<addOnsItem> = [
             carbs: "45.0",
           },
           regular: {
-            cals: "750 ",
-            protein: "50",
-            fat: "30",
-            carbs: "60",
+            cals: "230 ",
+            protein: "27",
+            fat: "14",
+            carbs: "0",
           },
         },
       },
@@ -98,10 +99,10 @@ const commonAddOns: Array<addOnsItem> = [
             carbs: "45.0",
           },
           regular: {
-            cals: "750 ",
-            protein: "50",
-            fat: "30",
-            carbs: "60",
+            cals: "294 ",
+            protein: "25",
+            fat: "21",
+            carbs: "0",
           },
         },
       },
@@ -111,16 +112,16 @@ const commonAddOns: Array<addOnsItem> = [
 
         nutrient: {
           mini: {
-            cals: "562.5",
-            protein: "37.5",
-            fat: "22.5",
-            carbs: "45.0",
+            cals: "206",
+            protein: "22",
+            fat: "12",
+            carbs: "0",
           },
           regular: {
-            cals: "750 ",
-            protein: "50",
-            fat: "30",
-            carbs: "60",
+            cals: "206",
+            protein: "22",
+            fat: "12",
+            carbs: "0",
           },
         },
       },
@@ -142,10 +143,10 @@ const commonAddOns: Array<addOnsItem> = [
             carbs: "45.0",
           },
           regular: {
-            cals: "750 ",
-            protein: "50",
-            fat: "30",
-            carbs: "60",
+            cals: "67 ",
+            protein: "3.2",
+            fat: "0.4",
+            carbs: "8",
           },
         },
       },
@@ -161,10 +162,167 @@ const commonAddOns: Array<addOnsItem> = [
             carbs: "45.0",
           },
           regular: {
-            cals: "750 ",
-            protein: "50",
-            fat: "30",
-            carbs: "60",
+            cals: "108",
+            protein: "6",
+            fat: "0.5",
+            carbs: "19",
+          },
+        },
+      },
+      {
+        item: "No Beans",
+        imagesrc: circle,
+
+        nutrient: {
+          mini: {
+            cals: "562.5",
+            protein: "37.5",
+            fat: "22.5",
+            carbs: "45.0",
+          },
+          regular: {
+            cals: "0 ",
+            protein: "0",
+            fat: "0",
+            carbs: "0",
+          },
+        },
+      },
+    ],
+  },
+  {
+    type: "Veggies",
+    value: [
+      {
+        item: "Corn Salsa",
+        imagesrc: circle,
+
+        nutrient: {
+          mini: {
+            cals: "562.5",
+            protein: "37.5",
+            fat: "22.5",
+            carbs: "45.0",
+          },
+          regular: {
+            cals: "80",
+            protein: "3",
+            fat: "2",
+            carbs: "16",
+          },
+        },
+      },
+      {
+        item: "Pico De Gallo (Tomato Salad)",
+        imagesrc: circle,
+
+        nutrient: {
+          mini: {
+            cals: "562.5",
+            protein: "37.5",
+            fat: "22.5",
+            carbs: "45.0",
+          },
+          regular: {
+            cals: "25",
+            protein: "0",
+            fat: "0",
+            carbs: "4",
+          },
+        },
+      },
+      {
+        item: "Roasted Tomato Salsa",
+        imagesrc: circle,
+
+        nutrient: {
+          mini: {
+            cals: "562.5",
+            protein: "37.5",
+            fat: "22.5",
+            carbs: "45.0",
+          },
+          regular: {
+            cals: "30",
+            protein: "0",
+            fat: "0",
+            carbs: "4",
+          },
+        },
+      },
+      {
+        item: "Sour Cream",
+        imagesrc: circle,
+
+        nutrient: {
+          mini: {
+            cals: "562.5",
+            protein: "37.5",
+            fat: "22.5",
+            carbs: "45.0",
+          },
+          regular: {
+            cals: "67",
+            protein: "5",
+            fat: "1",
+            carbs: "2",
+          },
+        },
+      },
+      {
+        item: "Fajita Veggies",
+        imagesrc: circle,
+
+        nutrient: {
+          mini: {
+            cals: "562.5",
+            protein: "37.5",
+            fat: "22.5",
+            carbs: "45.0",
+          },
+          regular: {
+            cals: "20",
+            protein: "1",
+            fat: "0",
+            carbs: "5",
+          },
+        },
+      },
+      {
+        item: "Cheese",
+        imagesrc: circle,
+
+        nutrient: {
+          mini: {
+            cals: "562.5",
+            protein: "37.5",
+            fat: "22.5",
+            carbs: "45.0",
+          },
+          regular: {
+            cals: "58",
+            protein: "4",
+            fat: "5",
+            carbs: "0",
+          },
+        },
+      },
+      {
+        item: "Lettuce",
+        imagesrc: circle,
+
+        nutrient: {
+          mini: {
+            cals: "562.5",
+            protein: "37.5",
+            fat: "22.5",
+            carbs: "45.0",
+          },
+          regular: {
+            cals: "5",
+            protein: "0",
+            fat: "0",
+            carbs: "1",
           },
         },
       },
@@ -187,10 +345,10 @@ const bowlAddOns: Array<addOnsItem> = [
             carbs: "45.0",
           },
           regular: {
-            cals: "750 ",
-            protein: "50",
-            fat: "30",
-            carbs: "60",
+            cals: "130",
+            protein: "2.5",
+            fat: "1",
+            carbs: "28",
           },
         },
       },
@@ -206,10 +364,29 @@ const bowlAddOns: Array<addOnsItem> = [
             carbs: "45.0",
           },
           regular: {
-            cals: "750 ",
-            protein: "50",
-            fat: "30",
-            carbs: "60",
+            cals: "110",
+            protein: "2.5",
+            fat: "1",
+            carbs: "22",
+          },
+        },
+      },
+      {
+        item: "No Rice",
+        imagesrc: circle,
+
+        nutrient: {
+          mini: {
+            cals: "0",
+            protein: "37.5",
+            fat: "22.5",
+            carbs: "45.0",
+          },
+          regular: {
+            cals: "0 ",
+            protein: "0",
+            fat: "0",
+            carbs: "0",
           },
         },
       },
