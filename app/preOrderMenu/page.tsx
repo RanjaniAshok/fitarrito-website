@@ -68,7 +68,7 @@ export default function PreOrdermenu() {
     <Container>
       {/* <MenuCategories /> */}
       <NutrientCalculator data={nutrientData} showAddToBag={false} />
-      <div className="container mx-auto p-6">
+      <div className="container mx-auto py-8">
         <HeaderRow>
           <Header>
             Select Your <HighlightedText>meal.</HighlightedText>

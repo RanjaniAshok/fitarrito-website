@@ -46,7 +46,7 @@ const CardHoverOverlay = styled(motion.div)`
   background-color: rgba(255, 255, 255, 0.5);
   ${tw`absolute inset-0 justify-center items-center xs:hidden sm:flex`}
 `;
-const CardButton = tw.div`text-sm m-1 xs:text-xs xs:px-8 px-2
+const CardButton = tw.div`truncate text-ellipsis text-sm xs:text-xs xs:px-2 px-8 mx-auto
  py-3 font-bold rounded bg-customTheme text-gray-100 hocus:bg-primary-700 hocus:text-gray-200 focus:shadow-sm focus:outline-none transition duration-300`;
 
 const CardText = tw.div`w-full p-4 text-gray-900 flex flex-col justify-between bg-gray-100`;
@@ -124,38 +124,32 @@ const DisplayTabContent: React.FC<{
                 },
               }}
               transition={{ duration: 0.3 }}
+              onClick={async () => {
+                if (menuType === "restaurant") {
+                  if (!card) return;
+
+                  const { meta } = await dispatch(
+                    addItemsToCart({
+                      ...card, // Spread the card object to match Item's structure
+                      quantity: quantity ?? 0,
+                    })
+                  );
+                  if (meta.requestStatus === "fulfilled") {
+                    isDrawerOpen?.();
+                  }
+                } else {
+                  dispatch(setSelectedMenu(selectedPreOrderMenu));
+                  const encodedName = encodeURIComponent(
+                    selectedPreOrderMenu?.title ?? ""
+                  );
+                  router.push(`/preOrderMenu/${encodedName}`);
+                }
+              }}
             >
               {menuType === "restaurant" ? (
-                <CardButton
-                  onClick={async () => {
-                    if (!card) return;
-
-                    const { meta } = await dispatch(
-                      addItemsToCart({
-                        ...card, // Spread the card object to match Item's structure
-                        quantity: quantity ?? 0,
-                      })
-                    );
-                    if (meta.requestStatus === "fulfilled") {
-                      isDrawerOpen?.();
-                    }
-                  }}
-                >
-                  Add to cart
-                </CardButton>
+                <CardButton>Add to cart</CardButton>
               ) : (
-                <CardButton
-                  onClick={async () => {
-                    console.log(card, "card");
-                    dispatch(setSelectedMenu(selectedPreOrderMenu));
-                    const encodedName = encodeURIComponent(
-                      selectedPreOrderMenu?.title ?? ""
-                    );
-                    router.push(`/preOrderMenu/${encodedName}`); // ✅ Navigate to the specific item page
-                  }}
-                >
-                  {selectedPreOrderMenu?.title}
-                </CardButton>
+                <CardButton>{selectedPreOrderMenu?.title}</CardButton>
               )}
             </CardHoverOverlay>
           </CardImageContainer>
@@ -168,19 +162,34 @@ const DisplayTabContent: React.FC<{
             <ChooseVariantCard item={card || null} />
 
             <CardBuyButton>
-              {menuType === "restaurant" ? (
-                <CardButton
-                  onClick={() => {
-                    if (!card) return;
-                    else openModal?.(card);
-                  }}
-                >
-                  Add to cart
-                </CardButton>
-              ) : null}
+              <CardButton
+                onClick={() => {
+                  if (!card) return;
+                  else openModal?.(card);
+                }}
+              >
+                Add to cart
+              </CardButton>
             </CardBuyButton>
           </CardText>
-        ) : null}
+        ) : (
+          <CardText>
+            <CardBuyButton>
+              <CardButton
+                onClick={async () => {
+                  console.log(card, "card");
+                  dispatch(setSelectedMenu(selectedPreOrderMenu));
+                  const encodedName = encodeURIComponent(
+                    selectedPreOrderMenu?.title ?? ""
+                  );
+                  router.push(`/preOrderMenu/${encodedName}`); // ✅ Navigate to the specific item page
+                }}
+              >
+                {selectedPreOrderMenu?.title}
+              </CardButton>
+            </CardBuyButton>
+          </CardText>
+        )}
       </Card>
     </CardContainer>
   );
