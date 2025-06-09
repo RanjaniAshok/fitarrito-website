@@ -48,8 +48,8 @@ import TeriyakiPaneerSalad from "@/images/menuimages/PaneerTeriyakiSalad.svg";
 //   reviews: string;
 //   url: string;
 //   nutrient?: {
-//     mini: { cals: string; protein: string; fat: string; carbs: string };
 //     regular: { cals: string; protein: string; fat: string; carbs: string };
+//     jumbo: { cals: string; protein: string; fat: string; carbs: string };
 //   };
 // }
 interface addOnsItem {
@@ -58,8 +58,8 @@ interface addOnsItem {
     item: string;
     imagesrc: { src: string };
     nutrient?: {
-      mini: { cals: string; protein: string; fat: string; carbs: string };
       regular: { cals: string; protein: string; fat: string; carbs: string };
+      jumbo: { cals: string; protein: string; fat: string; carbs: string };
     };
   }>;
 }
@@ -73,13 +73,13 @@ const commonAddOns: Array<addOnsItem> = [
         imagesrc: Chicken,
 
         nutrient: {
-          mini: {
+          regular: {
             cals: "562.5",
             protein: "37.5",
             fat: "22.5",
             carbs: "45.0",
           },
-          regular: {
+          jumbo: {
             cals: "230 ",
             protein: "27",
             fat: "14",
@@ -92,13 +92,13 @@ const commonAddOns: Array<addOnsItem> = [
         imagesrc: Mutton,
 
         nutrient: {
-          mini: {
+          regular: {
             cals: "562.5",
             protein: "37.5",
             fat: "22.5",
             carbs: "45.0",
           },
-          regular: {
+          jumbo: {
             cals: "294 ",
             protein: "25",
             fat: "21",
@@ -111,13 +111,13 @@ const commonAddOns: Array<addOnsItem> = [
         imagesrc: MuttonBurrito,
 
         nutrient: {
-          mini: {
+          regular: {
             cals: "206",
             protein: "22",
             fat: "12",
             carbs: "0",
           },
-          regular: {
+          jumbo: {
             cals: "206",
             protein: "22",
             fat: "12",
@@ -136,13 +136,13 @@ const commonAddOns: Array<addOnsItem> = [
         imagesrc: BlackBeans,
 
         nutrient: {
-          mini: {
+          regular: {
             cals: "562.5",
             protein: "37.5",
             fat: "22.5",
             carbs: "45.0",
           },
-          regular: {
+          jumbo: {
             cals: "67 ",
             protein: "3.2",
             fat: "0.4",
@@ -155,13 +155,13 @@ const commonAddOns: Array<addOnsItem> = [
         imagesrc: PintoBeans,
 
         nutrient: {
-          mini: {
+          regular: {
             cals: "562.5",
             protein: "37.5",
             fat: "22.5",
             carbs: "45.0",
           },
-          regular: {
+          jumbo: {
             cals: "108",
             protein: "6",
             fat: "0.5",
@@ -174,13 +174,13 @@ const commonAddOns: Array<addOnsItem> = [
         imagesrc: circle,
 
         nutrient: {
-          mini: {
+          regular: {
             cals: "562.5",
             protein: "37.5",
             fat: "22.5",
             carbs: "45.0",
           },
-          regular: {
+          jumbo: {
             cals: "0 ",
             protein: "0",
             fat: "0",
@@ -198,13 +198,13 @@ const commonAddOns: Array<addOnsItem> = [
         imagesrc: circle,
 
         nutrient: {
-          mini: {
+          regular: {
             cals: "562.5",
             protein: "37.5",
             fat: "22.5",
             carbs: "45.0",
           },
-          regular: {
+          jumbo: {
             cals: "80",
             protein: "3",
             fat: "2",
@@ -217,13 +217,13 @@ const commonAddOns: Array<addOnsItem> = [
         imagesrc: circle,
 
         nutrient: {
-          mini: {
+          regular: {
             cals: "562.5",
             protein: "37.5",
             fat: "22.5",
             carbs: "45.0",
           },
-          regular: {
+          jumbo: {
             cals: "25",
             protein: "0",
             fat: "0",
@@ -236,13 +236,13 @@ const commonAddOns: Array<addOnsItem> = [
         imagesrc: circle,
 
         nutrient: {
-          mini: {
+          regular: {
             cals: "562.5",
             protein: "37.5",
             fat: "22.5",
             carbs: "45.0",
           },
-          regular: {
+          jumbo: {
             cals: "30",
             protein: "0",
             fat: "0",
@@ -255,13 +255,13 @@ const commonAddOns: Array<addOnsItem> = [
         imagesrc: circle,
 
         nutrient: {
-          mini: {
+          regular: {
             cals: "562.5",
             protein: "37.5",
             fat: "22.5",
             carbs: "45.0",
           },
-          regular: {
+          jumbo: {
             cals: "67",
             protein: "5",
             fat: "1",
@@ -274,13 +274,13 @@ const commonAddOns: Array<addOnsItem> = [
         imagesrc: circle,
 
         nutrient: {
-          mini: {
+          regular: {
             cals: "562.5",
             protein: "37.5",
             fat: "22.5",
             carbs: "45.0",
           },
-          regular: {
+          jumbo: {
             cals: "20",
             protein: "1",
             fat: "0",
@@ -293,13 +293,13 @@ const commonAddOns: Array<addOnsItem> = [
         imagesrc: circle,
 
         nutrient: {
-          mini: {
+          regular: {
             cals: "562.5",
             protein: "37.5",
             fat: "22.5",
             carbs: "45.0",
           },
-          regular: {
+          jumbo: {
             cals: "58",
             protein: "4",
             fat: "5",
@@ -312,13 +312,13 @@ const commonAddOns: Array<addOnsItem> = [
         imagesrc: circle,
 
         nutrient: {
-          mini: {
+          regular: {
             cals: "562.5",
             protein: "37.5",
             fat: "22.5",
             carbs: "45.0",
           },
-          regular: {
+          jumbo: {
             cals: "5",
             protein: "0",
             fat: "0",
@@ -338,13 +338,13 @@ const bowlAddOns: Array<addOnsItem> = [
         imagesrc: WhiteRice,
 
         nutrient: {
-          mini: {
+          regular: {
             cals: "562.5",
             protein: "37.5",
             fat: "22.5",
             carbs: "45.0",
           },
-          regular: {
+          jumbo: {
             cals: "130",
             protein: "2.5",
             fat: "1",
@@ -357,13 +357,13 @@ const bowlAddOns: Array<addOnsItem> = [
         imagesrc: BrownRice,
 
         nutrient: {
-          mini: {
+          regular: {
             cals: "562.5",
             protein: "37.5",
             fat: "22.5",
             carbs: "45.0",
           },
-          regular: {
+          jumbo: {
             cals: "110",
             protein: "2.5",
             fat: "1",
@@ -376,13 +376,13 @@ const bowlAddOns: Array<addOnsItem> = [
         imagesrc: circle,
 
         nutrient: {
-          mini: {
+          regular: {
             cals: "0",
             protein: "37.5",
             fat: "22.5",
             carbs: "45.0",
           },
-          regular: {
+          jumbo: {
             cals: "0 ",
             protein: "0",
             fat: "0",

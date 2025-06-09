@@ -14,7 +14,7 @@ import tw from "twin.macro";
 import Modal from "react-modal";
 import CartDrawer from "@/components/CartDrawer";
 import DisplayTabContent from "@/components/DisplayTabContent";
-
+import { SubscriptionMenuItem } from "app/types/types";
 interface Card {
   imagesrc: { src: string };
   title: string;
@@ -24,14 +24,15 @@ interface Card {
   reviews: string;
   url: string;
   category?: string;
+
   nutrient?: {
-    mini: { cals: string; protein: string; fat: string; carbs: string };
     regular: { cals: string; protein: string; fat: string; carbs: string };
+    jumbo: { cals: string; protein: string; fat: string; carbs: string };
   };
 }
 
 type Tabs = {
-  [key: string]: Card[]; // Keys are strings, values are arrays of `Card`
+  [key: string]: Card[] | SubscriptionMenuItem[]; // Keys are strings, values are arrays of `Card`
 };
 interface MenuProps {
   heading: ReactNode;
@@ -112,17 +113,19 @@ export default function Menu({ heading, tabs }: MenuProps) {
       <ContentWithPaddingXl>
         <HeaderRow>
           <Header>{heading}</Header>
-          <TabsControl>
-            {Object.entries(tabs).map(([tabName], index) => (
-              <TabControl
-                key={index}
-                active={activeTab === tabName ? "true" : "false"}
-                onClick={() => handleTabChange(tabName)}
-              >
-                {tabName}
-              </TabControl>
-            ))}
-          </TabsControl>
+          {menuType === "restaurant" ? (
+            <TabsControl>
+              {Object.entries(tabs).map(([tabName], index) => (
+                <TabControl
+                  key={index}
+                  active={activeTab === tabName ? "true" : "false"}
+                  onClick={() => handleTabChange(tabName)}
+                >
+                  {tabName}
+                </TabControl>
+              ))}
+            </TabsControl>
+          ) : null}
         </HeaderRow>
         <div className="relative flex items-center">
           <TabContent ref={scrollRef} className="mx-auto">

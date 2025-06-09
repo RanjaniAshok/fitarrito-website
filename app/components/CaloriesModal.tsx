@@ -12,8 +12,8 @@ interface CardItem {
   rating: number | string;
   reviews: string;
   nutrient?: {
-    mini: { cals: string; protein: string; fat: string; carbs: string };
     regular: { cals: string; protein: string; fat: string; carbs: string };
+    jumbo: { cals: string; protein: string; fat: string; carbs: string };
   };
 }
 
@@ -38,7 +38,7 @@ const CaloriesModal: React.FC<CartModalProps> = ({
   closeModal,
   selectedCard,
 }) => {
-  const [variant, setVariant] = useState<"mini" | "regular">("mini");
+  const [variant, setVariant] = useState<"regular" | "jumbo">("regular");
 
   return (
     <Modal
@@ -59,9 +59,9 @@ const CaloriesModal: React.FC<CartModalProps> = ({
                 <input
                   type="radio"
                   name="variant"
-                  value="mini"
-                  checked={variant === "mini"}
-                  onChange={() => setVariant("mini")}
+                  value="regular"
+                  checked={variant === "regular"}
+                  onChange={() => setVariant("regular")}
                 />
                 Mini
               </label>
@@ -69,9 +69,9 @@ const CaloriesModal: React.FC<CartModalProps> = ({
                 <input
                   type="radio"
                   name="variant"
-                  value="regular"
-                  checked={variant === "regular"}
-                  onChange={() => setVariant("regular")}
+                  value="jumbo"
+                  checked={variant === "jumbo"}
+                  onChange={() => setVariant("jumbo")}
                 />
                 Regular
               </label>

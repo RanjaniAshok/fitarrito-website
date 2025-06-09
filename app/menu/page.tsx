@@ -24,10 +24,9 @@ export default function Dashboard() {
 
   useEffect(() => {
     console.log(menu, "menu in useEffect");
-  }, [menu]);
+  }, []);
   return (
     <>
-      {/* <About /> */}
       <Menu
         tabs={menu}
         heading={
@@ -36,7 +35,6 @@ export default function Dashboard() {
           </>
         }
       />
-      {/* <Statistics /> */}
     </>
   );
 }

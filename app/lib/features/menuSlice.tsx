@@ -8,7 +8,9 @@ import {
   Quesadillas,
 } from "@/helpers/menu";
 import { Bowl as Bowls, Salad as Salads } from "@/helpers/preOrderMenu";
-import { PreOrderMenuItem } from "app/types/types";
+import { Dish } from "@/helpers/subscriptionMenu";
+
+import { PreOrderMenuItem, SubscriptionMenuItem } from "app/types/types";
 interface Item {
   title: string;
   imagesrc: { src: string };
@@ -19,8 +21,8 @@ interface Item {
   url: string;
   category?: string;
   nutrient?: {
-    mini: { cals: string; protein: string; fat: string; carbs: string };
     regular: { cals: string; protein: string; fat: string; carbs: string };
+    jumbo: { cals: string; protein: string; fat: string; carbs: string };
   };
 }
 
@@ -30,7 +32,9 @@ type Tabs = {
 type PreOrderMenu = {
   [key: string]: PreOrderMenuItem[];
 };
-
+type SubscriptionMenu = {
+  [key: string]: SubscriptionMenuItem[];
+};
 export const getMenu = createAsyncThunk("menu/getMenu", async () => {
   const Tabs = {
     Burrito,
@@ -55,13 +59,22 @@ export const getPreOrderMenu = createAsyncThunk(
     return Tabs;
   }
 );
-
+export const getSubscriptionMenu = createAsyncThunk(
+  "menu/getSubscriptionMenu",
+  async () => {
+    const Tabs = {
+      Dish,
+    };
+    return Tabs;
+  }
+);
 const cartSlice = createSlice({
   name: "menu",
   initialState: {
     menu: {} as Tabs,
     restaurantMenu: {} as Tabs, // Store restaurant menu
     preOrderMenu: {} as PreOrderMenu,
+    subscriptionMenu: {} as SubscriptionMenu,
     selectedMenu: {} as PreOrderMenuItem | null | undefined,
     menuType: "restaurant",
     loading: "idle",
@@ -92,6 +105,12 @@ const cartSlice = createSlice({
         getPreOrderMenu.fulfilled,
         (state, action: PayloadAction<PreOrderMenu>) => {
           state.preOrderMenu = action.payload;
+        }
+      )
+      .addCase(
+        getSubscriptionMenu.fulfilled,
+        (state, action: PayloadAction<SubscriptionMenu>) => {
+          state.subscriptionMenu = action.payload;
         }
       )
       .addCase(getMenu.rejected, (state) => {

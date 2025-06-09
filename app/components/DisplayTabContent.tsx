@@ -26,8 +26,20 @@ interface Card {
   url: string;
   category?: string;
   nutrient?: {
-    mini: { cals: string; protein: string; fat: string; carbs: string };
-    regular: { cals: string; protein: string; fat: string; carbs: string };
+    regular: {
+      cals: string;
+      protein: string;
+      fat: string;
+      carbs: string;
+      price: string;
+    };
+    jumbo: {
+      cals: string;
+      protein: string;
+      fat: string;
+      carbs: string;
+      price: string;
+    };
   };
 
   // Add other card properties here
@@ -48,10 +60,10 @@ const CardHoverOverlay = styled(motion.div)`
 `;
 const CardButton = tw.div`truncate text-ellipsis text-sm xs:text-xs xs:px-2 px-8 mx-auto
  py-3 font-bold rounded bg-customTheme text-gray-100 hocus:bg-primary-700 hocus:text-gray-200 focus:shadow-sm focus:outline-none transition duration-300`;
+// const CardInfo = tw.div`grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 p-2 bg-gray-300 rounded-lg`;
 
 const CardText = tw.div`w-full p-4 text-gray-900 flex flex-col justify-between bg-gray-100`;
 const CardTitle = tw.h5`text-sm sm:text-base font-semibold group-hover:text-primary-500 mb-2`;
-const CardPrice = tw.p`text-sm sm:text-sm`;
 
 const CardBuyButton = tw.div`flex items-center mt-4 sm:hidden`;
 // const DecoratorBlob2 = styled.div`
@@ -84,6 +96,26 @@ const DisplayTabContent: React.FC<{
   const dispatch = useAppDispatch();
   const menuType = useAppSelector((state) => state.menu.menuType);
   const router = useRouter();
+  const renderCardButton = () => {
+    switch (menuType) {
+      case "restaurant":
+        return <CardButton>Add to cart</CardButton>;
+      case "preOrder":
+        return <CardButton>{selectedPreOrderMenu?.title}</CardButton>;
+      case "subscription":
+        return <CardButton>More Info</CardButton>;
+      default:
+        return <CardButton>Unknown Menu</CardButton>;
+    }
+  };
+  // function NutrientBadge({ label, value }: { label: string; value: string }) {
+  //   return (
+  //     <div className="text-center">
+  //       <p className="text-gray-500 text-sm font-bold">{label}</p>
+  //       <p className="text-green-700 font-bold text-xs">{value}</p>
+  //     </div>
+  //   );
+  // }
   return (
     <CardContainer
       key={`${card?.title}-${index}`}
@@ -137,6 +169,8 @@ const DisplayTabContent: React.FC<{
                   if (meta.requestStatus === "fulfilled") {
                     isDrawerOpen?.();
                   }
+                } else if (menuType === "subscription") {
+                  router.refresh?.();
                 } else {
                   dispatch(setSelectedMenu(selectedPreOrderMenu));
                   const encodedName = encodeURIComponent(
@@ -146,31 +180,33 @@ const DisplayTabContent: React.FC<{
                 }
               }}
             >
-              {menuType === "restaurant" ? (
-                <CardButton>Add to cart</CardButton>
-              ) : (
-                <CardButton>{selectedPreOrderMenu?.title}</CardButton>
-              )}
+              {renderCardButton()}
             </CardHoverOverlay>
           </CardImageContainer>
         </Container>
 
-        {menuType === "restaurant" ? (
+        {menuType === "restaurant" || "susubscription" ? (
           <CardText>
             <CardTitle>{card?.title}</CardTitle>
-            <CardPrice>Rs.{card?.price ?? ""}</CardPrice>
+
             <ChooseVariantCard item={card || null} />
 
-            <CardBuyButton>
-              <CardButton
-                onClick={() => {
-                  if (!card) return;
-                  else openModal?.(card);
-                }}
-              >
-                Add to cart
-              </CardButton>
-            </CardBuyButton>
+            {menuType === "restaurant" ? (
+              <CardBuyButton>
+                <CardButton
+                  onClick={() => {
+                    if (!card) return;
+                    else openModal?.(card);
+                  }}
+                >
+                  Add to cart
+                </CardButton>
+              </CardBuyButton>
+            ) : (
+              <CardBuyButton>
+                <CardButton>More Info</CardButton>
+              </CardBuyButton>
+            )}
           </CardText>
         ) : (
           <CardText>

@@ -8,8 +8,19 @@ export interface RestaurantMenuItem {
     url: string;
     category?: string;
     nutrient?: {
-      mini: { cals: string; protein: string; fat: string; carbs: string };
-      regular: { cals: string; protein: string; fat: string; carbs: string };
+      regular: { cals: string; protein: string; fat: string; carbs: string,price:string };
+      jumbo: { cals: string; protein: string; fat: string; carbs: string ,price:string};
+    };
+  }
+  export interface SubscriptionMenuItem {
+    title: string;
+    imagesrc: { src: string };
+    content: string | undefined;
+
+    category?: string;
+    nutrient?: {
+      regular: { cals: string; protein: string; fat: string; carbs: string,price:string };
+      jumbo: { cals: string; protein: string; fat: string; carbs: string ,price:string};
     };
   }
   interface addOnsItem {
@@ -18,8 +29,8 @@ export interface RestaurantMenuItem {
       item: string;
       imagesrc: { src: string };
       nutrient?: {
-        mini: { cals: string; protein: string; fat: string; carbs: string };
         regular: { cals: string; protein: string; fat: string; carbs: string };
+        jumbo: { cals: string; protein: string; fat: string; carbs: string };
       };
     }>;
   }

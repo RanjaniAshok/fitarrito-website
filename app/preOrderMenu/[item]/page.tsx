@@ -15,8 +15,8 @@ interface addOnsItem {
     item: string;
     imagesrc: { src: string };
     nutrient?: {
-      mini: { cals: string; protein: string; fat: string; carbs: string };
       regular: { cals: string; protein: string; fat: string; carbs: string };
+      jumbo: { cals: string; protein: string; fat: string; carbs: string };
     };
   }>;
 }
@@ -72,19 +72,19 @@ export default function PreOrderMenu() {
             </div>
             <NutrientInfo>
               <span className="font-bold text-2xl">
-                {protein.nutrient?.regular?.cals ?? 0} cal
+                {protein.nutrient?.jumbo?.cals ?? 0} cal
               </span>{" "}
               <br />
               <span className="text-red-600 font-semibold text-lg px-4">
-                {protein.nutrient?.regular?.fat ?? 0}g Fat
+                {protein.nutrient?.jumbo?.fat ?? 0}g Fat
               </span>
               <span className="w-px h-6 bg-gray-300 inline-block mx-2"></span>
               <span className="text-green-600 font-semibold text-lg px-4">
-                {protein.nutrient?.regular?.protein ?? 0}g Protein
+                {protein.nutrient?.jumbo?.protein ?? 0}g Protein
               </span>
               <span className="w-px h-6 bg-gray-300 inline-block mx-2"></span>
               <span className="text-yellow-600 font-semibold text-lg">
-                {protein.nutrient?.regular?.carbs ?? 0}g Carbs
+                {protein.nutrient?.jumbo?.carbs ?? 0}g Carbs
               </span>
             </NutrientInfo>
           </IngredientItem>
@@ -136,7 +136,7 @@ export default function PreOrderMenu() {
   const handleSelection = (proteinItem: {
     item: string;
     nutrient?: {
-      regular: { cals: string; fat: string; protein: string; carbs: string };
+      jumbo: { cals: string; fat: string; protein: string; carbs: string };
     };
   }) => {
     setSelectedAddOns((prev) => {
@@ -150,7 +150,7 @@ export default function PreOrderMenu() {
         ...prev,
         {
           item: proteinItem.item,
-          nutrient: proteinItem.nutrient?.regular, // Ensure nutrient data is stored
+          nutrient: proteinItem.nutrient?.jumbo, // Ensure nutrient data is stored
         },
       ];
     });

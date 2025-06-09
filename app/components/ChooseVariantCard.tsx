@@ -13,8 +13,20 @@ interface CardItem {
   reviews: string;
   url: string;
   nutrient?: {
-    mini: { cals: string; protein: string; fat: string; carbs: string };
-    regular: { cals: string; protein: string; fat: string; carbs: string };
+    regular: {
+      cals: string;
+      protein: string;
+      fat: string;
+      carbs: string;
+      price: string;
+    };
+    jumbo: {
+      cals: string;
+      protein: string;
+      fat: string;
+      carbs: string;
+      price: string;
+    };
   };
 
   // Add other card properties here
@@ -23,8 +35,9 @@ interface CardItem {
 const ChooseVariantCard: React.FC<{ item: CardItem | null }> = ({ item }) => {
   // State for the selected variant of this specific item
   const CardInfo = tw.div`grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 p-2 bg-gray-300 rounded-lg`;
+  const CardPrice = tw.p`text-sm sm:text-sm`;
 
-  const [variant, setVariant] = useState<"mini" | "regular">("mini");
+  const [variant, setVariant] = useState<"regular" | "jumbo">("regular");
 
   function NutrientBadge({ label, value }: { label: string; value: string }) {
     return (
@@ -36,18 +49,9 @@ const ChooseVariantCard: React.FC<{ item: CardItem | null }> = ({ item }) => {
   }
   return (
     <div className="mt-2">
+      <CardPrice>Rs.{item?.nutrient?.[variant]?.price}</CardPrice>
+
       <div className="flex gap-4 my-2">
-        <label className="flex items-center gap-1">
-          <input
-            type="radio"
-            name={`variant-${item?.title}`}
-            value="mini"
-            checked={variant === "mini"}
-            onChange={() => setVariant("mini")}
-            className="accent-red-500"
-          />
-          Mini
-        </label>
         <label className="flex items-center gap-1">
           <input
             type="radio"
@@ -58,6 +62,17 @@ const ChooseVariantCard: React.FC<{ item: CardItem | null }> = ({ item }) => {
             className="accent-red-500"
           />
           Regular
+        </label>
+        <label className="flex items-center gap-1">
+          <input
+            type="radio"
+            name={`variant-${item?.title}`}
+            value="jumbo"
+            checked={variant === "jumbo"}
+            onChange={() => setVariant("jumbo")}
+            className="accent-red-500"
+          />
+          Jumbo
         </label>
       </div>
       <CardInfo>

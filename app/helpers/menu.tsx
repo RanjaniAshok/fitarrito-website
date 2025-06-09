@@ -38,8 +38,8 @@ import TeriyakiPaneerSalad from "@/images/menuimages/PaneerTeriyakiSalad.svg";
 //   reviews: string;
 //   url: string;
 //   nutrient?: {
-//     mini: { cals: string; protein: string; fat: string; carbs: string };
 //     regular: { cals: string; protein: string; fat: string; carbs: string };
+//     jumbo: { cals: string; protein: string; fat: string; carbs: string };
 //   };
 // }
 interface Item {
@@ -53,8 +53,20 @@ interface Item {
 
   url: string;
   nutrient?: {
-    mini: { cals: string; protein: string; fat: string; carbs: string };
-    regular: { cals: string; protein: string; fat: string; carbs: string };
+    regular: {
+      cals: string;
+      protein: string;
+      fat: string;
+      carbs: string;
+      price: string;
+    };
+    jumbo: {
+      cals: string;
+      protein: string;
+      fat: string;
+      carbs: string;
+      price: string;
+    };
   };
 }
 
@@ -69,8 +81,20 @@ export const Burrito: Array<Item> = [
     url: "#",
 
     nutrient: {
-      mini: { cals: "562.5", protein: "37.5g", fat: "22.5g", carbs: "45.0g" },
-      regular: { cals: "750 ", protein: "50g", fat: "30g", carbs: "60g" },
+      regular: {
+        cals: "562.5",
+        protein: "37.5g",
+        fat: "22.5g",
+        carbs: "45.0g",
+        price: "120",
+      },
+      jumbo: {
+        cals: "750 ",
+        protein: "50g",
+        fat: "30g",
+        carbs: "60g",
+        price: "180",
+      },
     },
   },
   {
@@ -83,8 +107,20 @@ export const Burrito: Array<Item> = [
     reviews: "32",
     url: "#",
     nutrient: {
-      mini: { cals: "562.5", protein: "33.0g", fat: "25.5g", carbs: "45.0g" },
-      regular: { cals: "750 ", protein: "45g", fat: "35g", carbs: "60g" },
+      regular: {
+        cals: "562.5",
+        protein: "33.0g",
+        fat: "25.5g",
+        carbs: "45.0g",
+        price: "120",
+      },
+      jumbo: {
+        cals: "750 ",
+        protein: "45g",
+        fat: "35g",
+        carbs: "60g",
+        price: "180",
+      },
     },
   },
   {
@@ -97,8 +133,20 @@ export const Burrito: Array<Item> = [
     reviews: "89",
     url: "#",
     nutrient: {
-      mini: { cals: "465.0", protein: "22.5g", fat: "21.0g", carbs: "48.0g" },
-      regular: { cals: "620 ", protein: "30g", fat: "28g", carbs: "65g" },
+      regular: {
+        cals: "465.0",
+        protein: "22.5g",
+        fat: "21.0g",
+        carbs: "48.0g",
+        price: "120",
+      },
+      jumbo: {
+        cals: "620 ",
+        protein: "30g",
+        fat: "28g",
+        carbs: "65g",
+        price: "180",
+      },
     },
   },
   {
@@ -111,8 +159,20 @@ export const Burrito: Array<Item> = [
     reviews: "12",
     url: "#",
     nutrient: {
-      mini: { cals: "375.0", protein: "15.0g", fat: "10.5g", carbs: "52.5g" },
-      regular: { cals: "500 ", protein: "20g", fat: "15g", carbs: "70g" },
+      regular: {
+        cals: "375.0",
+        protein: "15.0g",
+        fat: "10.5g",
+        carbs: "52.5g",
+        price: "120",
+      },
+      jumbo: {
+        cals: "500 ",
+        protein: "20g",
+        fat: "15g",
+        carbs: "70g",
+        price: "180",
+      },
     },
   },
   {
@@ -125,8 +185,20 @@ export const Burrito: Array<Item> = [
     reviews: "61",
     url: "#",
     nutrient: {
-      mini: { cals: "390.0", protein: "25.5g", fat: "16.5g", carbs: "37.5g" },
-      regular: { cals: "520 ", protein: "35g", fat: "22g", carbs: "50g" },
+      regular: {
+        cals: "390.0",
+        protein: "25.5g",
+        fat: "16.5g",
+        carbs: "37.5g",
+        price: "120",
+      },
+      jumbo: {
+        cals: "520 ",
+        protein: "35g",
+        fat: "22g",
+        carbs: "50g",
+        price: "180",
+      },
     },
   },
 ];
@@ -140,8 +212,20 @@ export const Bowl: Array<Item> = [
     reviews: "87",
     url: "#",
     nutrient: {
-      mini: { cals: "562.5", protein: "37.5g", fat: "22.5g", carbs: "45.0g" },
-      regular: { cals: "750 ", protein: "50g", fat: "30g", carbs: "60g" },
+      regular: {
+        cals: "562.5",
+        protein: "37.5g",
+        fat: "22.5g",
+        carbs: "45.0g",
+        price: "120",
+      },
+      jumbo: {
+        cals: "750 ",
+        protein: "50g",
+        fat: "30g",
+        carbs: "60g",
+        price: "180",
+      },
     },
   },
   {
@@ -154,8 +238,20 @@ export const Bowl: Array<Item> = [
     reviews: "32",
     url: "#",
     nutrient: {
-      mini: { cals: "562.5", protein: "33.0g", fat: "25.5g", carbs: "45.0g" },
-      regular: { cals: "750 ", protein: "45g", fat: "35g", carbs: "60g" },
+      regular: {
+        cals: "562.5",
+        protein: "33.0g",
+        fat: "25.5g",
+        carbs: "45.0g",
+        price: "120",
+      },
+      jumbo: {
+        cals: "750 ",
+        protein: "45g",
+        fat: "35g",
+        carbs: "60g",
+        price: "180",
+      },
     },
   },
   {
@@ -168,8 +264,20 @@ export const Bowl: Array<Item> = [
     reviews: "89",
     url: "#",
     nutrient: {
-      mini: { cals: "465.0", protein: "22.5g", fat: "21.0g", carbs: "48.0g" },
-      regular: { cals: "620 ", protein: "30g", fat: "28g", carbs: "65g" },
+      regular: {
+        cals: "465.0",
+        protein: "22.5g",
+        fat: "21.0g",
+        carbs: "48.0g",
+        price: "120",
+      },
+      jumbo: {
+        cals: "620 ",
+        protein: "30g",
+        fat: "28g",
+        carbs: "65g",
+        price: "180",
+      },
     },
   },
   {
@@ -182,8 +290,20 @@ export const Bowl: Array<Item> = [
     reviews: "12",
     url: "#",
     nutrient: {
-      mini: { cals: "375.0", protein: "15.0g", fat: "10.5g", carbs: "52.5g" },
-      regular: { cals: "500 ", protein: "20g", fat: "15g", carbs: "70g" },
+      regular: {
+        cals: "375.0",
+        protein: "15.0g",
+        fat: "10.5g",
+        carbs: "52.5g",
+        price: "120",
+      },
+      jumbo: {
+        cals: "500 ",
+        protein: "20g",
+        fat: "15g",
+        carbs: "70g",
+        price: "180",
+      },
     },
   },
   {
@@ -196,8 +316,20 @@ export const Bowl: Array<Item> = [
     reviews: "61",
     url: "#",
     nutrient: {
-      mini: { cals: "390.0", protein: "25.5g", fat: "16.5g", carbs: "37.5g" },
-      regular: { cals: "520 ", protein: "35g", fat: "22g", carbs: "50g" },
+      regular: {
+        cals: "390.0",
+        protein: "25.5g",
+        fat: "16.5g",
+        carbs: "37.5g",
+        price: "120",
+      },
+      jumbo: {
+        cals: "520 ",
+        protein: "35g",
+        fat: "22g",
+        carbs: "50g",
+        price: "180",
+      },
     },
   },
   {
@@ -210,13 +342,20 @@ export const Bowl: Array<Item> = [
     reviews: "95",
     url: "#",
     nutrient: {
-      mini: {
+      regular: {
         cals: "360.0",
         protein: "16.5g",
         fat: "13.5g",
         carbs: "40.5g",
+        price: "120",
       },
-      regular: { cals: "480", protein: "22g", fat: "18g", carbs: "55g" },
+      jumbo: {
+        cals: "480",
+        protein: "22g",
+        fat: "18g",
+        carbs: "55g",
+        price: "180",
+      },
     },
   },
   {
@@ -229,13 +368,20 @@ export const Bowl: Array<Item> = [
     reviews: "95",
     url: "#",
     nutrient: {
-      mini: {
+      regular: {
         cals: "450.0",
         protein: "37.5g",
         fat: "15.0g",
         carbs: "45.0g",
+        price: "120",
       },
-      regular: { cals: "600", protein: "50g", fat: "20g", carbs: "60g" },
+      jumbo: {
+        cals: "600",
+        protein: "50g",
+        fat: "20g",
+        carbs: "60g",
+        price: "180",
+      },
     },
   },
 
@@ -248,8 +394,20 @@ export const Bowl: Array<Item> = [
     reviews: "95",
     url: "#",
     nutrient: {
-      mini: { cals: "375.0", protein: "12.0g", fat: "18.0g", carbs: "60.0g" },
-      regular: { cals: "500 ", protein: "16g", fat: "24g", carbs: "80g" },
+      regular: {
+        cals: "375.0",
+        protein: "12.0g",
+        fat: "18.0g",
+        carbs: "60.0g",
+        price: "120",
+      },
+      jumbo: {
+        cals: "500 ",
+        protein: "16g",
+        fat: "24g",
+        carbs: "80g",
+        price: "180",
+      },
     },
   },
   {
@@ -261,8 +419,20 @@ export const Bowl: Array<Item> = [
     reviews: "95",
     url: "#",
     nutrient: {
-      mini: { cals: "420.0", protein: "18.0g", fat: "22.5g", carbs: "52.5g" },
-      regular: { cals: "560 ", protein: "24g", fat: "30g", carbs: "70g" },
+      regular: {
+        cals: "420.0",
+        protein: "18.0g",
+        fat: "22.5g",
+        carbs: "52.5g",
+        price: "120",
+      },
+      jumbo: {
+        cals: "560 ",
+        protein: "24g",
+        fat: "30g",
+        carbs: "70g",
+        price: "180",
+      },
     },
   },
   {
@@ -274,8 +444,20 @@ export const Bowl: Array<Item> = [
     reviews: "95",
     url: "#",
     nutrient: {
-      mini: { cals: "450.0", protein: "27.0g", fat: "15.0g", carbs: "60.0g" },
-      regular: { cals: "600 ", protein: "36g", fat: "20g", carbs: "80g" },
+      regular: {
+        cals: "450.0",
+        protein: "27.0g",
+        fat: "15.0g",
+        carbs: "60.0g",
+        price: "120",
+      },
+      jumbo: {
+        cals: "600 ",
+        protein: "36g",
+        fat: "20g",
+        carbs: "80g",
+        price: "180",
+      },
     },
   },
 ];
@@ -289,8 +471,20 @@ export const Salad: Array<Item> = [
     reviews: "87",
     url: "#",
     nutrient: {
-      mini: { cals: "300.0", protein: "15.0g", fat: "7.5g", carbs: "30.0g" },
-      regular: { cals: "400", protein: "20g", fat: "10g", carbs: "40g" },
+      regular: {
+        cals: "300.0",
+        protein: "15.0g",
+        fat: "7.5g",
+        carbs: "30.0g",
+        price: "120",
+      },
+      jumbo: {
+        cals: "400",
+        protein: "20g",
+        fat: "10g",
+        carbs: "40g",
+        price: "180",
+      },
     },
   },
   {
@@ -434,8 +628,20 @@ export const Quesadillas: Array<Item> = [
     reviews: "95",
     url: "#",
     nutrient: {
-      mini: { cals: "480.0", protein: "15.0g", fat: "18.0g", carbs: "67.5g" },
-      regular: { cals: "640 ", protein: "20g", fat: "24g", carbs: "90g" },
+      regular: {
+        cals: "480.0",
+        protein: "15.0g",
+        fat: "18.0g",
+        carbs: "67.5g",
+        price: "120",
+      },
+      jumbo: {
+        cals: "640 ",
+        protein: "20g",
+        fat: "24g",
+        carbs: "90g",
+        price: "180",
+      },
     },
   },
   {
@@ -447,8 +653,20 @@ export const Quesadillas: Array<Item> = [
     reviews: "160",
     url: "#",
     nutrient: {
-      mini: { cals: "525.0", protein: "33.0g", fat: "21.0g", carbs: "57.0g" },
-      regular: { cals: "700 ", protein: "44g", fat: "28g", carbs: "76g" },
+      regular: {
+        cals: "525.0",
+        protein: "33.0g",
+        fat: "21.0g",
+        carbs: "57.0g",
+        price: "120",
+      },
+      jumbo: {
+        cals: "700 ",
+        protein: "44g",
+        fat: "28g",
+        carbs: "76g",
+        price: "180",
+      },
     },
   },
 ];

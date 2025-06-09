@@ -5,10 +5,10 @@ import { useAppDispatch, useAppSelector } from "app/lib/hooks";
 import Link from "next/link";
 
 import { FaUtensils } from "react-icons/fa";
-import { MdOutlineMoreTime } from "react-icons/md";
+import { MdOutlineMoreTime, MdCalendarMonth } from "react-icons/md";
 import { setMenuType } from "app/lib/features/menuSlice";
 const TabContent = tw.div`
-  grid grid-cols-2 
+  grid grid-cols-3 
   gap-6 max-w-full px-4 text-center justify-center mt-10 
 `;
 
@@ -50,6 +50,24 @@ const Categories = () => {
             }
           >
             Restaurant Menu
+          </Label>
+        </TabItem>
+      </Link>
+      <Link href="/">
+        <TabItem onClick={() => handleMenuSelection("subscription")}>
+          <IconWrapper
+            className={
+              selectedMenu === "subscription" ? "text-red-600" : "text-gray-600"
+            }
+          >
+            <MdCalendarMonth />
+          </IconWrapper>
+          <Label
+            className={
+              selectedMenu === "subscription" ? "text-red-600" : "text-gray-600"
+            }
+          >
+            Subscription Menu
           </Label>
         </TabItem>
       </Link>
