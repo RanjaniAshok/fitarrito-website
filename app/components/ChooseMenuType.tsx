@@ -85,7 +85,7 @@ const Categories = () => {
               selectedMenu === "preOrder" ? "text-red-600" : "text-gray-600"
             }
           >
-            Pre-order Menu
+            Nutrient calculator
           </Label>
         </TabItem>
       </Link>

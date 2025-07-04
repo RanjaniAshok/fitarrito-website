@@ -32,6 +32,9 @@
       ],
       "@/helpers/*": [
         "app/helpers/*"
+      ],
+      "@/types/*": [
+        "app/types/*"
       ]
     }
   },

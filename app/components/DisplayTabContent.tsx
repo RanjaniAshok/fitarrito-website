@@ -4,6 +4,7 @@ import tw from "twin.macro";
 import styled from "styled-components";
 import { motion } from "motion/react";
 import { useRouter } from "next/navigation"; // ✅ Import useRouter for navigation
+import Image from "next/image";
 
 import { Container } from "@/components/misc/Layout";
 import { addItemsToCart } from "app/lib/features/cartSlice";
@@ -11,9 +12,9 @@ import { setSelectedMenu } from "app/lib/features/menuSlice";
 import ChooseVariantCard from "./ChooseVariantCard";
 import { useAppSelector, useAppDispatch } from "app/lib/hooks";
 import { PreOrderMenuItem } from "app/types/types";
-interface CardImageContainerProps {
-  imagesrc: { src: string }; // Adjust the type as needed
-}
+// interface CardImageContainerProps {
+//   imagesrc: { src: string }; // Adjust the type as needed
+// }
 
 interface Card {
   // Define the structure of a card
@@ -48,11 +49,12 @@ const CardContainer = tw.div`w-full sm:w-auto flex-shrink-0 mt-10`;
 const Card = tw(
   motion.div
 )`bg-gray-200 rounded-b mx-auto sm:max-w-none sm:mx-0`;
+const CardImageContainer = tw.div`relative h-32 sm:h-56 xl:h-64 w-full bg-gray-200 rounded-t overflow-hidden`;
 
-const CardImageContainer = styled.div<CardImageContainerProps>`
-  background: url(${(props) => props.imagesrc.src}) no-repeat top center;
-  ${tw`h-32 sm:h-56 xl:h-64 w-full bg-center bg-cover relative rounded-t`}
-`;
+// const CardImageContainer = styled.div<CardImageContainerProps>`
+//   background: url(${(props) => props.imagesrc.src}) no-repeat top center;
+//   ${tw`h-32 sm:h-56 xl:h-72 w-full bg-center bg-cover relative rounded-t`}
+// `;
 
 const CardHoverOverlay = styled(motion.div)`
   background-color: rgba(255, 255, 255, 0.5);
@@ -138,11 +140,23 @@ const DisplayTabContent: React.FC<{
       >
         <Container>
           <CardImageContainer
-            imagesrc={
-              card?.imagesrc ??
-              selectedPreOrderMenu?.imagesrc ?? { src: "/fallback-image.jpg" }
-            }
+          // imagesrc={
+          //   card?.imagesrc ??
+          //   selectedPreOrderMenu?.imagesrc ?? { src: "/fallback-image.jpg" }
+          // }
           >
+            <Image
+              src={
+                card?.imagesrc?.src ??
+                selectedPreOrderMenu?.imagesrc?.src ??
+                "/fallback-image.jpg"
+              }
+              alt={card?.title ?? "Menu image"}
+              fill
+              className="object-cover rounded-t"
+              sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+            />
+
             <CardHoverOverlay
               variants={{
                 hover: {
@@ -208,24 +222,7 @@ const DisplayTabContent: React.FC<{
               </CardBuyButton>
             )}
           </CardText>
-        ) : (
-          <CardText>
-            <CardBuyButton>
-              <CardButton
-                onClick={async () => {
-                  console.log(card, "card");
-                  dispatch(setSelectedMenu(selectedPreOrderMenu));
-                  const encodedName = encodeURIComponent(
-                    selectedPreOrderMenu?.title ?? ""
-                  );
-                  router.push(`/preOrderMenu/${encodedName}`); // ✅ Navigate to the specific item page
-                }}
-              >
-                {selectedPreOrderMenu?.title}
-              </CardButton>
-            </CardBuyButton>
-          </CardText>
-        )}
+        ) : null}
       </Card>
     </CardContainer>
   );

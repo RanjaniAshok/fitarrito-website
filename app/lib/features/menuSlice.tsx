@@ -7,10 +7,18 @@ import {
   Salad,
   Quesadillas,
 } from "@/helpers/menu";
-import { Bowl as Bowls, Salad as Salads } from "@/helpers/preOrderMenu";
+import {
+  Burrito as Burritos,
+  Bowl as Bowls,
+  Salad as Salads,
+} from "@/helpers/preOrderMenu";
 import { Dish } from "@/helpers/subscriptionMenu";
 
-import { PreOrderMenuItem, SubscriptionMenuItem } from "app/types/types";
+import {
+  PreOrderMenuItem,
+  SubscriptionMenuItem,
+  NutrientCalItem,
+} from "app/types/types";
 interface Item {
   title: string;
   imagesrc: { src: string };
@@ -53,6 +61,7 @@ export const getPreOrderMenu = createAsyncThunk(
   async () => {
     const Tabs = {
       Bowls,
+      Burritos,
       Salads,
     };
 
@@ -75,7 +84,7 @@ const cartSlice = createSlice({
     restaurantMenu: {} as Tabs, // Store restaurant menu
     preOrderMenu: {} as PreOrderMenu,
     subscriptionMenu: {} as SubscriptionMenu,
-    selectedMenu: {} as PreOrderMenuItem | null | undefined,
+    selectedMenu: {} as NutrientCalItem | null | undefined,
     menuType: "restaurant",
     loading: "idle",
   },
@@ -85,7 +94,7 @@ const cartSlice = createSlice({
     },
     setSelectedMenu: (
       state,
-      action: PayloadAction<PreOrderMenuItem | null | undefined>
+      action: PayloadAction<NutrientCalItem | null | undefined>
     ) => {
       state.selectedMenu = action.payload;
     },

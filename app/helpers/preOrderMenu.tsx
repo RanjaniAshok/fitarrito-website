@@ -1,4 +1,3 @@
-import ChickenBurrito from "@/images/menuimages/ChickenBurrito.svg";
 import MuttonBurrito from "@/images/menuimages/MuttonBurrito.svg";
 import Chicken from "@/images/menuimages/Chicken.svg";
 import Mutton from "@/images/menuimages/Mutton.svg";
@@ -7,12 +6,13 @@ import BrownRice from "@/images/menuimages/BrownRice.svg";
 import BlackBeans from "@/images/menuimages/BlackBeans.svg";
 import PintoBeans from "@/images/menuimages/PintoBeans.svg";
 import circle from "@/images/menuimages/white-circle.svg";
+import Tortilla from "@/images/menuimages/Tortilla.svg";
 // import PannerBurrito from "@/images/menuimages/PannerBurrito.svg";
 // import MushroomBurrito from "@/images/menuimages/MushroomBurrito.svg";
-import SpudBowl from "@/images/menuimages/SpudBowl.svg";
-import VegHummusBuddhaBowl from "@/images/menuimages/VegHummusBowl.svg";
-import QuinoaBowl from "@/images/menuimages/QuinoaBowl.svg";
-import StirFryVeggiesBowl from "@/images/menuimages/StirFryVeggiesBowl.svg";
+// import SpudBowl from "@/images/menuimages/SpudBowl.svg";
+// import VegHummusBuddhaBowl from "@/images/menuimages/VegHummusBowl.svg";
+// import QuinoaBowl from "@/images/menuimages/QuinoaBowl.svg";
+// import StirFryVeggiesBowl from "@/images/menuimages/StirFryVeggiesBowl.svg";
 // import ChickenHummusBuddhaBowl from "@/images/menuimages/ChickenHummusBowl.svg";
 // import SingaporeLaksa from "@/images/menuimages/SingaporeLaksa.svg";
 // import Fiesta from "@/images/menuimages/fiesta.svg";
@@ -33,12 +33,12 @@ import StirFryVeggiesBowl from "@/images/menuimages/StirFryVeggiesBowl.svg";
 // import MangoSmoothie from "@/images/menuimages/MangoSmoothie.svg";
 // import ChocolateSmoothie from "@/images/menuimages/ChocolateSmoothie.svg";
 // import PaneerLaksa from "@/images/menuimages/PaneerLaksa.svg";
-import VegLaksa from "@/images/menuimages/VegLaksa.svg";
-import { PreOrderMenuItem } from "app/types/types";
+// import VegLaksa from "@/images/menuimages/VegLaksa.svg";
+import { NutrientCalItem } from "app/types/types";
 // import MushroomSalad from "@/images/menuimages/MushroomSalad.svg";
 // import BBQChickenSalad from "@/images/menuimages/BBQChickenSalad.svg";
 // import TeriyakiChickenSalad from "@/images/menuimages/TeriyakiChickenSalad.svg";
-import TeriyakiPaneerSalad from "@/images/menuimages/PaneerTeriyakiSalad.svg";
+// import TeriyakiPaneerSalad from "@/images/menuimages/PaneerTeriyakiSalad.svg";
 // interface items {
 //   imagesrc: { src: string };
 //   title: string;
@@ -59,7 +59,7 @@ interface addOnsItem {
     imagesrc: { src: string };
     nutrient?: {
       regular: { cals: string; protein: string; fat: string; carbs: string };
-      jumbo: { cals: string; protein: string; fat: string; carbs: string };
+      jumbo?: { cals: string; protein: string; fat: string; carbs: string };
     };
   }>;
 }
@@ -393,107 +393,51 @@ const bowlAddOns: Array<addOnsItem> = [
     ],
   },
 ];
-export const Bowl: Array<PreOrderMenuItem> = [
+const burritoAddOns: Array<addOnsItem> = [
   {
-    imagesrc: ChickenBurrito,
-    title: "Burrito Bowl",
-    content: "infused with chicken and veggies",
-    category: "Burrito Bowl",
-    nutrient: {
-      cals: 0,
-      protein: 0,
-      fat: 0,
-      carbs: 0,
-    },
-    addOns: commonAddOns,
-    specificAddons: bowlAddOns,
-  },
-  {
-    imagesrc: VegHummusBuddhaBowl,
-    title: "Hummus Buddha Bowl",
-    category: "Hummus Bowl",
-    content:
-      "A nutritious bowl with hummus, quinoa, fresh greens, roasted chickpeas, and tahini dressing.",
-    nutrient: {
-      cals: 0,
-      protein: 0,
-      fat: 0,
-      carbs: 0,
-    },
-    addOns: commonAddOns,
-  },
-  {
-    imagesrc: QuinoaBowl,
-    title: "Quinoa Bowl",
-    category: "Quiona Bowl",
-    content:
-      "A nutritious bowl with hummus, quinoa, fresh greens, roasted chickpeas, and tahini dressing.",
-    nutrient: {
-      cals: 0,
-      protein: 0,
-      fat: 0,
-      carbs: 0,
-    },
-    addOns: commonAddOns,
-    specificAddons: bowlAddOns,
-  },
-  {
-    imagesrc: StirFryVeggiesBowl,
-    title: "Stir Fry veggies Bowl",
-    category: "Quiona Bowl",
-    content:
-      "A protein-rich burrito stuffed with scrambled eggs, beans, cheese, and fresh vegetables.",
-    nutrient: {
-      cals: 0,
-      protein: 0,
-      fat: 0,
-      carbs: 0,
-    },
-    addOns: commonAddOns,
-    specificAddons: bowlAddOns,
-  },
-  {
-    imagesrc: SpudBowl,
-    title: "Spud Bowl",
-    category: "Quiona Bowl",
-    content:
-      "A protein-rich burrito stuffed with scrambled eggs, beans, cheese, and fresh vegetables.",
-    nutrient: {
-      cals: 0,
-      protein: 0,
-      fat: 0,
-      carbs: 0,
-    },
-    addOns: commonAddOns,
-    specificAddons: bowlAddOns,
-  },
+    type: "Included Ingredient",
+    value: [
+      {
+        item: "Tortilla",
+        imagesrc: Tortilla,
 
-  {
-    imagesrc: VegLaksa,
-    title: "Laksa Noodles",
-    category: "Soup Noodles",
-    content: "A spicy coconut-based noodle soup with tofu and vegetables.",
-    nutrient: {
-      cals: 0,
-      protein: 0,
-      fat: 0,
-      carbs: 0,
-    },
-    addOns: commonAddOns,
+        nutrient: {
+          jumbo: {
+            cals: "320",
+            protein: "9.5",
+            fat: "9",
+            carbs: "50",
+          },
+          regular: {
+            cals: "160",
+            protein: "4.75",
+            fat: "4.5",
+            carbs: "25",
+          },
+        },
+      },
+    ],
   },
 ];
-export const Salad: Array<PreOrderMenuItem> = [
+export const Burrito: Array<NutrientCalItem> = [
   {
-    imagesrc: TeriyakiPaneerSalad,
-    title: "Teriyaki Paneer Salad",
-    content: "Tomato Salad & Carrot",
-    category: "Salad",
-    nutrient: {
-      cals: 0,
-      protein: 0,
-      fat: 0,
-      carbs: 0,
-    },
+    tabName: "Burritos",
+    addOns: commonAddOns,
+    specificAddons: burritoAddOns,
+  },
+];
+export const Bowl: Array<NutrientCalItem> = [
+  {
+    tabName: "Bowls",
+
+    addOns: commonAddOns,
+    specificAddons: bowlAddOns,
+  },
+];
+export const Salad: Array<NutrientCalItem> = [
+  {
+    tabName: "Salads",
+
     addOns: commonAddOns,
   },
 ];

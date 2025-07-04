@@ -23,18 +23,19 @@ export interface RestaurantMenuItem {
       jumbo: { cals: string; protein: string; fat: string; carbs: string ,price:string};
     };
   }
-  interface addOnsItem {
+  export interface addOnsItem {
     type: string;
     value: Array<{
       item: string;
       imagesrc: { src: string };
       nutrient?: {
-        regular: { cals: string; protein: string; fat: string; carbs: string };
-        jumbo: { cals: string; protein: string; fat: string; carbs: string };
+        regular?: { cals: string; protein: string; fat: string; carbs: string };
+        jumbo?: { cals: string; protein: string; fat: string; carbs: string };
       };
     }>;
   }
   export interface PreOrderMenuItem {
+    tabName:string;
     title?: string;
     imagesrc?: { src: string };
     content?: string;
@@ -45,6 +46,11 @@ export interface RestaurantMenuItem {
       fat: number;
       carbs: number;
     };
+    addOns?: Array<addOnsItem>;
+    specificAddons?: Array<addOnsItem>;
+  }
+  export interface NutrientCalItem {
+tabName:string;
     addOns?: Array<addOnsItem>;
     specificAddons?: Array<addOnsItem>;
   }

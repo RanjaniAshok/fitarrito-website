@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import tw from "twin.macro";
+import { useAppSelector } from "app/lib/hooks";
 
 interface CardItem {
   // Define the structure of a card
@@ -36,6 +37,7 @@ const ChooseVariantCard: React.FC<{ item: CardItem | null }> = ({ item }) => {
   // State for the selected variant of this specific item
   const CardInfo = tw.div`grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 p-2 bg-gray-300 rounded-lg`;
   const CardPrice = tw.p`text-sm sm:text-sm`;
+  const menuType = useAppSelector((state) => state.menu.menuType);
 
   const [variant, setVariant] = useState<"regular" | "jumbo">("regular");
 
@@ -75,24 +77,26 @@ const ChooseVariantCard: React.FC<{ item: CardItem | null }> = ({ item }) => {
           Jumbo
         </label>
       </div>
-      <CardInfo>
-        <NutrientBadge
-          label="Cals"
-          value={`${item?.nutrient?.[variant]?.cals}`}
-        />
-        <NutrientBadge
-          label="Carbs"
-          value={`${item?.nutrient?.[variant]?.carbs}`}
-        />
-        <NutrientBadge
-          label="Fat"
-          value={`${item?.nutrient?.[variant]?.fat}`}
-        />
-        <NutrientBadge
-          label="Protein"
-          value={`${item?.nutrient?.[variant]?.protein}`}
-        />
-      </CardInfo>
+      {menuType === "restaurant" ? (
+        <CardInfo>
+          <NutrientBadge
+            label="Cals"
+            value={`${item?.nutrient?.[variant]?.cals}`}
+          />
+          <NutrientBadge
+            label="Carbs"
+            value={`${item?.nutrient?.[variant]?.carbs}`}
+          />
+          <NutrientBadge
+            label="Fat"
+            value={`${item?.nutrient?.[variant]?.fat}`}
+          />
+          <NutrientBadge
+            label="Protein"
+            value={`${item?.nutrient?.[variant]?.protein}`}
+          />
+        </CardInfo>
+      ) : null}
     </div>
   );
 };
