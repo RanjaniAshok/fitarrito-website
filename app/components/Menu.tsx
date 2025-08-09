@@ -14,6 +14,7 @@ import tw from "twin.macro";
 import Modal from "react-modal";
 import CartDrawer from "@/components/CartDrawer";
 import DisplayTabContent from "@/components/DisplayTabContent";
+import ReactWindowVirtualGrid from "@/components/ReactWindowVirtualGrid";
 import { SubscriptionMenuItem } from "app/types/types";
 interface Card {
   imagesrc: { src: string };
@@ -57,9 +58,9 @@ const TabControl = styled.div<TabControlProps>`
   ${(props) =>
     props["active"] === "true" ? tw`bg-primary-500! text-gray-100!` : ""}
 `;
-const TabContent = tw(
-  motion.div
-)`grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-full px-2`;
+const TabContent = tw(motion.div)`max-w-full px-2`;
+
+const VirtualTabContent = tw.div`max-w-full px-2`;
 
 export default function Menu({ heading, tabs }: MenuProps) {
   const tabsKeys = Object.keys(tabs);
@@ -128,28 +129,64 @@ export default function Menu({ heading, tabs }: MenuProps) {
           ) : null}
         </HeaderRow>
         <div className="relative flex items-center">
-          <TabContent ref={scrollRef} className="mx-auto">
-            {loading ? (
+          {loading ? (
+            <TabContent ref={scrollRef} className="mx-auto">
               <LoaderText />
-            ) : (
-              <>
-                {tabs[activeTab]?.length > 0 ? (
-                  Object.entries(tabs[activeTab]).map(([index, card]) => (
-                    <DisplayTabContent
-                      card={card}
-                      isDrawerOpen={() => setIsDrawerOpen(true)}
-                      openModal={openModal}
-                      quantity={quantity}
-                      index={parseInt(index)}
-                      key={card.title}
+            </TabContent>
+          ) : (
+            <>
+              {tabs[activeTab]?.length > 0 ? (
+                tabs[activeTab].length > 20 ? (
+                  // Use virtual scrolling for large menus
+                  <VirtualTabContent className="mx-auto">
+                    <ReactWindowVirtualGrid
+                      items={tabs[activeTab]}
+                      renderItem={(card: any, index: number) => (
+                        <DisplayTabContent
+                          card={card}
+                          isDrawerOpen={() => setIsDrawerOpen(true)}
+                          openModal={openModal}
+                          quantity={quantity}
+                          index={index}
+                          key={`${card.title}-${index}`}
+                        />
+                      )}
+                      containerHeight={600}
+                      itemHeight={400}
+                      gap={16}
+                      breakpoints={{
+                        sm: 1,
+                        md: 2,
+                        lg: 3,
+                        xl: 4,
+                      }}
                     />
-                  ))
+                  </VirtualTabContent>
                 ) : (
+                  // Use regular grid for smaller menus
+                  <TabContent
+                    ref={scrollRef}
+                    className="mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+                  >
+                    {Object.entries(tabs[activeTab]).map(([index, card]) => (
+                      <DisplayTabContent
+                        card={card}
+                        isDrawerOpen={() => setIsDrawerOpen(true)}
+                        openModal={openModal}
+                        quantity={quantity}
+                        index={parseInt(index)}
+                        key={card.title}
+                      />
+                    ))}
+                  </TabContent>
+                )
+              ) : (
+                <TabContent ref={scrollRef} className="mx-auto">
                   <LoaderText />
-                )}
-              </>
-            )}
-          </TabContent>
+                </TabContent>
+              )}
+            </>
+          )}
         </div>
       </ContentWithPaddingXl>
 
