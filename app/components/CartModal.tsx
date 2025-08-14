@@ -5,20 +5,12 @@ import tw, { styled } from "twin.macro";
 import Modal from "react-modal";
 import { useAppDispatch } from "app/lib/hooks";
 import { addItemsToCart } from "app/lib/features/cartSlice";
-
-interface CardItem {
-  title: string;
-  imagesrc: { src: string };
-  content: string;
-  price: number | string;
-  rating: number | string;
-  reviews: string;
-}
+import { menuItem } from "@/types/types";
 
 interface CartModalProps {
   isOpen: boolean;
   closeModal: () => void;
-  selectedCard: CardItem | null;
+  selectedCard: menuItem | null;
   quantity: number;
   incrementQuantity: () => void;
   decrementQuantity: () => void;

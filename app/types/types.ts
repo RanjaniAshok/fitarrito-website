@@ -1,4 +1,4 @@
-export interface RestaurantMenuItem {
+export interface menuItem {
     title: string;
     imagesrc: { src: string };
     content: string | undefined;
@@ -12,17 +12,7 @@ export interface RestaurantMenuItem {
       jumbo: { cals: string; protein: string; fat: string; carbs: string ,price:string};
     };
   }
-  export interface SubscriptionMenuItem {
-    title: string;
-    imagesrc: { src: string };
-    content: string | undefined;
 
-    category?: string;
-    nutrient?: {
-      regular: { cals: string; protein: string; fat: string; carbs: string,price:string };
-      jumbo: { cals: string; protein: string; fat: string; carbs: string ,price:string};
-    };
-  }
   export interface addOnsItem {
     type: string;
     value: Array<{

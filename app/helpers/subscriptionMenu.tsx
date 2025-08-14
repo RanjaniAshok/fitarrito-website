@@ -9,15 +9,18 @@ import TabboulehSalad from "@/images/menuimages/TabboulehSaladWithLentils.svg";
 import BBQChickenNoodles from "@/images/menuimages/BBQChickenNoodles.svg";
 import BBQChickenPowerBowl from "@/images/menuimages/BBQChickenPowerBowl.svg";
 import BoiledVeggiesBowl from "@/images/menuimages/BoiledVeggiesWithFriedBrownRice.svg";
-import { SubscriptionMenuItem } from "app/types/types";
+import { menuItem as Item } from "app/types/types";
 
-export const Dish: Array<SubscriptionMenuItem> = [
+export const Dish: Array<Item> = [
   {
     imagesrc: BBQChickenNoodles,
     title: "BBQ Chicken Noodles",
     content: "infused with chicken and veggies",
     category: "Burrito Bowl",
-
+    price: "120",
+    rating: "5.0",
+    reviews: "87",
+    url: "#",
     nutrient: {
       regular: {
         cals: "300.0",
@@ -39,7 +42,10 @@ export const Dish: Array<SubscriptionMenuItem> = [
     imagesrc: BBQChickenPowerBowl,
     title: "BBQ Chicken Power Bowl",
     category: "Hummus Bowl",
-
+    price: "120",
+    rating: "5.0",
+    reviews: "87",
+    url: "#",
     content:
       "A nutritious bowl with hummus, quinoa, fresh greens, roasted chickpeas, and tahini dressing.",
     nutrient: {
@@ -63,7 +69,10 @@ export const Dish: Array<SubscriptionMenuItem> = [
     imagesrc: BoiledVeggiesBowl,
     title: "Boiled Veggies with Fried Brown Rice ",
     category: "Quiona Bowl",
-
+    price: "120",
+    rating: "5.0",
+    reviews: "87",
+    url: "#",
     content:
       "A nutritious bowl with hummus, quinoa, fresh greens, roasted chickpeas, and tahini dressing.",
     nutrient: {
@@ -87,7 +96,10 @@ export const Dish: Array<SubscriptionMenuItem> = [
     imagesrc: BrocolliPasta,
     title: "Brocolli Pasta",
     category: "Quiona Bowl",
-
+    price: "120",
+    rating: "5.0",
+    reviews: "87",
+    url: "#",
     content:
       "A protein-rich burrito stuffed with scrambled eggs, beans, cheese, and fresh vegetables.",
     nutrient: {
@@ -111,7 +123,10 @@ export const Dish: Array<SubscriptionMenuItem> = [
     imagesrc: TandooriPaneerMeal,
     title: "Tandoori Paneer Meal",
     category: "Quiona Bowl",
-
+    price: "120",
+    rating: "5.0",
+    reviews: "87",
+    url: "#",
     content:
       "A protein-rich burrito stuffed with scrambled eggs, beans, cheese, and fresh vegetables.",
     nutrient: {
@@ -135,7 +150,10 @@ export const Dish: Array<SubscriptionMenuItem> = [
     imagesrc: TunaFishMeal,
     title: "Tuna Fish Meal",
     category: "Quiona Bowl",
-
+    price: "120",
+    rating: "5.0",
+    reviews: "87",
+    url: "#",
     content:
       "A protein-rich burrito stuffed with scrambled eggs, beans, cheese, and fresh vegetables.",
     nutrient: {
@@ -159,7 +177,10 @@ export const Dish: Array<SubscriptionMenuItem> = [
     imagesrc: FriedQuinoa,
     title: "Fried Quinoa Bowl",
     category: "Quiona Bowl",
-
+    price: "120",
+    rating: "5.0",
+    reviews: "87",
+    url: "#",
     content:
       "A protein-rich burrito stuffed with scrambled eggs, beans, cheese, and fresh vegetables.",
     nutrient: {
@@ -183,7 +204,10 @@ export const Dish: Array<SubscriptionMenuItem> = [
     imagesrc: TabboulehSalad,
     title: "Tabbouleh Salad with Lentils",
     category: "Quiona Bowl",
-
+    price: "120",
+    rating: "5.0",
+    reviews: "87",
+    url: "#",
     content:
       "A protein-rich burrito stuffed with scrambled eggs, beans, cheese, and fresh vegetables.",
     nutrient: {

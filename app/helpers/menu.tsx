@@ -29,6 +29,7 @@ import MushroomSalad from "@/images/menuimages/MushroomSalad.svg";
 import BBQChickenSalad from "@/images/menuimages/BBQChickenSalad.svg";
 import TeriyakiChickenSalad from "@/images/menuimages/TeriyakiChickenSalad.svg";
 import TeriyakiPaneerSalad from "@/images/menuimages/PaneerTeriyakiSalad.svg";
+import { menuItem as Item } from "@/types/types";
 // interface items {
 //   imagesrc: { src: string };
 //   title: string;
@@ -42,33 +43,33 @@ import TeriyakiPaneerSalad from "@/images/menuimages/PaneerTeriyakiSalad.svg";
 //     jumbo: { cals: string; protein: string; fat: string; carbs: string };
 //   };
 // }
-interface Item {
-  title: string;
-  imagesrc: { src: string };
-  content: string;
-  price: number | string;
-  rating: number | string;
-  reviews: string;
-  category?: string;
+// interface Item {
+//   title: string;
+//   imagesrc: { src: string };
+//   content: string;
+//   price: number | string;
+//   rating: number | string;
+//   reviews: string;
+//   category?: string;
 
-  url: string;
-  nutrient?: {
-    regular: {
-      cals: string;
-      protein: string;
-      fat: string;
-      carbs: string;
-      price: string;
-    };
-    jumbo: {
-      cals: string;
-      protein: string;
-      fat: string;
-      carbs: string;
-      price: string;
-    };
-  };
-}
+//   url: string;
+//   nutrient?: {
+//     regular: {
+//       cals: string;
+//       protein: string;
+//       fat: string;
+//       carbs: string;
+//       price: string;
+//     };
+//     jumbo: {
+//       cals: string;
+//       protein: string;
+//       fat: string;
+//       carbs: string;
+//       price: string;
+//     };
+//   };
+// }
 
 export const Burrito: Array<Item> = [
   {

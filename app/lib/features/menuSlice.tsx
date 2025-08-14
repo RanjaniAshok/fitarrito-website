@@ -14,34 +14,16 @@ import {
 } from "@/helpers/preOrderMenu";
 import { Dish } from "@/helpers/subscriptionMenu";
 
-import {
-  PreOrderMenuItem,
-  SubscriptionMenuItem,
-  NutrientCalItem,
-} from "app/types/types";
-interface Item {
-  title: string;
-  imagesrc: { src: string };
-  content: string | "";
-  price: number | string;
-  rating: number | string;
-  reviews: string;
-  url: string;
-  category?: string;
-  nutrient?: {
-    regular: { cals: string; protein: string; fat: string; carbs: string };
-    jumbo: { cals: string; protein: string; fat: string; carbs: string };
-  };
-}
+import { PreOrderMenuItem, menuItem, NutrientCalItem } from "app/types/types";
 
 type Tabs = {
-  [key: string]: Item[];
+  [key: string]: menuItem[];
 };
 type PreOrderMenu = {
   [key: string]: PreOrderMenuItem[];
 };
 type SubscriptionMenu = {
-  [key: string]: SubscriptionMenuItem[];
+  [key: string]: menuItem[];
 };
 export const getMenu = createAsyncThunk("menu/getMenu", async () => {
   const Tabs = {

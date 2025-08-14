@@ -11,40 +11,11 @@ import { addItemsToCart } from "app/lib/features/cartSlice";
 import { setSelectedMenu } from "app/lib/features/menuSlice";
 import ChooseVariantCard from "./ChooseVariantCard";
 import { useAppSelector, useAppDispatch } from "app/lib/hooks";
-import { PreOrderMenuItem } from "app/types/types";
+import { PreOrderMenuItem, menuItem } from "app/types/types";
 // interface CardImageContainerProps {
 //   imagesrc: { src: string }; // Adjust the type as needed
 // }
 
-interface Card {
-  // Define the structure of a card
-  imagesrc: { src: string };
-  title: string;
-  content: string;
-  price: number | string;
-  rating: number | string;
-  reviews: string;
-  url: string;
-  category?: string;
-  nutrient?: {
-    regular: {
-      cals: string;
-      protein: string;
-      fat: string;
-      carbs: string;
-      price: string;
-    };
-    jumbo: {
-      cals: string;
-      protein: string;
-      fat: string;
-      carbs: string;
-      price: string;
-    };
-  };
-
-  // Add other card properties here
-}
 const CardContainer = tw.div`w-full sm:w-auto flex-shrink-0 mt-10`;
 const Card = tw(
   motion.div
@@ -72,7 +43,7 @@ const CardBuyButton = tw.div`flex items-center mt-4 sm:hidden`;
 //   ${tw`pointer-events-none -z-20 absolute left-0 bottom-0 h-80 w-80 opacity-15 transform -translate-x-60 text-primary-500`}
 // `;
 const DisplayTabContent: React.FC<{
-  card?: Card;
+  card?: menuItem;
   selectedPreOrderMenu?: PreOrderMenuItem | null | undefined;
   index: number;
   setNutrientData?: (data: {
@@ -84,7 +55,7 @@ const DisplayTabContent: React.FC<{
   onHover?: () => void;
   quantity?: number | undefined;
   isDrawerOpen?: () => void | undefined;
-  openModal?: (card: Card) => void | undefined;
+  openModal?: (card: menuItem) => void | undefined;
 }> = ({
   card,
   selectedPreOrderMenu,

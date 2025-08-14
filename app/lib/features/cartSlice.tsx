@@ -1,13 +1,8 @@
 import { createAsyncThunk, PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-interface Item {
-  title: string;
-  imagesrc: { src: string };
-  content: string;
+import { menuItem } from "@/types/types";
+interface Item extends menuItem {
   quantity: number;
-  price: number | string;
-  rating: number | string;
-  reviews: string;
 }
 
 export const addItemsToCart = createAsyncThunk(

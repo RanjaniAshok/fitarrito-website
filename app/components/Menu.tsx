@@ -15,25 +15,37 @@ import Modal from "react-modal";
 import CartDrawer from "@/components/CartDrawer";
 import DisplayTabContent from "@/components/DisplayTabContent";
 import ReactWindowVirtualGrid from "@/components/ReactWindowVirtualGrid";
-import { SubscriptionMenuItem } from "app/types/types";
-interface Card {
-  imagesrc: { src: string };
-  title: string;
-  content: string;
-  price: number | string;
-  rating: number | string;
-  reviews: string;
-  url: string;
-  category?: string;
+import { menuItem } from "@/types/types";
+// interface Card {
+//   imagesrc: { src: string };
+//   title: string;
+//   content: string;
+//   price: number | string;
+//   rating: number | string;
+//   reviews: string;
+//   url: string;
+//   category?: string;
 
-  nutrient?: {
-    regular: { cals: string; protein: string; fat: string; carbs: string };
-    jumbo: { cals: string; protein: string; fat: string; carbs: string };
-  };
-}
+//   nutrient?: {
+//     regular: {
+//       cals: string;
+//       protein: string;
+//       fat: string;
+//       carbs: string;
+//       price: string;
+//     };
+//     jumbo: {
+//       cals: string;
+//       protein: string;
+//       fat: string;
+//       carbs: string;
+//       price: string;
+//     };
+//   };
+// }
 
 type Tabs = {
-  [key: string]: Card[] | SubscriptionMenuItem[]; // Keys are strings, values are arrays of `Card`
+  [key: string]: menuItem[]; // Keys are strings, values are arrays of `Card`
 };
 interface MenuProps {
   heading: ReactNode;
@@ -70,7 +82,7 @@ export default function Menu({ heading, tabs }: MenuProps) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
-  const [selectedCard, setSelectedCard] = useState<Card | null>(null);
+  const [selectedCard, setSelectedCard] = useState<menuItem | null>(null);
   const [loading, setLoading] = useState(false);
 
   const handleTabChange = (tabName: string) => {
@@ -80,7 +92,7 @@ export default function Menu({ heading, tabs }: MenuProps) {
       setLoading(false);
     }, 1000);
   };
-  const openModal = (card: Card) => {
+  const openModal = (card: menuItem) => {
     setSelectedCard(card);
     setQuantity(1);
     setModalOpen(true);
@@ -139,9 +151,9 @@ export default function Menu({ heading, tabs }: MenuProps) {
                 tabs[activeTab].length > 20 ? (
                   // Use virtual scrolling for large menus
                   <VirtualTabContent className="mx-auto">
-                    <ReactWindowVirtualGrid
-                      items={tabs[activeTab]}
-                      renderItem={(card: any, index: number) => (
+                    <ReactWindowVirtualGrid<menuItem>
+                      items={tabs[activeTab] as menuItem[]}
+                      renderItem={(card: menuItem, index: number) => (
                         <DisplayTabContent
                           card={card}
                           isDrawerOpen={() => setIsDrawerOpen(true)}
