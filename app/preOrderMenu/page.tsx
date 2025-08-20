@@ -203,15 +203,16 @@ export default function PreOrdermenu() {
           Select Your <HighlightedText>meal.</HighlightedText>
         </Header>
         <TabsControl>
-          {Object.entries(menu).map(([tabName], index) => (
-            <TabControl
-              key={index}
-              active={activeTab === tabName ? "true" : "false"}
-              onClick={() => handleTabChange(tabName)}
-            >
-              {tabName}
-            </TabControl>
-          ))}
+          {menu &&
+            Object.entries(menu).map(([tabName], index) => (
+              <TabControl
+                key={index}
+                active={activeTab === tabName ? "true" : "false"}
+                onClick={() => handleTabChange(tabName)}
+              >
+                {tabName}
+              </TabControl>
+            ))}
         </TabsControl>
       </HeaderRow>
       <NutrientCalculator data={nutrientData} showAddToBag={false} />
