@@ -22,6 +22,7 @@ const NutrientCalculator = (props: DataProps) => {
     { label: "Carbs", key: "carbs" },
   ];
   const data = props?.data;
+  console.log(data, "data");
   const [selectedProtein] = useState<string | null>(null);
 
   return (

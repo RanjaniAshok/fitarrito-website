@@ -19,8 +19,8 @@ export interface menuItem {
       item: string;
       imagesrc: { src: string };
       nutrient?: {
-        regular?: { cals: string; protein: string; fat: string; carbs: string };
-        jumbo?: { cals: string; protein: string; fat: string; carbs: string };
+        regular: { cals: number; protein: number; fat: number; carbs: number };
+        jumbo: { cals: number; protein: number; fat: number; carbs: number };
       };
     }>;
   }

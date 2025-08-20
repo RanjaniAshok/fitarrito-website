@@ -51,7 +51,7 @@ const Container = tw.div`relative mt-16`;
 
 export default function PreOrdermenu() {
   const menu = useAppSelector((state) => state.menu.preOrderMenu);
-  const tabsKeys = menu ? Object.keys(menu) : [];
+  const tabsKeys = menu && typeof menu === "object" ? Object.keys(menu) : [];
   const [activeTab, setActiveTab] = useState(tabsKeys[0] || "");
   const [nutrientData, setNutrientData] = useState<dataProps>({
     cals: 0,
@@ -99,7 +99,7 @@ export default function PreOrdermenu() {
                 onChange={() =>
                   handleSelection({
                     item: protein.item,
-                    // nutrient: protein.nutrient,
+                    nutrient: protein.nutrient,
                   })
                 }
               />
@@ -136,7 +136,7 @@ export default function PreOrdermenu() {
   const [selectedAddOns, setSelectedAddOns] = useState<
     {
       item: string;
-      nutrient?: { cals: string; fat: string; protein: string; carbs: string };
+      nutrient?: { cals: number; fat: number; protein: number; carbs: number };
     }[]
   >([]);
   const selectedAddOnsMemo = React.useMemo(
@@ -146,9 +146,9 @@ export default function PreOrdermenu() {
   const handleSelection = (proteinItem: {
     item: string;
     nutrient?: {
-      regular: { cals: string; fat: string; protein: string; carbs: string };
+      regular: { cals: number; fat: number; protein: number; carbs: number };
 
-      jumbo: { cals: string; fat: string; protein: string; carbs: string };
+      jumbo: { cals: number; fat: number; protein: number; carbs: number };
     };
   }) => {
     setSelectedAddOns((prev) => {
@@ -177,7 +177,6 @@ export default function PreOrdermenu() {
       updatedNutrients.carbs += Number(addOn.nutrient?.carbs ?? 0);
     });
     setNutrientData(updatedNutrients);
-    console.log(updatedNutrients, "updated Nutrients");
   }, [selectedAddOns]);
 
   const selectedMenu = useSelector(
@@ -188,7 +187,6 @@ export default function PreOrdermenu() {
 
   const specificAddons = selectedMenu?.specificAddons;
   const handleTabChange = (tabName: string) => {
-    // console.log(tabName);
     const newMenuItems = menu?.[tabName];
     if (Array.isArray(newMenuItems) && newMenuItems.length > 0) {
       dispatch(setSelectedMenu(newMenuItems[0])); // Set first item of the new tab
@@ -204,6 +202,7 @@ export default function PreOrdermenu() {
         </Header>
         <TabsControl>
           {menu &&
+            typeof menu === "object" &&
             Object.entries(menu).map(([tabName], index) => (
               <TabControl
                 key={index}
