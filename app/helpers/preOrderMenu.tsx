@@ -34,7 +34,7 @@ import Tortilla from "@/images/menuimages/Tortilla.svg";
 // import ChocolateSmoothie from "@/images/menuimages/ChocolateSmoothie.svg";
 // import PaneerLaksa from "@/images/menuimages/PaneerLaksa.svg";
 // import VegLaksa from "@/images/menuimages/VegLaksa.svg";
-import { NutrientCalItem } from "app/types/types";
+import { NutrientCalItem, addOnsItem } from "app/types/types";
 // import MushroomSalad from "@/images/menuimages/MushroomSalad.svg";
 // import BBQChickenSalad from "@/images/menuimages/BBQChickenSalad.svg";
 // import TeriyakiChickenSalad from "@/images/menuimages/TeriyakiChickenSalad.svg";
@@ -52,17 +52,17 @@ import { NutrientCalItem } from "app/types/types";
 //     jumbo: { cals: string; protein: string; fat: string; carbs: string };
 //   };
 // }
-interface addOnsItem {
-  type: string;
-  value: Array<{
-    item: string;
-    imagesrc: { src: string };
-    nutrient?: {
-      regular: { cals: string; protein: string; fat: string; carbs: string };
-      jumbo?: { cals: string; protein: string; fat: string; carbs: string };
-    };
-  }>;
-}
+// interface addOnsItem {
+//   type: string;
+//   value: Array<{
+//     item: string;
+//     imagesrc: { src: string };
+//     nutrient?: {
+//       regular: { cals: string; protein: string; fat: string; carbs: string };
+//       jumbo: { cals: string; protein: string; fat: string; carbs: string };
+//     };
+//   }>;
+// }
 
 const commonAddOns: Array<addOnsItem> = [
   {

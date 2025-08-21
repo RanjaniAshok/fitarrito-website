@@ -136,7 +136,7 @@ export default function PreOrdermenu() {
   const [selectedAddOns, setSelectedAddOns] = useState<
     {
       item: string;
-      nutrient?: { cals: number; fat: number; protein: number; carbs: number };
+      nutrient?: { cals: string; fat: string; protein: string; carbs: string };
     }[]
   >([]);
   const selectedAddOnsMemo = React.useMemo(
@@ -146,9 +146,9 @@ export default function PreOrdermenu() {
   const handleSelection = (proteinItem: {
     item: string;
     nutrient?: {
-      regular: { cals: number; fat: number; protein: number; carbs: number };
+      regular: { cals: string; fat: string; protein: string; carbs: string };
 
-      jumbo: { cals: number; fat: number; protein: number; carbs: number };
+      jumbo: { cals: string; fat: string; protein: string; carbs: string };
     };
   }) => {
     setSelectedAddOns((prev) => {

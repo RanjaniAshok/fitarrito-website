@@ -19,8 +19,8 @@ export interface menuItem {
       item: string;
       imagesrc: { src: string };
       nutrient?: {
-        regular: { cals: number; protein: number; fat: number; carbs: number };
-        jumbo: { cals: number; protein: number; fat: number; carbs: number };
+        regular: { cals: string; protein: string; fat: string; carbs: string };
+        jumbo: { cals: string; protein: string; fat: string; carbs: string };
       };
     }>;
   }
@@ -31,16 +31,16 @@ export interface menuItem {
     content?: string;
     category?: string;
     nutrient?: {
-      cals: number;
-      protein: number;
-      fat: number;
-      carbs: number;
+      cals: string;
+      protein: string;
+      fat: string;
+      carbs: string;
     };
     addOns?: Array<addOnsItem>;
     specificAddons?: Array<addOnsItem>;
   }
   export interface NutrientCalItem {
-tabName:string;
+    tabName:string;
     addOns?: Array<addOnsItem>;
     specificAddons?: Array<addOnsItem>;
   }
