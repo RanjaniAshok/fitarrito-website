@@ -187,16 +187,18 @@ export default function Menu({ heading, tabs }: MenuProps) {
                     ref={scrollRef}
                     className="mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
                   >
-                    {Object.entries(tabs[activeTab]).map(([index, card]) => (
-                      <DisplayTabContent
-                        card={card}
-                        isDrawerOpen={() => setIsDrawerOpen(true)}
-                        openModal={openModal}
-                        quantity={quantity}
-                        index={parseInt(index)}
-                        key={card.title}
-                      />
-                    ))}
+                    {tabs &&
+                      typeof tabs === "object" &&
+                      Object.entries(tabs[activeTab]).map(([index, card]) => (
+                        <DisplayTabContent
+                          card={card}
+                          isDrawerOpen={() => setIsDrawerOpen(true)}
+                          openModal={openModal}
+                          quantity={quantity}
+                          index={parseInt(index)}
+                          key={card.title}
+                        />
+                      ))}
                   </TabContent>
                 )
               ) : (
