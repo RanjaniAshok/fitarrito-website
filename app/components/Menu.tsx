@@ -1,5 +1,5 @@
 "use client";
-import React, { ReactNode, useState, useEffect, useRef } from "react";
+import React, { ReactNode, useState, useEffect, useRef, useMemo } from "react";
 import styled from "styled-components";
 import { motion } from "motion/react";
 import { useAppSelector } from "app/lib/hooks";
@@ -75,7 +75,12 @@ const TabContent = tw(motion.div)`max-w-full px-2`;
 const VirtualTabContent = tw.div`max-w-full px-2`;
 
 export default function Menu({ heading, tabs }: MenuProps) {
-  const tabsKeys = Object.keys(tabs);
+  const tabsKeys = useMemo(() => {
+    if (tabs && typeof tabs === "object") {
+      return Object.keys(tabs);
+    }
+    return [];
+  }, [tabs]);
   const menuType = useAppSelector((state) => state.menu.menuType);
   const [activeTab, setActiveTab] = useState(tabsKeys[0] || "");
   const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -128,15 +133,17 @@ export default function Menu({ heading, tabs }: MenuProps) {
           <Header>{heading}</Header>
           {menuType === "restaurant" ? (
             <TabsControl>
-              {Object.entries(tabs).map(([tabName], index) => (
-                <TabControl
-                  key={index}
-                  active={activeTab === tabName ? "true" : "false"}
-                  onClick={() => handleTabChange(tabName)}
-                >
-                  {tabName}
-                </TabControl>
-              ))}
+              {tabs &&
+                typeof tabs === "object" &&
+                Object.entries(tabs).map(([tabName], index) => (
+                  <TabControl
+                    key={index}
+                    active={activeTab === tabName ? "true" : "false"}
+                    onClick={() => handleTabChange(tabName)}
+                  >
+                    {tabName}
+                  </TabControl>
+                ))}
             </TabsControl>
           ) : null}
         </HeaderRow>
