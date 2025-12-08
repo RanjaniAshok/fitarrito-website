@@ -15,7 +15,7 @@ export const Dish: Array<Item> = [
   {
     imagesrc: BBQChickenNoodles,
     title: "BBQ Chicken Noodles",
-    content: "infused with chicken and veggies",
+    description: "infused with chicken and veggies",
     category: "Burrito Bowl",
     price: "120",
     rating: "5.0",
@@ -46,7 +46,7 @@ export const Dish: Array<Item> = [
     rating: "5.0",
     reviews: "87",
     url: "#",
-    content:
+    description:
       "A nutritious bowl with hummus, quinoa, fresh greens, roasted chickpeas, and tahini dressing.",
     nutrient: {
       regular: {
@@ -73,7 +73,7 @@ export const Dish: Array<Item> = [
     rating: "5.0",
     reviews: "87",
     url: "#",
-    content:
+    description:
       "A nutritious bowl with hummus, quinoa, fresh greens, roasted chickpeas, and tahini dressing.",
     nutrient: {
       regular: {
@@ -100,7 +100,7 @@ export const Dish: Array<Item> = [
     rating: "5.0",
     reviews: "87",
     url: "#",
-    content:
+    description:
       "A protein-rich burrito stuffed with scrambled eggs, beans, cheese, and fresh vegetables.",
     nutrient: {
       regular: {
@@ -127,7 +127,7 @@ export const Dish: Array<Item> = [
     rating: "5.0",
     reviews: "87",
     url: "#",
-    content:
+    description:
       "A protein-rich burrito stuffed with scrambled eggs, beans, cheese, and fresh vegetables.",
     nutrient: {
       regular: {
@@ -154,7 +154,7 @@ export const Dish: Array<Item> = [
     rating: "5.0",
     reviews: "87",
     url: "#",
-    content:
+    description:
       "A protein-rich burrito stuffed with scrambled eggs, beans, cheese, and fresh vegetables.",
     nutrient: {
       regular: {
@@ -181,7 +181,7 @@ export const Dish: Array<Item> = [
     rating: "5.0",
     reviews: "87",
     url: "#",
-    content:
+    description:
       "A protein-rich burrito stuffed with scrambled eggs, beans, cheese, and fresh vegetables.",
     nutrient: {
       regular: {
@@ -208,7 +208,7 @@ export const Dish: Array<Item> = [
     rating: "5.0",
     reviews: "87",
     url: "#",
-    content:
+    description:
       "A protein-rich burrito stuffed with scrambled eggs, beans, cheese, and fresh vegetables.",
     nutrient: {
       regular: {

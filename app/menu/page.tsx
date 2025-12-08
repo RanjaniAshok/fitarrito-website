@@ -22,9 +22,6 @@ export default function Dashboard() {
     dispatch(getPreOrderMenu());
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log(menu, "menu in useEffect");
-  }, []);
   return (
     <>
       <Menu

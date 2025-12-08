@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Chicken Burrito",
+    "price": 120,
+    "category": "Burrito",
+    "imageUrl": "/images/menuimages/ChickenBurrito.svg"
+  },
+  {
+    "title": "Paneer Burrito",
+    "price": 120,
+    "category": "Burrito",
+    "imageUrl": "/images/menuimages/PannerBurrito.svg"
+  }
+]

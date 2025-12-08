@@ -1,6 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import cartSlice from "./features/cartSlice";
 import menuSlice from "./features/menuSlice";
+import trialSlice from "./features/slice"
 import { persistReducer, persistStore } from "redux-persist";
 import { FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // Fix the storage import
@@ -16,6 +17,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   menu: menuSlice,
   cart: cartSlice,
+  trial:trialSlice
 });
 
 // 🔹 Apply Persisted Reducer

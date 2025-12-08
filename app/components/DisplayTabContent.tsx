@@ -16,11 +16,11 @@ import { PreOrderMenuItem, menuItem } from "app/types/types";
 //   imagesrc: { src: string }; // Adjust the type as needed
 // }
 
-const CardContainer = tw.div`w-full sm:w-auto flex-shrink-0 mt-10`;
-const Card = tw(
-  motion.div
-)`bg-gray-200 rounded-b mx-auto sm:max-w-none sm:mx-0`;
+const CardContainer = tw.div`w-full mt-10`;
+const Card = tw(motion.div)`bg-gray-200 rounded-lg mx-auto overflow-hidden`;
 const CardImageContainer = tw.div`relative h-32 sm:h-56 xl:h-64 w-full bg-gray-200 rounded-t overflow-hidden`;
+// Horizontal layout image container for items with protein variants - shows full image
+const HorizontalCardImageContainer = tw.div`relative w-full sm:w-[55%] bg-gray-200 flex-shrink-0 min-h-[320px] sm:min-h-[480px] sm:h-auto`;
 
 // const CardImageContainer = styled.div<CardImageContainerProps>`
 //   background: url(${(props) => props.imagesrc.src}) no-repeat top center;
@@ -35,8 +35,8 @@ const CardButton = tw.div`truncate text-ellipsis text-sm xs:text-xs xs:px-2 px-8
  py-3 font-bold rounded bg-customTheme text-gray-100 hocus:bg-primary-700 hocus:text-gray-200 focus:shadow-sm focus:outline-none transition duration-300`;
 // const CardInfo = tw.div`grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 p-2 bg-gray-300 rounded-lg`;
 
-const CardText = tw.div`w-full p-4 text-gray-900 flex flex-col justify-between bg-gray-100`;
-const CardTitle = tw.h5`text-sm sm:text-base font-semibold group-hover:text-primary-500 mb-2`;
+const CardText = tw.div`w-full sm:w-[45%] p-4 sm:p-6 text-gray-900 flex flex-col justify-center bg-gray-100 flex-1`;
+const CardTitle = tw.h5`text-sm sm:text-2xl font-semibold text-primary-500 pb-5`;
 
 const CardBuyButton = tw.div`flex items-center mt-4 sm:hidden`;
 // const DecoratorBlob2 = styled.div`
@@ -69,6 +69,12 @@ const DisplayTabContent: React.FC<{
   const dispatch = useAppDispatch();
   const menuType = useAppSelector((state) => state.menu.menuType);
   const router = useRouter();
+
+  // Check if card has protein variants (needs horizontal layout)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const hasProteinVariants =
+    card?.proteinVariants && card.proteinVariants.length > 0;
+
   const renderCardButton = () => {
     switch (menuType) {
       case "restaurant":
@@ -81,17 +87,10 @@ const DisplayTabContent: React.FC<{
         return <CardButton>Unknown Menu</CardButton>;
     }
   };
-  // function NutrientBadge({ label, value }: { label: string; value: string }) {
-  //   return (
-  //     <div className="text-center">
-  //       <p className="text-gray-500 text-sm font-bold">{label}</p>
-  //       <p className="text-green-700 font-bold text-xs">{value}</p>
-  //     </div>
-  //   );
-  // }
   return (
     <CardContainer
       key={`${card?.title}-${index}`}
+      className={hasProteinVariants ? "col-span-full max-w-[75vw] mx-auto" : ""}
       onMouseEnter={onHover}
       onMouseLeave={
         () =>
@@ -104,98 +103,170 @@ const DisplayTabContent: React.FC<{
       }
     >
       <Card
-        className="group"
+        className={`group w-full ${
+          hasProteinVariants ? "flex flex-col sm:flex-row items-stretch" : ""
+        }`}
         animate={"rest"}
         initial="rest"
         whileHover="hover"
       >
-        <Container>
-          <CardImageContainer
-          // imagesrc={
-          //   card?.imagesrc ??
-          //   selectedPreOrderMenu?.imagesrc ?? { src: "/fallback-image.jpg" }
-          // }
-          >
-            <Image
-              src={
-                card?.imagesrc?.src ??
-                selectedPreOrderMenu?.imagesrc?.src ??
-                "/fallback-image.jpg"
-              }
-              alt={card?.title ?? "Menu image"}
-              fill
-              className="object-cover rounded-t"
-              sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-            />
-
-            <CardHoverOverlay
-              variants={{
-                hover: {
-                  opacity: 1,
-                  height: "auto",
-                },
-
-                rest: {
-                  opacity: 0,
-                  height: 0,
-                },
-              }}
-              transition={{ duration: 0.3 }}
-              onClick={async () => {
-                if (menuType === "restaurant") {
-                  if (!card) return;
-
-                  const { meta } = await dispatch(
-                    addItemsToCart({
-                      ...card, // Spread the card object to match Item's structure
-                      quantity: quantity ?? 0,
-                    })
-                  );
-                  if (meta.requestStatus === "fulfilled") {
-                    isDrawerOpen?.();
+        {hasProteinVariants ? (
+          // Horizontal layout for items with protein variants
+          <>
+            <HorizontalCardImageContainer className="sm:rounded-l sm:rounded-t-none rounded-t p-4 sm:p-6">
+              <div className="relative w-full h-full">
+                <Image
+                  src={
+                    card?.imagesrc?.src ??
+                    selectedPreOrderMenu?.imagesrc?.src ??
+                    "/fallback-image.jpg"
                   }
-                } else if (menuType === "subscription") {
-                  router.refresh?.();
-                } else {
-                  dispatch(setSelectedMenu(selectedPreOrderMenu));
-                  const encodedName = encodeURIComponent(
-                    selectedPreOrderMenu?.title ?? ""
-                  );
-                  router.push(`/preOrderMenu/${encodedName}`);
-                }
-              }}
-            >
-              {renderCardButton()}
-            </CardHoverOverlay>
-          </CardImageContainer>
-        </Container>
-
-        {menuType === "restaurant" || "susubscription" ? (
-          <CardText>
-            <CardTitle>{card?.title}</CardTitle>
-
-            <ChooseVariantCard item={card || null} />
-
-            {menuType === "restaurant" ? (
-              <CardBuyButton>
-                <CardButton
-                  onClick={() => {
+                  alt={card?.title ?? "Menu image"}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 640px) 100vw, 45vw"
+                />
+              </div>
+              <CardHoverOverlay
+                variants={{
+                  hover: {
+                    opacity: 1,
+                    height: "auto",
+                  },
+                  rest: {
+                    opacity: 0,
+                    height: 0,
+                  },
+                }}
+                transition={{ duration: 0.3 }}
+                onClick={async () => {
+                  if (menuType === "restaurant") {
                     if (!card) return;
-                    else openModal?.(card);
+                    const { meta } = await dispatch(
+                      addItemsToCart({
+                        ...card,
+                        quantity: quantity ?? 0,
+                      })
+                    );
+                    if (meta.requestStatus === "fulfilled") {
+                      isDrawerOpen?.();
+                    }
+                  } else if (menuType === "subscription") {
+                    router.refresh?.();
+                  } else {
+                    dispatch(setSelectedMenu(selectedPreOrderMenu));
+                    const encodedName = encodeURIComponent(
+                      selectedPreOrderMenu?.title ?? ""
+                    );
+                    router.push(`/preOrderMenu/${encodedName}`);
+                  }
+                }}
+              >
+                {renderCardButton()}
+              </CardHoverOverlay>
+            </HorizontalCardImageContainer>
+            <CardText className="sm:rounded-r sm:rounded-b-none rounded-b">
+              <CardTitle>{card?.title}</CardTitle>
+              <ChooseVariantCard item={card || null} />
+              {menuType === "restaurant" ? (
+                <CardBuyButton>
+                  <CardButton
+                    onClick={() => {
+                      if (!card) return;
+                      else openModal?.(card);
+                    }}
+                  >
+                    Add to cart
+                  </CardButton>
+                </CardBuyButton>
+              ) : (
+                <CardBuyButton>
+                  <CardButton>More Info</CardButton>
+                </CardBuyButton>
+              )}
+            </CardText>
+          </>
+        ) : (
+          // Vertical layout for regular items
+          <>
+            <Container>
+              <CardImageContainer>
+                <Image
+                  src={
+                    card?.imagesrc?.src ??
+                    selectedPreOrderMenu?.imagesrc?.src ??
+                    "/fallback-image.jpg"
+                  }
+                  alt={card?.title ?? "Menu image"}
+                  fill
+                  className="object-cover rounded-t"
+                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                />
+                <CardHoverOverlay
+                  variants={{
+                    hover: {
+                      opacity: 1,
+                      height: "auto",
+                    },
+                    rest: {
+                      opacity: 0,
+                      height: 0,
+                    },
+                  }}
+                  transition={{ duration: 0.3 }}
+                  onClick={async () => {
+                    if (menuType === "restaurant") {
+                      if (!card) return;
+                      const { meta } = await dispatch(
+                        addItemsToCart({
+                          ...card,
+                          quantity: quantity ?? 0,
+                        })
+                      );
+                      if (meta.requestStatus === "fulfilled") {
+                        isDrawerOpen?.();
+                      }
+                    } else if (menuType === "subscription") {
+                      router.refresh?.();
+                    } else {
+                      dispatch(setSelectedMenu(selectedPreOrderMenu));
+                      const encodedName = encodeURIComponent(
+                        selectedPreOrderMenu?.title ?? ""
+                      );
+                      router.push(`/preOrderMenu/${encodedName}`);
+                    }
                   }}
                 >
-                  Add to cart
-                </CardButton>
-              </CardBuyButton>
-            ) : (
-              <CardBuyButton>
-                <CardButton>More Info</CardButton>
-              </CardBuyButton>
-            )}
-          </CardText>
-        ) : null}
+                  {renderCardButton()}
+                </CardHoverOverlay>
+              </CardImageContainer>
+            </Container>
+            {menuType === "restaurant" || "subscription" ? (
+              <CardText>
+                <CardTitle>{card?.title}</CardTitle>
+                <ChooseVariantCard item={card || null} />
+                {menuType === "restaurant" ? (
+                  <CardBuyButton>
+                    <CardButton
+                      onClick={() => {
+                        if (!card) return;
+                        else openModal?.(card);
+                      }}
+                    >
+                      Add to cart
+                    </CardButton>
+                  </CardBuyButton>
+                ) : (
+                  <CardBuyButton>
+                    <CardButton>More Info</CardButton>
+                  </CardBuyButton>
+                )}
+              </CardText>
+            ) : null}
+          </>
+        )}
       </Card>
     </CardContainer>
   );
 };
-export default DisplayTabContent;
+export default React.memo(DisplayTabContent);

@@ -2,58 +2,31 @@
 import React, { ReactNode, useState, useEffect, useRef, useMemo } from "react";
 import styled from "styled-components";
 import { motion } from "motion/react";
-import { useAppSelector } from "app/lib/hooks";
 
 import { Container, ContentWithPaddingXl } from "@/components/misc/Layout";
 import LoaderText from "@/components/ImageSkeleton";
 import { SectionHeading } from "@/components/misc/Heading";
 import SvgDecoratorBlob2 from "@/images/svg-decorator-blob-7.svg";
 import Image from "next/image";
-import CartModal from "./CartModal"; // Import modal
+import CartModal from "./CartModal";
 import tw from "twin.macro";
 import Modal from "react-modal";
 import CartDrawer from "@/components/CartDrawer";
 import DisplayTabContent from "@/components/DisplayTabContent";
 import ReactWindowVirtualGrid from "@/components/ReactWindowVirtualGrid";
 import { menuItem } from "@/types/types";
-// interface Card {
-//   imagesrc: { src: string };
-//   title: string;
-//   content: string;
-//   price: number | string;
-//   rating: number | string;
-//   reviews: string;
-//   url: string;
-//   category?: string;
-
-//   nutrient?: {
-//     regular: {
-//       cals: string;
-//       protein: string;
-//       fat: string;
-//       carbs: string;
-//       price: string;
-//     };
-//     jumbo: {
-//       cals: string;
-//       protein: string;
-//       fat: string;
-//       carbs: string;
-//       price: string;
-//     };
-//   };
-// }
 
 type Tabs = {
-  [key: string]: menuItem[]; // Keys are strings, values are arrays of `Card`
+  [key: string]: menuItem[];
 };
-interface MenuProps {
+
+interface SubscriptionMenuProps {
   heading: ReactNode;
   tabs: Tabs;
 }
 
 interface TabControlProps {
-  active: string; // Adjust the type as needed
+  active: string;
 }
 
 const Header = tw(SectionHeading)``;
@@ -71,17 +44,19 @@ const TabControl = styled.div<TabControlProps>`
     props["active"] === "true" ? tw`bg-primary-500! text-gray-100!` : ""}
 `;
 const TabContent = tw(motion.div)`max-w-full px-2`;
-
 const VirtualTabContent = tw.div`max-w-full px-2`;
 
-export default function Menu({ heading, tabs }: MenuProps) {
+export default function SubscriptionMenu({
+  heading,
+  tabs,
+}: SubscriptionMenuProps) {
   const tabsKeys = useMemo(() => {
     if (tabs && typeof tabs === "object") {
       return Object.keys(tabs);
     }
     return [];
   }, [tabs]);
-  const menuType = useAppSelector((state) => state.menu.menuType);
+
   const [activeTab, setActiveTab] = useState(tabsKeys[0] || "");
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -97,6 +72,7 @@ export default function Menu({ heading, tabs }: MenuProps) {
       setLoading(false);
     }, 1000);
   };
+
   const openModal = (card: menuItem) => {
     setSelectedCard(card);
     setQuantity(1);
@@ -115,14 +91,10 @@ export default function Menu({ heading, tabs }: MenuProps) {
       }
     }
   }, []);
-  useEffect(() => {
-    if (tabsKeys.length > 0) {
-      setActiveTab(tabsKeys[0]); // Set the first tab as active
-    }
-  }, [menuType]);
+
   useEffect(() => {
     if (tabsKeys.length > 0 && !activeTab) {
-      setActiveTab(tabsKeys[0]); // Set the first tab as active
+      setActiveTab(tabsKeys[0]);
     }
   }, [tabsKeys, activeTab]);
 
@@ -131,7 +103,7 @@ export default function Menu({ heading, tabs }: MenuProps) {
       <ContentWithPaddingXl>
         <HeaderRow>
           <Header>{heading}</Header>
-          {menuType === "restaurant" && tabsKeys.length > 1 ? (
+          {tabsKeys.length > 1 ? (
             <TabsControl>
               {tabs &&
                 typeof tabs === "object" &&
@@ -147,7 +119,7 @@ export default function Menu({ heading, tabs }: MenuProps) {
             </TabsControl>
           ) : null}
         </HeaderRow>
-        <div className="relative flex items-center w-full">
+        <div className="relative flex items-center">
           {loading ? (
             <TabContent ref={scrollRef} className="mx-auto">
               <LoaderText />
@@ -156,7 +128,6 @@ export default function Menu({ heading, tabs }: MenuProps) {
             <>
               {tabs[activeTab]?.length > 0 ? (
                 tabs[activeTab].length > 20 ? (
-                  // Use virtual scrolling for large menus
                   <VirtualTabContent className="mx-auto">
                     <ReactWindowVirtualGrid<menuItem>
                       keyExtractor={(item, idx) => `${item.title}-${idx}`}
@@ -183,10 +154,9 @@ export default function Menu({ heading, tabs }: MenuProps) {
                     />
                   </VirtualTabContent>
                 ) : (
-                  // Use regular grid for smaller menus
                   <TabContent
                     ref={scrollRef}
-                    className="mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full"
+                    className="mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
                   >
                     {tabs &&
                       typeof tabs === "object" &&

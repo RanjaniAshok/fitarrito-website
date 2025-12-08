@@ -24,7 +24,6 @@ const Header: React.FC = () => {
   const navRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const totalQuantity = useAppSelector(selectTotalQuantity);
-  console.log(isOpen);
   const prevScrollY = useRef(0);
   const useIsomorphicLayoutEffect =
     typeof window !== "undefined" ? useLayoutEffect : useEffect;

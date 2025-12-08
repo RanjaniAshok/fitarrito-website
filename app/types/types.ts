@@ -1,7 +1,17 @@
+export interface ProteinVariant {
+  name: string;
+  type: "veg" | "non-veg"; // Type of protein: vegetarian or non-vegetarian
+  imagesrc?: { src: string }; // Optional image for the protein variant
+  nutrient: {
+    regular: { cals: string; protein: string; fat: string; carbs: string; price: string };
+    jumbo: { cals: string; protein: string; fat: string; carbs: string; price: string };
+  };
+}
+
 export interface menuItem {
     title: string;
     imagesrc: { src: string };
-    content: string | undefined;
+    description: string | undefined;
     price: number | string;
     rating: number | string;
     reviews: string;
@@ -11,8 +21,23 @@ export interface menuItem {
       regular: { cals: string; protein: string; fat: string; carbs: string,price:string };
       jumbo: { cals: string; protein: string; fat: string; carbs: string ,price:string};
     };
+    proteinVariants?: ProteinVariant[]; // Optional: for items with protein choices
   }
-
+export interface dbMenuItem {
+    title: string;
+    imagesrc: { src: string };
+    description: string ;
+    price: number | string;
+    rating: number | string;
+    reviews: string;
+    url: string;
+    category?: string;
+    nutrient?: {
+      regular: { cals: string; protein: string; fat: string; carbs: string,price:string };
+      jumbo: { cals: string; protein: string; fat: string; carbs: string ,price:string};
+    };
+    proteinVariants?: ProteinVariant[]; // Optional: for items with protein choices
+  }
   export interface addOnsItem {
     type: string;
     value: Array<{
@@ -28,7 +53,7 @@ export interface menuItem {
     tabName:string;
     title?: string;
     imagesrc?: { src: string };
-    content?: string;
+    description?: string;
     category?: string;
     nutrient?: {
       cals: string;

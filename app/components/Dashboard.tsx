@@ -24,9 +24,6 @@ const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -ske
 // };
 export default function Dashboard() {
   const menu = useAppSelector((state) => state.menu.restaurantMenu);
-  const subscriptionMenu = useAppSelector(
-    (state) => state.menu.subscriptionMenu
-  );
 
   const menuType = useAppSelector((state) => state.menu.menuType);
   const pathname = usePathname(); // ✅ Get current route
@@ -45,25 +42,14 @@ export default function Dashboard() {
     <>
       <About />
       <MenuCategories />
-      {menuType === "restaurant" ? (
-        <Menu
-          tabs={menu}
-          heading={
-            <>
-              Checkout our <HighlightedText>menu.</HighlightedText>
-            </>
-          }
-        />
-      ) : (
-        <Menu
-          tabs={subscriptionMenu}
-          heading={
-            <>
-              Checkout our <HighlightedText>menu.</HighlightedText>
-            </>
-          }
-        />
-      )}
+      <Menu
+        tabs={menu}
+        heading={
+          <>
+            Checkout our <HighlightedText>menu.</HighlightedText>
+          </>
+        }
+      />
       <Statistics />
     </>
   );

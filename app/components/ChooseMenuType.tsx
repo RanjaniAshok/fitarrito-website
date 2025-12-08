@@ -53,7 +53,7 @@ const Categories = () => {
           </Label>
         </TabItem>
       </Link>
-      <Link href="/">
+      <Link href="/subscriptionMenu">
         <TabItem onClick={() => handleMenuSelection("subscription")}>
           <IconWrapper
             className={

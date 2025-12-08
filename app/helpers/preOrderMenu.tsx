@@ -1,68 +1,13 @@
-import MuttonBurrito from "@/images/menuimages/MuttonBurrito.svg";
-import Chicken from "@/images/menuimages/Chicken.svg";
-import Mutton from "@/images/menuimages/Mutton.svg";
+import Chicken from "@/images/menuimages/proteinImages/ChickenIcon.svg";
+import MuttonIcon from "@/images/menuimages/proteinImages/MeatIcon.svg";
 import WhiteRice from "@/images/menuimages/WhiteRice.svg";
 import BrownRice from "@/images/menuimages/BrownRice.svg";
 import BlackBeans from "@/images/menuimages/BlackBeans.svg";
 import PintoBeans from "@/images/menuimages/PintoBeans.svg";
 import circle from "@/images/menuimages/white-circle.svg";
 import Tortilla from "@/images/menuimages/Tortilla.svg";
-// import PannerBurrito from "@/images/menuimages/PannerBurrito.svg";
-// import MushroomBurrito from "@/images/menuimages/MushroomBurrito.svg";
-// import SpudBowl from "@/images/menuimages/SpudBowl.svg";
-// import VegHummusBuddhaBowl from "@/images/menuimages/VegHummusBowl.svg";
-// import QuinoaBowl from "@/images/menuimages/QuinoaBowl.svg";
-// import StirFryVeggiesBowl from "@/images/menuimages/StirFryVeggiesBowl.svg";
-// import ChickenHummusBuddhaBowl from "@/images/menuimages/ChickenHummusBowl.svg";
-// import SingaporeLaksa from "@/images/menuimages/SingaporeLaksa.svg";
-// import Fiesta from "@/images/menuimages/fiesta.svg";
-// import ChickenNachos from "@/images/menuimages/ChickenNachos.svg";
-// import PannerNachos from "@/images/menuimages/PannerNachos.svg";
-// import ButterChickenNachos from "@/images/menuimages/ButterChickenNachos.svg";
-// import BBQCHickenNachos from "@/images/menuimages/BBQChickenNachos.svg";
-// import MushroomNachos from "@/images/menuimages/MushroomNachos.svg";
-// import Chickentaco from "@/images/menuimages/ChickenTaco.svg";
-// import Muttontaco from "@/images/menuimages/MuttonTaco.svg";
-// import EggTaco from "@/images/menuimages/EggTaco.svg";
-// import Paneertaco from "@/images/menuimages/PaneerTaco.svg";
-// import MushroomTaco from "@/images/menuimages/MushroomTaco.svg";
-// import VegOuesadilla from "@/images/menuimages/VegQuesadilla.svg";
-// import ChickenQuesadilla from "@/images/menuimages/ChickenQuesadilla.svg";
-// import AppleSmoothie from "@/images/menuimages/AppleSmoothie.svg";
-// import BananaSmoothie from "@/images/menuimages/BananaSmoothie.svg";
-// import MangoSmoothie from "@/images/menuimages/MangoSmoothie.svg";
-// import ChocolateSmoothie from "@/images/menuimages/ChocolateSmoothie.svg";
-// import PaneerLaksa from "@/images/menuimages/PaneerLaksa.svg";
-// import VegLaksa from "@/images/menuimages/VegLaksa.svg";
+import FishIcon from "@/images/menuimages/proteinImages/FishIcon.svg";
 import { NutrientCalItem, addOnsItem } from "app/types/types";
-// import MushroomSalad from "@/images/menuimages/MushroomSalad.svg";
-// import BBQChickenSalad from "@/images/menuimages/BBQChickenSalad.svg";
-// import TeriyakiChickenSalad from "@/images/menuimages/TeriyakiChickenSalad.svg";
-// import TeriyakiPaneerSalad from "@/images/menuimages/PaneerTeriyakiSalad.svg";
-// interface items {
-//   imagesrc: { src: string };
-//   title: string;
-//   content: string;
-//   price: number | string;
-//   rating: number | string;
-//   reviews: string;
-//   url: string;
-//   nutrient?: {
-//     regular: { cals: string; protein: string; fat: string; carbs: string };
-//     jumbo: { cals: string; protein: string; fat: string; carbs: string };
-//   };
-// }
-// interface addOnsItem {
-//   type: string;
-//   value: Array<{
-//     item: string;
-//     imagesrc: { src: string };
-//     nutrient?: {
-//       regular: { cals: string; protein: string; fat: string; carbs: string };
-//       jumbo: { cals: string; protein: string; fat: string; carbs: string };
-//     };
-//   }>;
-// }
 
 const commonAddOns: Array<addOnsItem> = [
   {
@@ -89,7 +34,7 @@ const commonAddOns: Array<addOnsItem> = [
       },
       {
         item: "Mutton",
-        imagesrc: Mutton,
+        imagesrc: MuttonIcon,
 
         nutrient: {
           regular: {
@@ -108,7 +53,7 @@ const commonAddOns: Array<addOnsItem> = [
       },
       {
         item: "Fish",
-        imagesrc: MuttonBurrito,
+        imagesrc: FishIcon,
 
         nutrient: {
           regular: {

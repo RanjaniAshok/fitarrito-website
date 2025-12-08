@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    
     "target": "ES2017",
     "lib": [
       "dom",
@@ -35,6 +36,9 @@
       ],
       "@/types/*": [
         "app/types/*"
+      ],
+        "@/slice/*": [
+        "app/lib/features*"
       ]
     }
   },
@@ -43,7 +47,8 @@
     "**/*.tsx",
     "app/types/custom.d.ts",
     "next-env.d.ts",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "prisma"
   ],
   "exclude": [
     "node_modules"

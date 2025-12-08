@@ -12,6 +12,8 @@ import AutoSizer from "react-virtualized-auto-sizer";
 interface ReactWindowVirtualGridProps<T> {
   items: T[];
   renderItem: (item: T, index: number) => React.ReactNode;
+  keyExtractor?: (item: T, index: number) => string | number;
+
   containerHeight?: number;
   itemHeight?: number;
   itemWidth?: number;
@@ -27,6 +29,7 @@ interface ReactWindowVirtualGridProps<T> {
 function ReactWindowVirtualGrid<T>({
   items,
   renderItem,
+  keyExtractor,
   containerHeight = 600,
   itemHeight = 300,
   itemWidth = 250,
@@ -142,6 +145,11 @@ function ReactWindowVirtualGrid<T>({
             rowHeight={actualItemHeight}
             width={width}
             itemData={items}
+            itemKey={({ columnIndex, rowIndex, data }) => {
+              const idx = rowIndex * itemsPerRow + columnIndex;
+              const item = data[idx];
+              return keyExtractor ? keyExtractor(item, idx) : idx;
+            }}
           >
             {cellRenderer}
           </Grid>
