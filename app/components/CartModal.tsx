@@ -99,8 +99,17 @@ const CartModal: React.FC<CartModalProps> = ({
           </QuantityWrapper>
           <ActionButton
             onClick={async () => {
+              // Generate unique cart item ID
+              const cartItemId = `${selectedCard.title}-${
+                selectedCard.selectedProtein || "default"
+              }-${selectedCard.selectedSize || "regular"}`;
+
               const { meta } = await dispatch(
-                addItemsToCart({ ...selectedCard, quantity: quantity })
+                addItemsToCart({
+                  ...selectedCard,
+                  quantity: quantity,
+                  cartItemId, // Store unique cart item ID
+                })
               );
               if (meta.requestStatus === "fulfilled") {
                 closeModal();

@@ -45,7 +45,7 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "app/types/custom.d.ts",
+    "app/types/**/*.d.ts",
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "prisma"

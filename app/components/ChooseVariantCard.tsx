@@ -1,12 +1,24 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import tw from "twin.macro";
 import Image from "next/image";
 import { useAppSelector } from "app/lib/hooks";
 import { menuItem, ProteinVariant } from "@/types/types";
 
-const ChooseVariantCard: React.FC<{ item: menuItem | null }> = ({ item }) => {
+interface ChooseVariantCardProps {
+  item: menuItem | null;
+  onPriceChange?: (
+    price: number,
+    selectedProtein?: string,
+    size?: "regular" | "jumbo"
+  ) => void;
+}
+
+const ChooseVariantCard: React.FC<ChooseVariantCardProps> = ({
+  item,
+  onPriceChange,
+}) => {
   // State for the selected variant of this specific item
   const CardInfo = tw.div`grid grid-cols-4 gap-2 sm:gap-4 mt-4 p-3 sm:p-4 bg-gray-300 rounded-lg`;
   const CardPrice = tw.p`text-lg font-semibold text-gray-900`;
@@ -59,6 +71,16 @@ const ChooseVariantCard: React.FC<{ item: menuItem | null }> = ({ item }) => {
     variant,
     item?.title,
   ]);
+
+  // Notify parent component of price changes
+  useEffect(() => {
+    if (onPriceChange) {
+      const sizeVariant = item?.title?.toLowerCase().includes("taco")
+        ? "regular"
+        : variant;
+      onPriceChange(totalPrice, selectedProtein || undefined, sizeVariant);
+    }
+  }, [totalPrice, selectedProtein, variant, item?.title, onPriceChange]);
 
   // Check if item has size variants (different prices for regular/jumbo)
   const hasSizeVariants = useMemo(() => {

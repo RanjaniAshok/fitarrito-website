@@ -8,9 +8,8 @@ import { clearCart } from "app/lib/features/cartSlice"; // Update path as needed
 // Tailwind Styled Components
 const Card = tw.div`bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto`;
 const CardHeader = tw.h2`text-lg font-bold text-gray-900 mb-4`;
-const CardInput = tw.input`w-full border border-gray-300 p-2  focus:ring focus:ring-blue-300 mb-2 text-sm font-medium`;
+const CardInput = tw.input`w-full border border-gray-300 p-2 rounded-lg focus:ring focus:ring-blue-300 mb-2 text-sm font-medium`;
 const CardButton = tw.button`bg-red-500 text-white font-semibold px-4 py-2 rounded-lg mt-4 hover:bg-green-600 w-full`;
-const CardTextarea = tw.textarea`w-full border border-gray-300 p-2 rounded-lg focus:ring focus:ring-blue-300 resize-none h-24 text-sm font-medium`;
 
 const appRoot =
   typeof document !== "undefined"
@@ -26,7 +25,12 @@ export default function OrderModal({
 }: orderModalProps) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
+  const [addressLine1, setAddressLine1] = useState("");
+  const [addressLine2, setAddressLine2] = useState("");
+  const [city, setCity] = useState("Tiruchirappali");
+  const state = "Tamil Nadu"; // Default state
+  const [postalCode, setPostalCode] = useState("");
+  const country = "🇮🇳 India"; // Default country with flag
   const cartItems = useAppSelector((state) => state.cart.cartItems);
   const dispatch = useAppDispatch();
 
@@ -35,7 +39,16 @@ export default function OrderModal({
     let orderMessage = `🛒 *New Order*\n\n`;
 
     cartItems.forEach((item, index) => {
-      orderMessage += `${index + 1}. *${item.title}* - ₹${item.price} x ${
+      // Display title with protein variant if available
+      const displayTitle = item.selectedProtein
+        ? `${item.title} (${item.selectedProtein}${
+            item.selectedSize && item.selectedSize !== "regular"
+              ? ` - ${item.selectedSize}`
+              : ""
+          })`
+        : item.title;
+
+      orderMessage += `${index + 1}. *${displayTitle}* - ₹${item.price} x ${
         item.quantity
       } (₹${Number(item.price) * item.quantity})\n`;
     });
@@ -46,7 +59,15 @@ export default function OrderModal({
     )}`;
     orderMessage += `\n👤 *Name:* ${name}`;
     orderMessage += `\n📞 *Phone:* ${phone}`;
-    orderMessage += `\n📍 *Address:* ${address}`;
+    orderMessage += `\n📍 *Address:*`;
+    orderMessage += `\n   Address Line 1: ${addressLine1}`;
+    if (addressLine2) {
+      orderMessage += `\n   Address Line 2: ${addressLine2}`;
+    }
+    orderMessage += `\n   City: ${city}`;
+    orderMessage += `\n   State/Province: ${state}`;
+    orderMessage += `\n   Postal Code/ZIP: ${postalCode}`;
+    orderMessage += `\n   Country: ${country}`;
 
     const encodedMessage = encodeURIComponent(orderMessage);
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
@@ -79,12 +100,42 @@ export default function OrderModal({
           onChange={(e) => setPhone(e.target.value)}
           className="mt-2"
         />
-        <CardTextarea
-          placeholder="Delivery Address"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
+        <CardInput
+          type="text"
+          placeholder="Address Line 1"
+          value={addressLine1}
+          onChange={(e) => setAddressLine1(e.target.value)}
           className="mt-2"
         />
+        <CardInput
+          type="text"
+          placeholder="Address Line 2 (Optional)"
+          value={addressLine2}
+          onChange={(e) => setAddressLine2(e.target.value)}
+          className="mt-2"
+        />
+        <CardInput
+          type="text"
+          placeholder="City"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          className="mt-2"
+        />
+        <CardInput
+          type="text"
+          placeholder="Postal Code/ZIP"
+          value={postalCode}
+          onChange={(e) => setPostalCode(e.target.value)}
+          className="mt-2"
+        />
+        <div className="mt-2 flex items-center gap-2 text-sm text-gray-700">
+          <span>State:</span>
+          <span className="font-medium">{state}</span>
+        </div>
+        <div className="mt-2 flex items-center gap-2 text-sm text-gray-700">
+          <span>Country:</span>
+          <span className="font-medium">{country}</span>
+        </div>
         <CardButton onClick={sendOrderToWhatsApp}>Submit & Order</CardButton>
         <button
           onClick={() => setIsModalOpen(false)}

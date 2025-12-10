@@ -36,9 +36,9 @@ const ItemImage = tw.img`md:w-16 md:h-16 xs:w-8 xs:h-8 object-cover rounded`;
 
 const ItemInfo = tw.div`flex-1 overflow-hidden`;
 
-const ItemTitle = tw.p`text-sm md:text-base font-medium text-gray-800 truncate`;
+const ItemTitle = tw.p`text-sm md:text-xs font-medium text-gray-800 truncate`;
 
-const ItemPrice = tw.span`text-gray-500 text-xs md:text-sm`;
+const ItemPrice = tw.span`text-gray-500 font-bold text-xs md:text-sm`;
 
 const QuantityWrapper = tw.div`flex items-center space-x-2`;
 
@@ -92,35 +92,53 @@ const DrawerComponent = ({ isOpen, setIsOpen }: DrawerProps) => {
           </EmptyCartContainer>
         ) : (
           <CartItemList>
-            {cartItems.map((item) => (
-              <CartItem key={item.title}>
-                <ItemWrapper>
-                  <ItemImage src={item.imagesrc.src} alt={item.title} />
-                  <ItemInfo>
-                    <ItemTitle>{item.title}</ItemTitle>
-                    <ItemPrice>₹{item.price}</ItemPrice>
-                  </ItemInfo>
-                  <QuantityWrapper>
-                    <QuantityButton
-                      onClick={() => dispatch(decrementQuantity(item.title))}
+            {cartItems.map((item) => {
+              // Generate unique cart item ID
+              const cartItemId =
+                item.cartItemId ||
+                `${item.title}-${item.selectedProtein || "default"}-${
+                  item.selectedSize || "regular"
+                }`;
+
+              // Display title with protein variant if available
+              const displayTitle = item.selectedProtein
+                ? `${item.title} (${item.selectedProtein}${
+                    item.selectedSize && item.selectedSize !== "regular"
+                      ? ` - ${item.selectedSize}`
+                      : ""
+                  })`
+                : item.title;
+
+              return (
+                <CartItem key={cartItemId}>
+                  <ItemWrapper>
+                    <ItemImage src={item.imagesrc.src} alt={item.title} />
+                    <ItemInfo>
+                      <ItemTitle>{displayTitle}</ItemTitle>
+                      <ItemPrice>₹{item.price}</ItemPrice>
+                    </ItemInfo>
+                    <QuantityWrapper>
+                      <QuantityButton
+                        onClick={() => dispatch(decrementQuantity(cartItemId))}
+                      >
+                        -
+                      </QuantityButton>
+                      <QuantityText>{item.quantity}</QuantityText>
+                      <QuantityButton
+                        onClick={() => dispatch(incrementQuantity(cartItemId))}
+                      >
+                        +
+                      </QuantityButton>
+                    </QuantityWrapper>
+                    <DeleteButton
+                      onClick={() => dispatch(removeItem(cartItemId))}
                     >
-                      -
-                    </QuantityButton>
-                    <QuantityText>{item.quantity}</QuantityText>
-                    <QuantityButton
-                      onClick={() => dispatch(incrementQuantity(item.title))}
-                    >
-                      +
-                    </QuantityButton>
-                  </QuantityWrapper>
-                  <DeleteButton
-                    onClick={() => dispatch(removeItem(item.title))}
-                  >
-                    <IoTrash />
-                  </DeleteButton>
-                </ItemWrapper>
-              </CartItem>
-            ))}
+                      <IoTrash />
+                    </DeleteButton>
+                  </ItemWrapper>
+                </CartItem>
+              );
+            })}
           </CartItemList>
         )}
 

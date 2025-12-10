@@ -1,13 +1,5 @@
 import { createAsyncThunk, PayloadAction, createSlice } from "@reduxjs/toolkit";
 import {
-  Burrito,
-  Bowl,
-  Nachos,
-  Taco,
-  Salad,
-  Quesadillas,
-} from "@/helpers/menu";
-import {
   Burrito as Burritos,
   Bowl as Bowls,
   Salad as Salads,
@@ -25,19 +17,24 @@ type PreOrderMenu = {
 type SubscriptionMenu = {
   [key: string]: menuItem[];
 };
+
+// Fetch menu from API
 export const getMenu = createAsyncThunk("menu/getMenu", async () => {
-  const Tabs = {
-    Burrito,
-    Bowl,
-    Salad,
-    Nachos,
-    Taco,
-    Quesadillas,
-  };
-  return Tabs;
-  // const { data } = await getMenu();
-  // return data;
+  try {
+    const response = await fetch("/api/menu");
+    if (!response.ok) {
+      throw new Error("Failed to fetch menu");
+    }
+    const data = await response.json();
+    console.log(data, "data of getMenu");
+    return data as Tabs;
+  } catch (error) {
+    console.error("Error fetching menu from API:", error);
+    // Fallback to empty object if API fails
+    return {} as Tabs;
+  }
 });
+
 export const getPreOrderMenu = createAsyncThunk(
   "menu/getPreOrder",
   async () => {
@@ -91,6 +88,7 @@ const cartSlice = createSlice({
       })
       .addCase(getMenu.fulfilled, (state, action: PayloadAction<Tabs>) => {
         state.restaurantMenu = action.payload;
+        state.menu = action.payload; // Also update the main menu
       })
       .addCase(
         getPreOrderMenu.fulfilled,

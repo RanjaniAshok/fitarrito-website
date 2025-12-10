@@ -22,6 +22,8 @@ export interface menuItem {
       jumbo: { cals: string; protein: string; fat: string; carbs: string ,price:string};
     };
     proteinVariants?: ProteinVariant[]; // Optional: for items with protein choices
+    selectedProtein?: string; // Selected protein variant name
+    selectedSize?: "regular" | "jumbo"; // Selected size variant
   }
 export interface dbMenuItem {
     title: string;

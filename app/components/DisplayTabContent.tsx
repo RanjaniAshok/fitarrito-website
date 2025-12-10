@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { motion } from "motion/react";
@@ -12,20 +12,12 @@ import { setSelectedMenu } from "app/lib/features/menuSlice";
 import ChooseVariantCard from "./ChooseVariantCard";
 import { useAppSelector, useAppDispatch } from "app/lib/hooks";
 import { PreOrderMenuItem, menuItem } from "app/types/types";
-// interface CardImageContainerProps {
-//   imagesrc: { src: string }; // Adjust the type as needed
-// }
 
 const CardContainer = tw.div`w-full mt-10`;
 const Card = tw(motion.div)`bg-gray-200 rounded-lg mx-auto overflow-hidden`;
 const CardImageContainer = tw.div`relative h-32 sm:h-56 xl:h-64 w-full bg-gray-200 rounded-t overflow-hidden`;
 // Horizontal layout image container for items with protein variants - shows full image
 const HorizontalCardImageContainer = tw.div`relative w-full sm:w-[55%] bg-gray-200 flex-shrink-0 min-h-[320px] sm:min-h-[480px] sm:h-auto`;
-
-// const CardImageContainer = styled.div<CardImageContainerProps>`
-//   background: url(${(props) => props.imagesrc.src}) no-repeat top center;
-//   ${tw`h-32 sm:h-56 xl:h-72 w-full bg-center bg-cover relative rounded-t`}
-// `;
 
 const CardHoverOverlay = styled(motion.div)`
   background-color: rgba(255, 255, 255, 0.5);
@@ -70,10 +62,26 @@ const DisplayTabContent: React.FC<{
   const menuType = useAppSelector((state) => state.menu.menuType);
   const router = useRouter();
 
+  // Store calculated price and selected options for cart
+  const [calculatedPrice, setCalculatedPrice] = useState<number>(
+    parseFloat(String(card?.price || 0))
+  );
+  const [selectedProtein, setSelectedProtein] = useState<string | undefined>();
+  const [selectedSize, setSelectedSize] = useState<"regular" | "jumbo">(
+    "regular"
+  );
+
   // Check if card has protein variants (needs horizontal layout)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const hasProteinVariants =
     card?.proteinVariants && card.proteinVariants.length > 0;
+
+  // Update calculated price when card changes
+  useEffect(() => {
+    if (card?.price) {
+      setCalculatedPrice(parseFloat(String(card.price)));
+    }
+  }, [card?.price]);
 
   const renderCardButton = () => {
     switch (menuType) {
@@ -142,10 +150,19 @@ const DisplayTabContent: React.FC<{
                 onClick={async () => {
                   if (menuType === "restaurant") {
                     if (!card) return;
+                    // Generate unique cart item ID
+                    const cartItemId = `${card.title}-${
+                      selectedProtein || "default"
+                    }-${selectedSize || "regular"}`;
+
                     const { meta } = await dispatch(
                       addItemsToCart({
                         ...card,
-                        quantity: quantity ?? 0,
+                        price: calculatedPrice.toString(), // Use calculated price instead of base price
+                        quantity: quantity ?? 1, // Use quantity from props (defaults to 1)
+                        selectedProtein, // Store selected protein
+                        selectedSize, // Store selected size
+                        cartItemId, // Store unique cart item ID
                       })
                     );
                     if (meta.requestStatus === "fulfilled") {
@@ -167,13 +184,27 @@ const DisplayTabContent: React.FC<{
             </HorizontalCardImageContainer>
             <CardText className="sm:rounded-r sm:rounded-b-none rounded-b">
               <CardTitle>{card?.title}</CardTitle>
-              <ChooseVariantCard item={card || null} />
+              <ChooseVariantCard
+                item={card || null}
+                onPriceChange={(price, protein, size) => {
+                  setCalculatedPrice(price);
+                  setSelectedProtein(protein);
+                  setSelectedSize(size || "regular");
+                }}
+              />
               {menuType === "restaurant" ? (
                 <CardBuyButton>
                   <CardButton
                     onClick={() => {
                       if (!card) return;
-                      else openModal?.(card);
+                      // Update card with calculated price before opening modal
+                      const cardWithPrice = {
+                        ...card,
+                        price: calculatedPrice.toString(),
+                        selectedProtein,
+                        selectedSize,
+                      };
+                      openModal?.(cardWithPrice);
                     }}
                   >
                     Add to cart

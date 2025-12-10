@@ -3,6 +3,18 @@ import { RootState } from "../store";
 import { menuItem } from "@/types/types";
 interface Item extends menuItem {
   quantity: number;
+  selectedProtein?: string;
+  selectedSize?: "regular" | "jumbo";
+  cartItemId?: string; // Unique identifier for cart items
+}
+
+// Helper function to generate unique cart item ID
+function getCartItemId(item: Item): string {
+  if (item.cartItemId) return item.cartItemId;
+  // Create unique ID based on title + protein + size
+  const protein = item.selectedProtein || "default";
+  const size = item.selectedSize || "regular";
+  return `${item.title}-${protein}-${size}`;
 }
 
 export const addItemsToCart = createAsyncThunk(
@@ -26,7 +38,7 @@ const cartSlice = createSlice({
     },
     incrementQuantity: (state, action: PayloadAction<string>) => {
       const item = state.cartItems.find(
-        (item) => item.title === action.payload
+        (item) => getCartItemId(item) === action.payload
       );
       if (item) {
         item.quantity += 1;
@@ -38,7 +50,7 @@ const cartSlice = createSlice({
     },
     decrementQuantity: (state, action: PayloadAction<string>) => {
       const item = state.cartItems.find(
-        (item) => item.title === action.payload
+        (item) => getCartItemId(item) === action.payload
       );
       if (item && item.quantity > 1) {
         item.quantity -= 1;
@@ -50,7 +62,7 @@ const cartSlice = createSlice({
     },
     removeItem: (state, action: PayloadAction<string>) => {
       state.cartItems = state.cartItems.filter(
-        (item) => item.title !== action.payload
+        (item) => getCartItemId(item) !== action.payload
       );
       state.totalAmt = state.cartItems.reduce(
         (total, item) => total + Number(item.price) * item.quantity,
@@ -68,14 +80,22 @@ const cartSlice = createSlice({
         (state, action: PayloadAction<Item>) => {
           state.loading = "succeeded";
 
+          // Generate unique cart item ID
+          const newItemId = getCartItemId(action.payload);
+          const itemWithId = {
+            ...action.payload,
+            cartItemId: newItemId,
+          };
+
+          // Find existing item by unique ID (title + protein + size)
           const existingItem = state.cartItems.find(
-            (item) => item.title === action.payload.title
+            (item) => getCartItemId(item) === newItemId
           );
 
           if (existingItem) {
             existingItem.quantity += action.payload.quantity;
           } else {
-            state.cartItems.push(action.payload);
+            state.cartItems.push(itemWithId);
           }
           state.totalAmt = state.cartItems.reduce(
             (total, item) => total + Number(item.price) * item.quantity,
