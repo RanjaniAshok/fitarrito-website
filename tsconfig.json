@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    
     "target": "ES2017",
     "lib": [
       "dom",
@@ -45,6 +44,7 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
+    "**/*.d.ts",
     "app/types/**/*.d.ts",
     "next-env.d.ts",
     ".next/types/**/*.ts",

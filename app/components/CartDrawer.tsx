@@ -3,7 +3,9 @@
 import tw, { styled } from "twin.macro";
 import { useState, useEffect } from "react";
 import { IoCloseSharp, IoTrash } from "react-icons/io5";
-import PlaceOrderForm from "@/components/PlaceOrderForm";
+import PlaceOrderForm, {
+  OrderConfirmationWrapper,
+} from "@/components/PlaceOrderForm";
 import cartEmpty from "@/images/CartEmpty.svg";
 import { useAppSelector, useAppDispatch } from "app/lib/hooks";
 import {
@@ -64,6 +66,7 @@ const DrawerComponent = ({ isOpen, setIsOpen }: DrawerProps) => {
     };
   }, [isOpen]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
   const cartItems = useAppSelector((state) => state.cart.cartItems);
   const totalAmt = useAppSelector((state) => state.cart.totalAmt);
@@ -155,7 +158,15 @@ const DrawerComponent = ({ isOpen, setIsOpen }: DrawerProps) => {
             </ContinueButton>
           </Footer>
         )}
-        <PlaceOrderForm isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+        <PlaceOrderForm
+          isOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          onOrderSubmit={() => setShowConfirmationModal(true)}
+        />
+        <OrderConfirmationWrapper
+          showConfirmationModal={showConfirmationModal}
+          setShowConfirmationModal={setShowConfirmationModal}
+        />
       </DrawerContainer>
     </>
   );
